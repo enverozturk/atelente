@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   regression:
     runs-on: ubuntu-latest
@@ -75,11 +78,11 @@ jobs:
       - name: Installed package matches source
         run: Rscript tests/test_package_equivalence.R lib
 
-  # Follows the README install/open steps and the usage-guide example on a clean
-  # runner. Until the public repository exists, install_local(".") stands in for
-  # install_github("enverozturk/atelente"); switch after migration.
+  # Install the exact tested commit from this repository on a clean runner.
   readme-install:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
 
@@ -91,7 +94,7 @@ jobs:
       - name: README install commands
         run: |
           install.packages(c("remotes", "shiny", "readxl", "openxlsx"))
-          remotes::install_local(".", dependencies = NA, upgrade = "never")
+          remotes::install_github("enverozturk/atelente", ref = Sys.getenv("GITHUB_SHA"), dependencies = NA, upgrade = "never")
           stopifnot(inherits(atelente::pm_wizard_app(), "shiny.appobj"))
         shell: Rscript {0}
 

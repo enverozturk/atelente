@@ -6,7 +6,7 @@ Atelente is an R package with a local Shiny interface for shotgun proteomics. It
 
 The spanning peptide provides a reference across the same bond, complementary to protein-level abundance. Results combine searchable tables, protein-position maps and MEROPS/UniProt annotations.
 
-> Publication draft: the `enverozturk/atelente` installation target below is planned and is not yet available. This notice will be removed only after the approved repository is created and its installation is tested.
+> Development version. While this repository is private, GitHub installation requires authentication with an account that has repository access.
 
 ## Install and open
 
