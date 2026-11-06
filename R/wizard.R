@@ -12,6 +12,30 @@ pm_wizard_frame <- function(x, fields) {
   x
 }
 
+# Column headers can contain control characters, e.g. wrapped Excel header cells
+# exported with "\r\n". A browser does not return such an option value intact
+# when the user clicks it, so these columns use a stable ASCII key in the
+# selection controls. The server resolves the key back to the exact original
+# header; headers without control characters are used as their own key.
+pm_wizard_column_keys <- function(columns) {
+  columns <- as.character(columns)
+  keys <- columns
+  unsafe <- which(grepl("[[:cntrl:]]", columns))
+  if (length(unsafe)) {
+    tokens <- paste0("atelente-column-", unsafe)
+    while (any(tokens %in% columns)) tokens <- paste0("_", tokens)  # never equal a real header
+    keys[unsafe] <- tokens
+  }
+  keys
+}
+pm_wizard_resolve_columns <- function(values, columns) {
+  if (is.null(values)) return(values)
+  values <- as.character(values)
+  hit <- match(values, pm_wizard_column_keys(columns))
+  values[!is.na(hit)] <- as.character(columns)[hit[!is.na(hit)]]
+  values
+}
+
 pm_prepare_column_input <- function(source, column_mapping, sample_design=NULL,
                                     assignment_mode="representative", pair_statistics=FALSE) {
   if(!is.data.frame(source)||anyDuplicated(names(source))||any(!nzchar(names(source))))
@@ -196,12 +220,14 @@ pm_wizard_app <- function(run_root=file.path(getwd(),"atelente_runs"), template=
     output$preview <- shiny::renderTable({head(source(),8)},striped=TRUE,bordered=FALSE,rownames=FALSE)
     output$tableInfo <- shiny::renderText({x<-source();paste(nrow(x),"rows \u00b7",ncol(x),"columns loaded.")})
     output$columnsUI <- shiny::renderUI({x<-source();choices<-names(x)
-      optional<-c("Not supplied"="",setNames(choices,choices))
+      # Labels show the original headers; values are browser-safe keys.
+      keyed<-setNames(pm_wizard_column_keys(choices),choices)
+      optional<-c("Not supplied"="",keyed)
       shiny::tagList(
         section("Required columns",shiny::fluidRow(
-          shiny::column(6,shiny::selectInput("sequence","Peptide sequence",c("Choose a column"="",setNames(choices,choices)),selected="")),
+          shiny::column(6,shiny::selectInput("sequence","Peptide sequence",c("Choose a column"="",keyed),selected="")),
           shiny::column(6,shiny::selectInput("representative","Master / representative protein",optional,selected="")))),
-        section("Sample measurements",shiny::selectizeInput("quantities","Quantity columns",choices=choices,selected=character(),multiple=TRUE,
+        section("Sample measurements",shiny::selectizeInput("quantities","Quantity columns",choices=keyed,selected=character(),multiple=TRUE,
           options=list(placeholder="Choose columns to include")),
           shiny::selectInput("scale","Values are",c("Linear intensities"="linear","Log2-transformed intensities"="log2"),selected="linear"),
           shiny::p(class="small-note","Choose individual samples, not group averages. Leave empty for mapping only.")),
@@ -216,7 +242,8 @@ pm_wizard_app <- function(run_root=file.path(getwd(),"atelente_runs"), template=
       columns<-names(source());sampleGeneration<<-sampleGeneration+1L
       state<-new.env(parent=emptyenv())
       state$columns<-columns;state$ids<-paste0(sampleGeneration,"_",seq_along(columns))
-      state$values<-list(sample=columns,condition=rep("",length(columns)),use=rep(TRUE,length(columns)))
+      # Default sample names come from headers; line breaks become spaces (a text box cannot hold them).
+      state$values<-list(sample=gsub("[[:cntrl:]]+"," ",columns),condition=rep("",length(columns)),use=rep(TRUE,length(columns)))
       state})
     sampleControlId <- function(prefix,column) {
       state<-sampleRegistry();paste0(prefix,"_",state$ids[match(column,state$columns)])
@@ -228,7 +255,8 @@ pm_wizard_app <- function(run_root=file.path(getwd(),"atelente_runs"), template=
         if(!is.null(value))state$values[[prefix]][i]<-value
       }
       state$values})
-    output$samplesUI <- shiny::renderUI({cols<-input$quantities
+    selectedColumns <- function(values) pm_wizard_resolve_columns(values,names(source()))
+    output$samplesUI <- shiny::renderUI({cols<-selectedColumns(input$quantities)
       if(!length(cols))return(shiny::p("No quantity columns selected. Mapping and reference annotation can run without quantities."))
       state<-sampleRegistry();indices<-match(cols,state$columns)
       values<-shiny::isolate(sampleValues())
@@ -238,7 +266,7 @@ pm_wizard_app <- function(run_root=file.path(getwd(),"atelente_runs"), template=
           shiny::textInput(sampleControlId("condition",cols[i]),NULL,values$condition[indices[i]],width="100%"),
           shiny::checkboxInput(sampleControlId("use",cols[i]),NULL,values$use[indices[i]],width="100%"))})
       shiny::div(class="sample-table",shiny::div(class="sample-row",shiny::strong("Source column"),shiny::strong("Sample"),shiny::strong("Condition"),shiny::strong("Include")),rows)})
-    sampleInput <- shiny::reactive({cols<-input$quantities
+    sampleInput <- shiny::reactive({cols<-selectedColumns(input$quantities)
       if(!length(cols))return(pm_wizard_frame(NULL,c("Sample","Condition","Use","Peptide column","Experimental unit")))
       values<-sampleValues();indices<-match(cols,sampleRegistry()$columns)
       data.frame(Sample=values$sample[indices],Condition=values$condition[indices],
@@ -269,8 +297,9 @@ pm_wizard_app <- function(run_root=file.path(getwd(),"atelente_runs"), template=
       if(is.null(input$fasta))stop("Choose a FASTA file in step 1.")
       if(is.null(input$sequence)||!nzchar(input$sequence))stop("Select the peptide sequence column in step 2.")
       clean<-function(x)if(is.null(x)||!nzchar(x))NULL else x
-      mapping<-list(sequence=input$sequence,modifications=clean(input$modifications),representative_protein=clean(input$representative),
-        protein_accessions=clean(input$accessions),contaminant=clean(input$contaminant),quantity_columns=as.list(input$quantities),quantity_scale=input$scale)
+      column<-function(x)selectedColumns(clean(x))
+      mapping<-list(sequence=column(input$sequence),modifications=column(input$modifications),representative_protein=column(input$representative),
+        protein_accessions=column(input$accessions),contaminant=column(input$contaminant),quantity_columns=as.list(selectedColumns(input$quantities)),quantity_scale=input$scale)
       comparisonName<-input$comparisonName
       if(isTRUE(input$compare)&&(is.null(clean(input$control))||is.null(clean(input$treatment))))
         stop("Choose both control and treatment conditions in step 3.")
