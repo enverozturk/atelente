@@ -1,0 +1,16 @@
+{
+  "peptides": "your_peptides.xlsx",
+  "peptide_sheet": "PeptideGroups",
+  "proteins": "your_proteins.xlsx",
+  "protein_sheet": "Proteins",
+  "fasta": "your_search_database.fasta.gz",
+  "output_dir": "mapping_results",
+  "scope": "reported",
+  "excel": true,
+  "annotations": true,
+  "sequence_column": "Annotated Sequence",
+  "metadata": {
+    "search_specificity": "tryptic",
+    "pd_version": "unknown"
+  }
+}

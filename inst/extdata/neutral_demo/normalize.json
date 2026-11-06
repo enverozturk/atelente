@@ -1,0 +1,14 @@
+{
+  "peptides": "peptides.csv",
+  "proteins": "proteins.csv",
+  "samples": "samples.csv",
+  "output_dir": "results",
+  "excel": true,
+  "spec": {
+    "observation_level": "peptide_observation",
+    "link_separator": ";",
+    "peptide": {"id":"Observation","sequence":"Sequence","protein_links":"Protein groups","modifications":"Modification","scale":"linear","quantity_type":"Synthetic intensity"},
+    "protein": {"id":"Group","accessions":"Members","entity_type":"protein_group","scale":"linear","quantity_type":"Synthetic protein-group abundance"}
+  },
+  "notes": ["Synthetic known-answer examples, not experimental biology. A and B do not define a statistical contrast.","Shared change: peptide and protein both double, so their ratio stays 0.1. Peptide-specific change: the ratio increases from 0.1 to 0.2."]
+}

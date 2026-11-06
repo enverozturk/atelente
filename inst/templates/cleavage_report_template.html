@@ -1,0 +1,393 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atelente · Results</title><style>
+:root{color:#1d3734;background:#f3f6f4;font:15px/1.5 system-ui,sans-serif}*{box-sizing:border-box}body{margin:0}main{max-width:1350px;margin:auto;padding:28px 24px}header{margin-bottom:18px}.brand{font-size:12px;font-weight:750;letter-spacing:.17em;color:#23756d}h1{margin:2px 0 0;font-size:30px}h2{margin:0;font-size:19px}h3{font-size:15px;margin:14px 0 8px}.muted,small{color:#516861}.card{background:white;border:1px solid #d7e2da;border-radius:9px;padding:18px 20px;margin:14px 0}.controls,.heading,.pager,.downloads{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px}.controls{align-items:end;margin:12px 0}.heading span{font-size:13px;color:#516861}label{font-size:12px;font-weight:650;display:grid;gap:4px}input,select,button{font:inherit;background:white;color:inherit;border:1px solid #adc2b9;border-radius:5px;padding:7px 10px}input{width:300px;max-width:100%}button,summary{cursor:pointer}button:disabled{opacity:.45;cursor:default}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;padding:8px 10px;border-bottom:1px solid #e3eae6;white-space:nowrap;font-variant-numeric:tabular-nums}th{background:#edf3ef;font-size:12px;color:#3c5850}tr[data-site],tr[data-peptide]{cursor:pointer}tr[aria-selected="true"]{background:#def1e8}tr[data-site]:hover,tr[data-peptide]:hover{background:#eff8f3}.link{border:0;background:transparent;padding:0;font:inherit;font-weight:650;color:#12645c}.mono{font-family:ui-monospace,monospace}.role{font-weight:650}.pager{font-size:12px;margin-top:10px}.pager button{padding:4px 9px}.panels details{margin-top:12px}.panels summary,section>details>summary{font-weight:650}.context{font:600 16px ui-monospace,monospace;color:#1c6159}.downloads a{color:#12645c}.empty{padding:12px;color:#516861}.badge{font-size:12px;color:#516861}.track{margin:12px 0;overflow:auto}.track svg{display:block;min-width:580px;width:100%}.track text{font:12px system-ui,sans-serif;fill:#304b43}.track g{cursor:pointer}.track g.active text{font-weight:750}.track g.active rect{stroke:#173c33;stroke-width:2}[hidden]{display:none!important}:focus-visible{outline:2px solid #267968;outline-offset:2px}@media(max-width:700px){main{padding:16px 10px}.card{padding:12px}.controls label{max-width:100%}h1{font-size:24px}}
+.view-switch{display:flex;gap:6px;margin:12px 0}.view-switch button[aria-pressed="true"]{background:#17685d;color:white;border-color:#17685d}.map-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.map-tools select{max-width:100%}.track g.active rect{stroke-width:3}.bond-marker{stroke:#a94932;stroke-dasharray:4 3;pointer-events:none}
+#evidence th{white-space:normal}#peptides td:nth-child(2),#peptides td:nth-child(3){white-space:normal;overflow-wrap:anywhere;max-width:175px}#peptides button{white-space:normal;overflow-wrap:anywhere;text-align:left}#evidenceMain{margin:6px 0 10px}.intensity-note{font-size:12px;color:#516861}
+#sites td{vertical-align:top;white-space:normal}#sites .site-id{min-width:148px}#sites .site-id>*{display:block}.site-id small{margin-top:3px}.ref-col{min-width:140px;max-width:230px}.role-cell{min-width:135px}.role-cell .observation+.observation{border-top:1px solid #dae6df;margin-top:5px;padding-top:5px}.observation .mono{display:block;font-size:11px;overflow-wrap:anywhere;color:#506660}.effect{font-weight:700}.role-cell small{white-space:nowrap}.site-scroll{max-height:72vh}.site-scroll th{position:sticky;top:0;z-index:1}.controls .check{display:flex;align-items:center;gap:6px}.check input{width:auto}
+
+main{max-width:1700px}#overview th button{font:inherit;text-align:left;border:0;background:none;padding:0;font-weight:700}.number{text-align:right;white-space:nowrap!important}#coverage,#threshold{width:75px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.chips button{font-size:12px}.chips button[aria-pressed=true]{background:#17685d;color:white}.badge{display:block}.warn{color:#8a4d22}.table-note{font-size:12px;color:#516861}#referenceRows td{white-space:normal;max-width:260px}#pairChoice{max-width:650px}#peptides td:nth-child(2){max-width:350px}#peptides td:nth-child(3){max-width:450px}#allPairBody tr,#otherBody tr{cursor:pointer}.test-reason,.ratio-status{white-space:normal;min-width:110px;max-width:180px;font-size:12px}#otherBody td{white-space:normal;max-width:280px}
+.motif-grids{display:grid;grid-template-columns:repeat(2,minmax(340px,1fr));gap:24px}.motif-matrix{display:grid;grid-template-columns:minmax(250px,1fr) 48px;gap:12px;align-items:start}.motif-grid{table-layout:fixed;width:100%;border-collapse:collapse;font-size:11px}.motif-grid td,.motif-grid th{text-align:center;padding:0;white-space:nowrap}.motif-grid td{height:21px;border:1px solid #a8b6c5}.motif-grid th{background:white;border:0;font-weight:500;color:#24435f}.motif-grid th:first-child{width:24px}.motif-grid tfoot th{padding-top:9px;font-size:11px}.motif-grid td button{display:block;height:21px;border:0;border-radius:0;background:transparent;padding:0;width:100%;font:inherit;color:inherit}.motif-grid td:nth-child(6){border-left:2px solid #496078}.motif-unavailable{background:#edf0f3;color:#61716a}.motif-colorbar{display:grid;grid-template-columns:12px 30px;gap:5px;height:420px;font-size:11px;color:#24435f}.motif-colorbar-bar{background:linear-gradient(to top,#ffffff,#08519c);border:1px solid #a8b6c5}.motif-colorbar-ticks{display:flex;flex-direction:column;justify-content:space-between}.motif-legend{font-size:12px;color:#516861}@media(max-width:850px){.motif-grids{grid-template-columns:1fr}}#motifSection .controls select{max-width:360px}
+header{padding:12px 0 22px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:15px;font-family:Georgia,"Times New Roman",serif;font-size:52px;font-weight:600;line-height:1.08;letter-spacing:-2px;color:#164f48;margin:0 0 30px}.brand-mark{width:34px;height:39px;display:inline-block;position:relative;border-left:4px solid #26766b;border-right:4px solid #26766b;transform:skew(-13deg);border-radius:3px}.brand-mark:before,.brand-mark:after{content:"";position:absolute;height:4px;background:#26766b;left:-2px;right:-2px;top:13px;transform:rotate(-22deg)}.brand-mark:after{top:24px;width:16px;left:6px;background:#b79052}header h1{font-size:26px;font-weight:550;letter-spacing:-.5px;margin:0}.run-profile{display:block;margin-top:8px;color:#61716a;font-size:12px}.download-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 22px;margin:14px 0}.download-actions a{text-decoration:none;font-size:14px}.download-primary{background:#17685d;color:white!important;border-radius:6px;padding:10px 15px}.download-actions button{font-size:14px}.table-choices{display:flex;gap:12px 24px;flex-wrap:wrap;margin:14px 0}.table-choices label{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500}.table-choices input{width:auto}.download-status{font-size:12px;color:#516861;margin-left:12px}@media(max-width:700px){.brand{font-size:43px;margin-bottom:23px}.brand-mark{width:29px;height:34px}header h1{font-size:23px}}.frequency-scale{display:flex;align-items:center;gap:9px;font-size:12px;color:#516861;margin:14px 0}.frequency-gradient{display:inline-block;width:150px;height:12px;border-radius:3px;background:linear-gradient(to right,#ffffff,#08519c)}.frequency-scale>span:first-child{margin-right:10px}.motif-advanced>summary{font-size:12px}.motif-advanced label{margin-top:8px}.motif-grids h3{font-size:14px;margin-bottom:14px}</style></head><body><main>
+<header><div class="brand"><span class="brand-mark" aria-hidden="true"></span>Atelente</div><h1>Cleavage analysis</h1><small id="datasetLabel" hidden></small><small id="runProfile" class="run-profile"></small></header>
+<nav class="view-switch"><button id="sitesView" aria-pressed="true">Results</button><button id="mapView" aria-pressed="false">Protein map</button></nav><div id="notice">Loading report…</div>
+<section class="card" id="siteList"><div class="heading"><h2>Ratio results</h2><span id="count" role="status"></span><button id="clearRecord" hidden>Show all proteins</button></div>
+<div class="controls"><label>Search<input id="search" type="search" placeholder="Protein, gene, bond, peptide or protease"></label><label>Comparison<select id="comparison"></select></label><label>Minimum samples<input id="coverage" type="number" min="0" step="1" value="0"></label><label>Ratio threshold |log2FC|<input id="threshold" type="number" min="0" step="0.1" value="1"></label><button id="showAll">Show all coverage</button><button id="resetFilters">Reset filters</button></div>
+<details><summary>Evidence filters</summary><div class="controls"><label>Role<select id="roleFilter"><option value="">Both roles</option><option value="N">Neo-N</option><option value="C">Neo-C</option></select></label><label>Terminal evidence<select id="support"><option value="all">Any</option><option value="both">Both termini</option><option value="single">One terminus</option></select></label><label>Spanning<select id="spanSelect"><option value="all">Any</option><option value="yes">Observed</option><option value="no">Not observed</option></select></label><label id="proteaseLabel">Exact MEROPS protease<select id="protease"><option value="">Any</option></select></label><label id="meropsLabel" class="check"><input id="hasReference" type="checkbox">Exact MEROPS match only</label></div></details>
+<p class="table-note" id="filterNote"></p><div id="patternCounts" class="chips" aria-label="Pattern filters"></div><div class="scroll site-scroll"><table id="overview" aria-label="Candidate bonds and terminal roles"><thead><tr id="overviewHead"></tr></thead><tbody id="sites"></tbody></table></div><div class="pager"><button id="prev">Previous</button><span id="page"></span><button id="next">Next</button><button id="exportSites">Download filtered summary (CSV)</button></div></section>
+<section class="card" id="motifSection"><details id="motifDetails"><summary>Motif summary</summary><div class="controls"><label>Terminus<select id="motifRole"><option value="N">N-term</option><option value="C">C-term</option></select></label><details class="motif-advanced"><summary>Advanced</summary><label>Test family<select id="motifFamily"></select></label></details><button id="motifExport">Download counts</button></div><p class="motif-legend">Observed frequency (%)</p><div class="motif-grids" id="motifGrids"></div><p id="motifCellDetail" class="table-note" role="status"></p></details></section>
+<section class="card" id="otherSection" hidden><details id="otherCandidates"><summary id="otherHeading">Other candidates</summary><div class="scroll"><table aria-label="Other candidate forms"><thead><tr id="otherHead"></tr></thead><tbody id="otherBody"></tbody></table></div><div class="pager"><button id="otherPrev">Previous candidates</button><span id="otherPage"></span><button id="otherNext">Next candidates</button></div></details></section>
+<section id="evidence" class="card" hidden><div class="heading"><h2 id="bond"></h2><span id="context" class="context"></span><button id="openMap" class="link">View full protein map →</button></div>
+<div id="mappingControls" class="controls" hidden><label>Protein / bond mapping<select id="mappingChoice"></select></label><span id="mappingStatus" class="table-note"></span></div><h3>Supporting peptides</h3><div class="scroll"><table aria-label="Supporting peptides"><thead><tr id="evidenceHead"></tr></thead><tbody id="peptides"></tbody></table></div><p class="table-note" id="peptideNote"></p>
+<div id="pairDetail"><h3>Ratio summary</h3><div class="controls"><label>Role<select id="detailRole"></select></label><label>Peptide-form pair<select id="pairChoice"></select></label><button id="resetPair">Use selected representative</button></div><p class="table-note" id="pairNote"></p><div class="scroll"><table aria-label="Selected peptide-form pair"><thead><tr id="pairHead"></tr></thead><tbody id="pairBody"></tbody></table></div><details id="allPairs"><summary id="allPairsLabel">All pairs</summary><div class="scroll"><table aria-label="All peptide-form pairs"><thead><tr id="allPairHead"></tr></thead><tbody id="allPairBody"></tbody></table></div></details></div>
+<details open><summary>Protein positions</summary><div id="localTrack" class="track"></div></details><details id="referencePanel"><summary id="referenceHeading">Reference annotations</summary><p id="referenceStatus" class="table-note"></p><div class="scroll"><table aria-label="Reference annotations"><thead><tr><th>Source</th><th>Type / protease</th><th>Substrate / feature</th><th>Position</th><th>Sequence</th><th>Match basis</th><th>Evidence / references</th></tr></thead><tbody id="referenceRows"></tbody></table></div></details></section>
+<section id="mapPanel" class="card" hidden><div class="heading"><h2>Protein map</h2><span id="proteinInfo"></span></div><div class="controls"><label>Find a protein<input id="proteinQuery" type="search" placeholder="Accession, gene or protein name"></label><label>Matching proteins<select id="proteinRecord"></select></label></div><div class="map-tools"><label>Candidate bond<select id="mapBond"></select></label><button id="viewEvidence">View bond evidence &amp; FC →</button></div><div class="map-tools badge"><span style="color:#247565">● Neo-N</span> · <span style="color:#67559c">● Neo-C</span> · <span style="color:#956320">● Spanning</span> · Other placement</div><div id="track" class="track"></div><div class="pager"><button id="mapPrev">Previous</button><span id="mapPage"></span><button id="mapNext">Next</button></div><div id="related" class="map-tools" aria-live="polite"></div></section>
+
+<section class="card"><h2>Downloads</h2><div class="download-actions" id="downloads"></div><div id="tableChooser" hidden><div id="tableChoices" class="table-choices"></div><button id="downloadChosen" type="button">Download selected tables</button><span id="downloadStatus" class="download-status" role="status"></span></div></section>
+</main><script type="application/json" id="data">__PROTEOMASTER_DATA__</script><script>__ATELENTE_REPORT_PAYLOAD_JS__</script><script>__ATELENTE_WORKBOOK_JS__</script><script>__ATELENTE_PAIR_SUMMARY_JS__</script><script>
+'use strict';
+(async function(){
+const D=await ReportPayload.parse(document.getElementById('data').textContent),$=id=>document.getElementById(id);
+function node(tag,text,parent){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(parent)parent.append(e);return e}
+function indexMany(rows,key){const m=new Map();for(const r of rows||[]){if(!m.has(r[key]))m.set(r[key],[]);m.get(r[key]).push(r)}return m}
+function svg(tag,attrs,text,parent){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;if(parent)parent.append(e);return e}
+const proteins=new Map(D.proteins.map(p=>[p.record_id,p])),observations=new Map(D.peptides.map(p=>[p.peptide_id,p]));
+const evidence=indexMany(D.cleavage.evidence,'site_id'),sites=D.cleavage.sites,sitesById=new Map(sites.map(s=>[s.site_id,s]));
+const merops=indexMany(D.merops?.matches||[],'site_id'),uniprot=indexMany(D.uniprot?.site_annotations||[],'site_id');
+const referenceRecords=new Map((D.uniprot?.records||[]).map(r=>[r.record_id,r]));
+const placementsByRecord=indexMany(D.matches,'record_id'),sitesByRecord=indexMany(sites,'record_id');
+const colors={'Neo-N':'#247565','Neo-C':'#67559c','Spanning':'#956320'};
+function groupOf(s){return s.neo_n_count&&s.neo_c_count?'both':s.neo_n_count?'n':s.neo_c_count?'c':null}
+function referenceBond(m){
+  const k=Number(m.p1_position);
+  return Number.isInteger(k)&&k>0?k+'|'+(k+1):'Position unavailable';
+}
+function referenceSequence(m){
+  const seq=String(m.p4_p4prime||'');
+  return seq.length===8?seq.slice(0,4)+'|'+seq.slice(4):'Unavailable';
+}
+function referenceBasis(m){
+  if(m.relation_type==='motif_compatibility')return 'Same 8 residues only';
+  return {agreement:'Same accession, bond and 8 residues',mismatch:'Same accession and bond; residues differ',unknown:'Same accession and bond; sequence unavailable'}[m.context_status]||'Same accession and bond';
+}
+function meropsSummary(site){
+  if(!D.merops)return 'Not supplied';
+  const all=merops.get(site.site_id)||[],exact=exactRefs.get(site.site_id)||[];
+  const matches=exact.length?[...exact,...all.filter(m=>!exact.includes(m))]:all;
+  const shortBasis=m=>m.relation_type==='motif_compatibility'?'Motif only':m.context_status==='agreement'?'Exact bond + context':m.context_status==='mismatch'?'Bond; context differs':'Bond; context unavailable';
+  const labels=[...new Set(matches.map(m=>(m.protease_name||m.protease_id||'Protease unavailable')+' · '+shortBasis(m)))];
+  return labels.length?labels[0]+(labels.length>1?' +'+(labels.length-1)+' more':'')+' · '+all.length+' records':'0 matching records';
+}
+function processingSummary(site){
+  if(!D.uniprot)return 'Not supplied';
+  const rows=(uniprot.get(site.site_id)||[]).filter(a=>a.record_id===site.record_id);
+  if(rows.length)return [...new Set(rows.map(a=>a.feature_type+' · '+String(a.boundary).replaceAll('_',' ')))].join(', ');
+  const ref=referenceRecords.get(site.record_id);
+  return ({matched:'No matching boundary',not_found:'Not in supplied snapshot',unsupported_identifier:'Not queried: non-UniProt identifier',unsupported_isoform:'Isoform not covered',sequence_mismatch:'Reference sequence differs',ambiguous_accession:'Ambiguous reference',sequence_unavailable:'Reference sequence unavailable'})[ref?.status]||'Reference unavailable';
+}
+const recordCounts=indexMany(D.proteins,'accession');
+function proteinLabel(site){const gene=proteins.get(site.record_id)?.gene_symbol;return [site.accession,gene,recordCounts.get(site.accession)?.length>1?'record '+site.record_id:''].filter(Boolean).join(' · ')}
+const exactRefs=indexMany((D.merops?.matches||[]).filter(m=>m.relation_type==='reference_site_candidate'&&m.context_status==='agreement'),'site_id');
+function supportingRows(site){
+  const grouped=new Map();
+  for(const e of evidence.get(site.site_id)||[]){
+    if(e.record_id!==site.record_id||(!e.is_candidate&&e.role!=='spanning'))continue;
+    const role=e.role==='spanning'?'Spanning':e.role==='N'?'Neo-N':'Neo-C';
+    const p=observations.get(e.peptide_id);if(!p)continue;
+    const key=e.peptide_id+'|'+role;
+    if(!grouped.has(key))grouped.set(key,{p,role,placements:[]});
+    grouped.get(key).placements.push(e);
+  }
+  return [...grouped.values()].sort((a,b)=>Object.keys(colors).indexOf(a.role)-Object.keys(colors).indexOf(b.role)||a.p.source_row-b.p.source_row);
+}
+function format(value,probability=false){
+  if(typeof value!=='number'||!Number.isFinite(value))return '—';
+  if(probability&&value!==0&&value<.001)return value.toExponential(3);
+  return Number(value.toPrecision(4)).toString();
+}
+
+const rowsBySite=new Map(sites.map(s=>[s.site_id,supportingRows(s)]));
+const searchText=new Map(sites.map(s=>[s.site_id,[proteinLabel(s),s.bond_left,s.bond_right,s.bond_left+'|'+s.bond_right,s.context_display,...rowsBySite.get(s.site_id).map(r=>r.p.sequence),...(merops.get(s.site_id)||[]).flatMap(m=>[m.protease_name,m.protease_id,m.substrate_accession,m.merops_record_id])].join(' ').toUpperCase()]));
+const linksByPlacement=new Map();function placementKey(r){return [r.record_id,r.peptide_id,r.start,r.end].join('|')}
+for(const e of D.cleavage.evidence){if(!sitesById.has(e.site_id)||(!e.is_candidate&&e.role!=='spanning'))continue;const k=placementKey(e);if(!linksByPlacement.has(k))linksByPlacement.set(k,new Set());linksByPlacement.get(k).add(e.site_id)}
+for(const rows of placementsByRecord.values())rows.sort((a,b)=>a.start-b.start||a.end-b.end||String(a.peptide_id).localeCompare(String(b.peptide_id)));
+const pairData=D.pair_view||{},comparisons=pairData.comparisons||[],sampleDesign=pairData.samples||[],pairChoices=new Map();
+const digestionLookup=PairSummary.buildDigestionLookup(D);
+const analysisSelectionK=new Map(comparisons.map(c=>[c.Name,pairData.selection?.k_by_comparison?.[c.Name]??Math.max(1,PairSummary.defaultK(sampleDesign,c))]));
+let filtered=[],otherRows=[],otherPage=0,overviewRows=[],overviewGroups=[],page=0,active=null,activeRole='N',selectedPeptide=null,mapMode=false,scopeRecord=null,mapRecord=null,mapPage=0,selectedPlacement=null,patternFilter='',sortField='identity',sortDirection=1;
+const pageSize=25,mapSize=35;const groupKey=(s,role)=>JSON.stringify([s.site_id,role]);
+function selectedComparison(){return comparisons.find(c=>c.Name===$('comparison').value)}
+function choiceKey(s,role){return JSON.stringify([selectedComparison()?.Name,s.site_id,role])}
+function kValue(){return Math.max(0,Math.floor(Number($('coverage').value)||0))}function tauValue(){return Math.max(0,Number($('threshold').value)||0)}
+function availableRoles(s){return ['N','C'].filter(r=>rowsBySite.get(s.site_id).some(x=>x.role==='Neo-'+r))}
+function fallbackView(){return {status:'no_pair',status_label:selectedComparison()?'No quantified pair':'No comparison',coverage_pass:kValue()===0,pattern:'unavailable',pattern_label:'No ratio available'}}
+let summaryCache=null,rankedCache=null;
+const assignmentLinks=Array.isArray(pairData.links)?new Map(pairData.links.map(link=>[PairSummary.pairKey(link),link])):null;
+function assignmentLink(p){return assignmentLinks?.get(PairSummary.pairKey(p))}
+function assigned(p){return !assignmentLinks||assignmentLink(p)?.assignment_eligible===true}
+function assignmentReason(p){return assignmentLink(p)?.exclusion_reason||'No eligible source protein assignment'}
+function directionText(d){return d.label+' · '+d.increased+'↑ / '+d.decreased+'↓'+(d.below_threshold?' · '+d.below_threshold+' below threshold':'')}
+function rebuild(){
+ if(!summaryCache){summaryCache=new Map();const prepared=Array.isArray(pairData.prepared_summaries),summaries=prepared?PairSummary.preparedPairs(pairData.prepared_summaries,selectedComparison(),digestionLookup):PairSummary.summarizePairs(pairData.ratios||[],sampleDesign,selectedComparison(),pairData.contrasts||[]);for(const p of summaries){const key=JSON.stringify([p.site_id,p.role]);if(!summaryCache.has(key))summaryCache.set(key,[]);summaryCache.get(key).push(p)}}
+ if(!rankedCache){rankedCache=new Map();for(const [key,all] of summaryCache)rankedCache.set(key,Array.isArray(pairData.prepared_summaries)?PairSummary.preparedOrder(all.filter(assigned)):PairSummary.rankPairs(all.filter(assigned),{selectionK:analysisSelectionK.get(selectedComparison()?.Name),digestionByPair:digestionLookup}));}
+ overviewRows=[];
+ for(const s of sites)for(const role of availableRoles(s)){
+  const all=summaryCache.get(groupKey(s,role))||[],ps=rankedCache.get(groupKey(s,role))||[],selected=ps[0]||null;
+  const rejected=all.filter(p=>!assigned(p));
+  overviewRows.push({key:groupKey(s,role),site:s,role,pairs:ps,allPairs:[...ps,...rejected],selected,view:selected?PairSummary.view(selected,kValue(),tauValue()):fallbackView(),computable:ps.filter(p=>Number.isFinite(p.log2_fc)).length,directions:PairSummary.directionSummary(ps,kValue(),tauValue())});
+ }
+ overviewGroups=PairSummary.groupOverviewRows(overviewRows);for(const g of overviewGroups)g.directions=PairSummary.directionSummary(g.pairs,kValue(),tauValue());filter();renderMotif();
+}
+function mappingMatches(r){const q=$('search').value.trim().toUpperCase(),bond=q.match(/^(\d+)\s*[|:-]\s*(\d+)$/),s=r.site;
+ return (!scopeRecord||s.record_id===scopeRecord)&&(!q||(bond?Number(bond[1])===s.bond_left&&Number(bond[2])===s.bond_right:searchText.get(s.site_id).includes(q)))&&(!$('roleFilter').value||r.role===$('roleFilter').value)&&($('support').value==='all'||($('support').value==='both'?groupOf(s)==='both':groupOf(s)!=='both'))&&($('spanSelect').value==='all'||Boolean(s.spanning_count)===($('spanSelect').value==='yes'))&&(!$('hasReference').checked||exactRefs.has(s.site_id))&&(!$('protease').value||(exactRefs.get(s.site_id)||[]).some(m=>m.protease_id===$('protease').value));
+}
+function filter(){
+ const base=overviewGroups.filter(g=>g.mappings.some(mappingMatches));
+ // A wholly unquantified component is not a ratio result. Keep its source
+ // observations in the audit; do not reclassify it as an Other candidate.
+ const paired=base.filter(r=>r.selected&&!['spanning_only','neo_only'].includes(r.view.status)),covered=paired.filter(r=>r.view.coverage_pass),chips=$('patternCounts');chips.replaceChildren();
+ const counts=new Map();for(const r of covered){const key=r.view.pattern;if(!counts.has(key))counts.set(key,{label:r.view.pattern_label,n:0});counts.get(key).n++}
+ const add=(key,label,n)=>{const b=node('button',label+' · '+n,chips);b.setAttribute('aria-pressed',String(patternFilter===key));b.onclick=()=>{patternFilter=key;filter()}};
+ add('','All results',covered.length);for(const [key,c] of counts)add(key,c.label,c.n);
+ filtered=covered.filter(r=>!patternFilter||r.view.pattern===patternFilter);filtered.sort(compareRows);page=0;
+ otherRows=overviewRows.filter(mappingMatches).filter(r=>!r.allPairs.length).flatMap(r=>(rowsBySite.get(r.site.site_id)||[]).filter(x=>x.role==='Neo-'+r.role).map(item=>({r,item})));otherPage=0;
+ $('clearRecord').hidden=!scopeRecord;const hidden=paired.length-covered.length;$('filterNote').textContent=hidden?hidden+' results below minimum sample coverage.':'';
+ showPage();showOtherCandidates();
+}
+function mappingLabel(site){return proteinLabel(site)+' · '+site.bond_left+' | '+site.bond_right}
+function groupedReferences(r,fn){const labels=[...new Set(r.mappings.map(m=>fn(m.site)))];return labels.join('; ')}
+function groupSelectionValue(r,field){const values=r.mappings.map(m=>m.selected.selection?.[field]),distinct=[...new Set(values.map(x=>JSON.stringify(x)))];return distinct.length===1?values[0]:JSON.stringify(r.mappings.map((m,i)=>({record_id:m.site.record_id,bond_left:m.site.bond_left,value:values[i]})));}
+function groupTestResult(r){const results=r.mappings.map(m=>testResult(m.selected)),first=results[0],signature=t=>JSON.stringify([t.result?.family,t.result?.p_value,t.result?.adjusted_p_value,t.reason]);return results.every(t=>signature(t)===signature(first))?first:{rows:[],reason:'Varies by mapping; see details'};}
+function sortValue(r,key){const p=r.selected;switch(key){case 'identity':return proteinLabel(r.site)+' '+String(r.site.bond_left).padStart(9,'0')+' '+r.role;case 'role':return r.role;case 'neo':return p?.neo_log2_fc;case 'span':return p?.spanning_log2_fc;case 'ratio':return p?.log2_fc;case 'coverage':return p?Math.min(p.control.co,p.treatment.co):null;case 'control':return p?.control.co;case 'treatment':return p?.treatment.co;case 'status':return r.view.pattern_label;case 'pairs':return r.pairs.length;case 'merops':return meropsSummary(r.site);case 'uniprot':return processingSummary(r.site);case 'pvalue':return groupTestResult(r).result?.p_value;case 'bh':return groupTestResult(r).result?.adjusted_p_value;case 'family':return testResult(p).rows.map(x=>x.family).join('; ')}}
+function compareRows(a,b){const av=sortValue(a,sortField),bv=sortValue(b,sortField);if(av==null)return bv==null?0:1;if(bv==null)return -1;return (typeof av==='number'?av-bv:String(av).localeCompare(String(bv)))*sortDirection}
+const inferenceRows=pairData.statistics||[],inferenceIndex=new Map();for(const r of inferenceRows){const key=JSON.stringify([r.site_id,r.role,r.neo_peptide_id,r.spanning_peptide_id,r.comparison]);if(!inferenceIndex.has(key))inferenceIndex.set(key,[]);inferenceIndex.get(key).push(r)}
+const excludedIndex=new Map((pairData.excluded_statistics||[]).map(r=>[JSON.stringify([r.site_id,r.role,r.neo_peptide_id,r.spanning_peptide_id,r.comparison]),r.reason]));
+function testResult(p){
+ if(!p)return {rows:[],reason:'No quantified pair'};
+ const key=JSON.stringify([p.site_id,p.role,p.neo_peptide_id,p.spanning_peptide_id,selectedComparison()?.Name]);
+ const rows=inferenceIndex.get(key)||[],result=rows.length===1&&rows[0].status==='tested'?rows[0]:null;
+ const labels={insufficient_replicates:'Insufficient replicates',zero_residual_variance:'No residual variation',insufficient_features_for_moderation:'Insufficient features for testing',numeric_failure:'Numeric failure',model_numeric_failure:'Model numeric failure'};
+ const reason=result?'':rows.length>1?'Multiple test families':rows.length?(labels[rows[0].status]||String(rows[0].status).replaceAll('_',' ')):(excludedIndex.get(key)||'Not tested');
+ return {rows,result,reason};
+}
+let motifData=null,motifInitialized=false;
+function motifRows(){return overviewRows.filter(r=>r.selected).map(r=>({site:r.site,pair:r.selected,families:[...new Set(testResult(r.selected).rows.map(t=>t.family).filter(Boolean))]}))}
+function motifCellText(cell){return cell.group+' · '+cell.position.replace('prime','′')+' · '+cell.residue+': '+cell.numerator+' / '+cell.denominator+' valid pairs'+(cell.percent===null?' · Not available':' · '+cell.percent.toFixed(1)+'%')}
+
+function renderMotif(){
+ const rows=motifRows(),availableRoles=[...new Set(rows.map(r=>r.pair.role))];
+ if(!motifInitialized&&availableRoles.length&&!availableRoles.includes($('motifRole').value))$('motifRole').value=availableRoles[0];
+ const role=$('motifRole').value,eligible=rows.filter(r=>r.pair.role===role&&Number.isFinite(r.pair.log2_fc)&&r.pair.arithmetic_valid&&PairSummary.view(r.pair,kValue(),tauValue()).coverage_pass),families=[...new Set(eligible.flatMap(r=>r.families))].sort();
+ if(eligible.some(r=>!r.families.length)||!families.length)families.push('');
+ const previous=$('motifFamily').value;$('motifFamily').replaceChildren();
+ for(const family of families)node('option',family||'Unclassified / no test family',$('motifFamily')).value=family;
+ $('motifFamily').value=motifInitialized&&families.includes(previous)?previous:(families.find(f=>f.includes('primary'))??families[0]);motifInitialized=true;
+ motifData=PairSummary.motifSummary(rows,{role,family:$('motifFamily').value,k:kValue(),tau:tauValue()});
+ const maxFrequency=Math.max(0,...motifData.groups.flatMap(g=>g.cells.map(c=>Number.isFinite(c.percent)?c.percent:0))),colorMax=maxFrequency||1;
+ $('motifGrids').replaceChildren();$('motifCellDetail').textContent='';
+ for(const group of motifData.groups){
+  const panel=node('div',undefined,$('motifGrids'));node('h3',group.name+' · n = '+group.measurement_pairs,panel);
+  const matrix=node('div',undefined,panel);matrix.className='motif-matrix';
+  const table=node('table',undefined,matrix);table.className='motif-grid';table.setAttribute('aria-label',group.name+' observed residue frequency');
+  const foot=node('tr',undefined,node('tfoot',undefined,table));for(const label of ['',...motifData.positions.map(p=>p.replace('prime','′'))])node('th',label,foot);
+  const body=node('tbody',undefined,table);
+  for(const residue of motifData.residues){const tr=node('tr',undefined,body);node('th',residue,tr);
+   for(const cell of group.cells.filter(c=>c.residue===residue)){
+    const td=node('td',undefined,tr),value=cell.percent,description=motifCellText(cell),button=node('button',value===null?'—':'',td);
+    button.title=description;button.setAttribute('aria-label',description);button.onfocus=button.onclick=()=>$('motifCellDetail').textContent=description;
+    if(value===null)td.className='motif-unavailable';else{const strength=Math.min(1,value/colorMax),base=[8,81,156];td.style.backgroundColor='rgb('+base.map(x=>Math.round(255+(x-255)*strength)).join(',')+')';td.style.color=strength>.65?'white':'#1d3734';}
+   }
+  }
+  const legend=node('div',undefined,matrix);legend.className='motif-colorbar';legend.setAttribute('aria-label',maxFrequency?'Observed frequency: shared automatic scale from 0 to '+maxFrequency+' percent':'Observed frequency: no available values');
+  node('div',undefined,legend).className='motif-colorbar-bar';const ticks=node('div',undefined,legend);ticks.className='motif-colorbar-ticks';for(const value of maxFrequency?[maxFrequency,maxFrequency/2,0].map(v=>Number(v.toFixed(1))+'%'):['—'])node('span',value,ticks);
+ }
+ $('motifExport').disabled=!motifData.measurement_pairs;
+}
+function exportMotif(){if(!motifData)return;const h=['Comparison','Role','Family','Coverage k','Ratio threshold','Group','Position','Residue','Count','Valid positions','Percent'];
+ const quote=x=>{if(x==null)return '';if(typeof x==='number')return String(x);let s=String(x);if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';};
+ const rows=motifData.groups.flatMap(g=>g.cells.map(c=>[selectedComparison()?.Name,motifData.role,motifData.family||'Unclassified / no test family',motifData.coverage_k,motifData.threshold,c.group,c.position,c.residue,c.numerator,c.denominator,c.percent]));
+ const url=URL.createObjectURL(new Blob(['\uFEFF'+[h,...rows].map(r=>r.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'})),a=node('a');a.href=url;a.download='atelente_motif_counts.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function addTestCells(tr,p,t=testResult(p)){const pc=node('td',format(t.result?.p_value,true),tr);pc.className='number';const bh=node('td',t.result?format(t.result.adjusted_p_value,true):t.reason,tr);bh.className=t.result?'number':'test-reason';const info=t.rows.map(x=>x.family).join('; ');pc.title=bh.title=info?('Original test family: '+info):t.reason;}
+function headers(id,labels){$(id).replaceChildren();for(const label of labels)node('th',label,$(id))}
+function showPage(){
+ const c=selectedComparison(),cols=[['Protein / bond mappings','identity'],['Role','role'],['Ratio log2FC','ratio'],['Neo log2FC','neo'],['Spanning log2FC','span'],[(c?.Control||'Control')+' samples','control'],[(c?.Treatment||'Treatment')+' samples','treatment'],['Pairs','pairs']];
+ if(D.merops)cols.push(['MEROPS','merops']);if(D.uniprot)cols.push(['UniProt','uniprot']);if(inferenceRows.length)cols.push(['P-value','pvalue'],['BH-adjusted P','bh']);
+ $('overviewHead').replaceChildren();for(const [label,key] of cols){const th=node('th',undefined,$('overviewHead')),b=node('button',label+(sortField===key?(sortDirection===1?' ↑':' ↓'):''),th);if(['control','treatment'].includes(key))th.title='Samples with both forms measured / total included samples';b.onclick=()=>{sortDirection=sortField===key?-sortDirection:1;sortField=key;filtered.sort(compareRows);showPage()}}
+ const body=$('sites');body.replaceChildren();const start=page*pageSize;
+ for(const r of filtered.slice(start,start+pageSize)){
+  const s=r.site,p=r.selected,tr=node('tr',undefined,body);tr.dataset.site=s.site_id;tr.dataset.role=r.role;tr.setAttribute('aria-selected',String(r.mappings.some(m=>m.site.site_id===active?.site_id)&&activeRole===r.role));
+  const identity=node('td',undefined,tr);identity.className='site-id';for(const m of r.mappings){const btn=node('button',mappingLabel(m.site),node('div',undefined,identity));btn.className='link';btn.onclick=e=>{e?.stopPropagation();active=m.site;activeRole=r.role;pairChoices.delete(choiceKey(active,activeRole));selectedPeptide=m.selected.neo_peptide_id;showPage()};}
+  node('td','Neo-'+r.role,tr);ratioCell(tr,p,r.view);for(const v of [p.neo_log2_fc,p.spanning_log2_fc])node('td',format(v),tr).className='number';
+  for(const side of ['control','treatment'])node('td',p[side].co+'/'+p[side].total,tr).title='Both forms measured / total samples';
+  const pc=node('td',String(r.pairs.length),tr);pc.title=r.computable+'/'+r.pairs.length+' pairs have a finite ratio change; the overview uses one fixed representative.';node('small',directionText(r.directions),pc).className='badge';
+  if(D.merops)node('td',groupedReferences(r,meropsSummary),tr).className='ref-col';if(D.uniprot)node('td',groupedReferences(r,processingSummary),tr).className='ref-col';if(inferenceRows.length)addTestCells(tr,p,groupTestResult(r));
+  tr.onclick=()=>{active=s;activeRole=r.role;pairChoices.delete(choiceKey(s,r.role));selectedPeptide=p.neo_peptide_id;showPage()};
+ }
+ if(!filtered.length)node('td','No ratio results match these filters.',node('tr',undefined,body)).colSpan=cols.length;
+ $('count').textContent=filtered.length+' measurement-pair results · '+filtered.reduce((n,r)=>n+r.mappings.length,0)+' protein/bond mappings';$('page').textContent=filtered.length?(start+1)+'–'+Math.min(start+pageSize,filtered.length)+' of '+filtered.length:'0 results';$('prev').disabled=page===0;$('next').disabled=start+pageSize>=filtered.length;renderEvidence();
+}
+function ratioCell(tr,p,v){const finite=Number.isFinite(p?.log2_fc),cell=node('td',finite?format(p.log2_fc):v.status_label,tr);cell.className=finite?'number effect':'ratio-status';cell.title=finite?v.pattern_label:v.status_label;}
+function showOtherCandidates(){
+ const c=selectedComparison();$('otherSection').hidden=mapMode||!otherRows.length;$('otherHeading').textContent='Other candidates · '+otherRows.length+' forms';
+ headers('otherHead',['Protein / gene · bond','Role','Peptide sequence','Modifications',...(c?['Neo log2FC',c.Control+' samples',c.Treatment+' samples']:[]),'Evidence',...(D.merops?['MEROPS']:[]),...(D.uniprot?['UniProt']:[])]);
+ $('otherBody').replaceChildren();const start=otherPage*pageSize;
+ for(const {r,item} of otherRows.slice(start,start+pageSize)){
+  const tr=node('tr',undefined,$('otherBody')),s=r.site,p=item.p,b=node('button',proteinLabel(s)+' · '+s.bond_left+' | '+s.bond_right,node('td',undefined,tr));b.className='link';node('td',item.role,tr);node('td',p.sequence,tr).className='mono';node('td',p.modifications||(p.modifications_available?'None reported':'Unavailable'),tr);
+  if(c){const fx=peptideEffect(p.peptide_id);node('td',format(fx?.fc),tr).className='number';for(const side of ['control','treatment'])node('td',fx?fx[side].n+'/'+fx[side].total:'—',tr)}
+  node('td',s.spanning_count?'No quantified pair':(availableRoles(s).length===2?'Two termini; no spanning':'One terminus; no spanning'),tr);
+  if(D.merops)node('td',meropsSummary(s),tr);if(D.uniprot)node('td',processingSummary(s),tr);
+  tr.onclick=()=>{active=s;activeRole=r.role;selectedPeptide=p.peptide_id;renderEvidence()};
+ }
+ $('otherPage').textContent=(start+1)+'–'+Math.min(start+pageSize,otherRows.length)+' of '+otherRows.length;$('otherPrev').disabled=otherPage===0;$('otherNext').disabled=start+pageSize>=otherRows.length;
+}
+function highlight(id){selectedPeptide=id;for(const row of $('peptides').children)row.setAttribute('aria-selected',String(!!id&&row.dataset.peptide===String(id)));for(const g of document.querySelectorAll('.track g[data-peptide]'))g.classList.toggle('active',g.dataset.peptide===String(id))}
+const measurementMap=new Map();function addMeasurement(id,col,value,status){const key=JSON.stringify([id,col]);if(!measurementMap.has(key))measurementMap.set(key,{value,status})}for(const r of pairData.measurements||[])addMeasurement(r.peptide_id,r.source_column,r.value,r.value_status);for(const r of pairData.ratios||[]){addMeasurement(r.neo_peptide_id,r.source_column,r.neo_value,r.neo_status);addMeasurement(r.spanning_peptide_id,r.source_column,r.spanning_value,r.spanning_status)}
+function peptideEffect(id){const c=selectedComparison();if(!c)return null;const a=[c.Control,c.Treatment].map(condition=>{const samples=sampleDesign.filter(s=>s.Use==='Yes'&&s.Condition===condition),v=samples.map(s=>measurementMap.get(JSON.stringify([id,s['Peptide column']]))).filter(x=>x?.status==='observed'&&Number.isFinite(x.value)&&x.value>0).map(x=>Math.log2(x.value));return {n:v.length,total:samples.length,mean:v.length?v.reduce((a,b)=>a+b,0)/v.length:null}});return {control:a[0],treatment:a[1],fc:a.every(x=>x.n)?a[1].mean-a[0].mean:null,coverage:a.map(x=>x.n+'/'+x.total).join(' · ')}}
+const termini=indexMany(D.cleavage.termini||[],'peptide_id');function ends(item){const entries=(termini.get(item.p.peptide_id)||[]).filter(t=>t.record_id===active.record_id&&item.placements.some(p=>p.start===t.start&&p.end===t.end));return ['N','C'].map(role=>{const r=entries.filter(t=>t.role===role);if(!r.length)return role+': unavailable';return role+': '+[...new Set(r.map(t=>t.pre_digest_n_label&&role==='N'?'labelled':t.classification==='reference_end'?'reference end':t.processing_status==='possible_initiator_met_removal'?'possible Met removal':t.digestion_compatible===true?'digestion-compatible':t.digestion_compatible===false?'digestion-incompatible':String(t.classification||'unavailable').replaceAll('_',' ')))].join(', ')}).join(' · ')}
+const hasSpecificity=(D.cleavage.termini||[]).some(t=>typeof t.specificity==='string');
+function itemTermini(item){return (termini.get(item.p.peptide_id)||[]).filter(t=>t.record_id===active.record_id&&item.placements.some(p=>p.start===t.start&&p.end===t.end))}
+function specificity(item){return [...new Set(itemTermini(item).map(t=>t.specificity).filter(Boolean))].join(', ')||'Unavailable'}
+function processingContext(item){const labels=itemTermini(item).filter(t=>t.processing_status&&t.processing_status!=='not_assessed'&&t.processing_status!=='not_applicable').map(t=>t.processing_status==='reference_end'?(t.role==='N'?'Reference start':'Reference end'):t.processing_status==='possible_initiator_met_removal'?'Possible initiator-Met removal':String(t.processing_status).replaceAll('_',' '));return [...new Set(labels)].join(', ')||'Internal'}
+function renderMappingChoice(){
+ const g=overviewGroups.find(g=>g.mappings.some(m=>m.site===active&&m.role===activeRole));const mappings=g?.mappings||[];
+ $('mappingChoice').replaceChildren();for(const m of mappings)node('option',mappingLabel(m.site),$('mappingChoice')).value=m.site.site_id;$('mappingChoice').value=active.site_id;
+ $('mappingControls').hidden=mappings.length<2;$('mappingStatus').textContent=mappings.length>1?'Same measurements; '+mappings.length+' alternative protein/bond mappings.':'';
+}
+function renderEvidence(){$('evidence').hidden=mapMode||!active;if(!active)return;renderMappingChoice();$('bond').textContent=proteinLabel(active)+' · '+active.bond_left+' | '+active.bond_right;$('context').textContent=active.context_display;const c=selectedComparison();headers('evidenceHead',['Role','Peptide sequence','Modifications','Position',...(hasSpecificity?['Specificity','Processing context']:['Ends']),...(c?['Peptide log2FC',c.Control+' samples',c.Treatment+' samples']:[])]);$('peptides').replaceChildren();for(const item of rowsBySite.get(active.site_id)||[]){const {p,role,placements}=item,tr=node('tr',undefined,$('peptides'));tr.dataset.peptide=p.peptide_id;const rc=node('td',role,tr);rc.style.color=colors[role];rc.className='role';const b=node('button',p.sequence,node('td',undefined,tr));b.className='link mono';b.title='Input row '+p.source_row;node('td',p.modifications||(p.modifications_available?'None reported':'Unavailable'),tr);node('td',[...new Set(placements.map(e=>e.start+'–'+e.end))].join(', '),tr);node('td',hasSpecificity?specificity(item):ends(item),tr);if(hasSpecificity)node('td',processingContext(item),tr);if(c){const fx=peptideEffect(p.peptide_id);node('td',format(fx?.fc),tr).className='number';for(const side of ['control','treatment'])node('td',fx?fx[side].n+'/'+fx[side].total:'—',tr)}tr.onclick=()=>highlight(p.peptide_id)}$('peptideNote').hidden=true;renderPairDetail();renderLocalMap();renderReferences();highlight(selectedPeptide)}
+const observationLabels=new Map(),labelCounts=new Map();for(const p of observations.values()){const label=[p.sequence,p.modifications].filter(Boolean).join(' · ');observationLabels.set(p.peptide_id,label);labelCounts.set(label,(labelCounts.get(label)||0)+1)}
+function observationLabel(id){const p=observations.get(id),label=observationLabels.get(id);return p?label+(labelCounts.get(label)>1?' · '+p.peptide_id:''):String(id)}
+function observationAudit(id){const p=observations.get(id);return p?observationLabel(id)+' · input row '+p.source_row:String(id)}
+function pairLabel(p){return observationLabel(p.neo_peptide_id)+' / '+observationLabel(p.spanning_peptide_id)}
+function pairHeaders(id,identity=false){const c=selectedComparison();headers(id,[...(identity?['Peptide-form pair']:[]),'Ratio log2FC','Neo log2FC','Spanning log2FC',(c?.Control||'Control')+' samples',(c?.Treatment||'Treatment')+' samples',...(inferenceRows.length?['P-value','BH-adjusted P']:[])])}
+function pairCells(tr,p,identity=false){if(identity)node('td',pairLabel(p),tr);const v=PairSummary.view(p,kValue(),tauValue());ratioCell(tr,p,v);for(const value of [p.neo_log2_fc,p.spanning_log2_fc])node('td',format(value),tr).className='number';for(const side of ['control','treatment'])node('td',p[side].co+'/'+p[side].total,tr).title='Both forms measured / total samples';if(inferenceRows.length)addTestCells(tr,p)}
+function renderPairDetail(){const roles=availableRoles(active);if(!roles.includes(activeRole))activeRole=roles[0];$('detailRole').replaceChildren();for(const role of roles)node('option','Neo-'+role,$('detailRole')).value=role;$('detailRole').value=activeRole;const r=overviewRows.find(x=>x.site===active&&x.role===activeRole),ps=r?.allPairs||[],p=ps.find(x=>x.key===pairChoices.get(choiceKey(active,activeRole)))||r?.selected||ps[0];$('pairChoice').replaceChildren();for(const [i,x] of ps.entries()){const option=node('option',(i+1)+'. '+pairLabel(x)+(assigned(x)?'':' · Outside assignment scope'),$('pairChoice'));option.value=x.key;option.title=observationAudit(x.neo_peptide_id)+' / '+observationAudit(x.spanning_peptide_id)}$('pairChoice').disabled=!p;$('pairChoice').value=p?.key||'';$('pairChoice').title=p?observationAudit(p.neo_peptide_id)+' / '+observationAudit(p.spanning_peptide_id):'';$('resetPair').disabled=!p||!r?.selected||p===r.selected;$('pairNote').textContent=p?'Pair '+(ps.indexOf(p)+1)+' of '+ps.length+' · '+ps.filter(x=>Number.isFinite(x.log2_fc)).length+'/'+ps.length+' with a finite ratio change'+' · '+directionText(r.directions)+(p===r.selected?' · Representative':assigned(p)?' · Alternative':' · '+assignmentReason(p)):'No quantified pair for this role.';pairHeaders('pairHead');$('pairBody').replaceChildren();if(p)pairCells(node('tr',undefined,$('pairBody')),p);else node('td','No pair result.',node('tr',undefined,$('pairBody'))).colSpan=7;pairHeaders('allPairHead',true);$('allPairBody').replaceChildren();for(const q of ps){const tr=node('tr',undefined,$('allPairBody'));tr.setAttribute('aria-selected',String(q===p));pairCells(tr,q,true);tr.onclick=()=>choosePair(q.key)}$('allPairsLabel').textContent='All '+ps.length+' peptide-form pairs';$('allPairs').hidden=ps.length<2}
+function choosePair(key){pairChoices.set(choiceKey(active,activeRole),key);renderPairDetail();const p=overviewRows.find(x=>x.site===active&&x.role===activeRole)?.allPairs.find(x=>x.key===key);highlight(p?.neo_peptide_id)}
+function renderLocalMap(){const items=(rowsBySite.get(active.site_id)||[]).flatMap(x=>x.placements.map(p=>({...x,...p}))),box=$('localTrack');box.replaceChildren();if(!items.length)return;const lo=Math.max(1,Math.min(...items.map(x=>x.start))-2),hi=Math.min(proteins.get(active.record_id)?.length||Infinity,Math.max(...items.map(x=>x.end))+2),x=v=>215+(v-lo)/(hi-lo+1)*740;const plot=svg('svg',{viewBox:'0 0 1000 '+(60+items.length*28),role:'group','aria-label':'Supporting peptide positions around selected bond'},undefined,box);svg('text',{x:215,y:18},String(lo),plot);svg('text',{x:955,y:18,'text-anchor':'end'},String(hi),plot);svg('line',{x1:215,x2:955,y1:28,y2:28,stroke:'#aac1b8'},undefined,plot);for(const [i,item] of items.entries()){const p=item.p,y=55+i*28,g=svg('g',{'data-peptide':p.peptide_id,role:'button',tabindex:0,'aria-label':p.sequence+' '+item.start+'–'+item.end},undefined,plot);svg('title',{},observationAudit(p.peptide_id)+' · '+item.start+'–'+item.end,g);svg('text',{x:5,y:y+4},p.sequence.length>24?p.sequence.slice(0,21)+'…':p.sequence,g);const role=item.role==='N'?'Neo-N':item.role==='C'?'Neo-C':item.role==='spanning'?'Spanning':item.role;svg('rect',{x:x(item.start),y:y-6,width:Math.max(2,x(item.end+1)-x(item.start)),height:13,rx:2,fill:colors[role]},undefined,g);g.onclick=()=>highlight(p.peptide_id);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();highlight(p.peptide_id)}}}svg('line',{x1:x(active.bond_right),x2:x(active.bond_right),y1:25,y2:42+items.length*28,stroke:'#304b43','stroke-dasharray':'4 3'},undefined,plot)}
+function renderReferences(){const ms=merops.get(active.site_id)||[],us=(uniprot.get(active.site_id)||[]).filter(r=>r.record_id===active.record_id);$('referenceHeading').textContent='Reference annotations ('+(ms.length+us.length)+')';$('referenceStatus').textContent='MEROPS: '+(D.merops?ms.length+' matching records':'not supplied')+' · UniProt: '+processingSummary(active);$('referenceRows').replaceChildren();const add=values=>{const tr=node('tr',undefined,$('referenceRows'));for(const v of values)node('td',v==null||v===''?'—':String(v),tr)};for(const m of ms)add(['MEROPS',[m.protease_name,m.protease_id].filter(Boolean).join(' · '),[m.substrate_accession,m.substrate_name,m.substrate_species].filter(Boolean).join(' · '),referenceBond(m),referenceSequence(m),referenceBasis(m),[m.merops_record_id,m.cleavage_type,m.reference_ids].filter(Boolean).join(' · ')]);for(const u of us)add(['UniProt',u.feature_type,u.description,u.bond_left+' | '+u.bond_right,'—',String(u.boundary).replaceAll('_',' '),[u.evidence_codes,u.source_feature_id].filter(Boolean).join(' · ')])}
+function recordTitle(p){
+  return [p.accession,p.gene_symbol,recordCounts.get(p.accession)?.length>1?'record '+p.record_id:''].filter(Boolean).join(' · ');
+}
+function populateProteins(){
+  const select=$('proteinRecord'),query=$('proteinQuery').value.trim().toUpperCase();
+  select.replaceChildren();
+  const found=D.proteins.filter(p=>[p.accession,p.gene_symbol,p.header].join(' ').toUpperCase().includes(query));
+  node('option',found.length?'Choose a protein':'No matching proteins',select).value='';
+  for(const p of found)node('option',recordTitle(p),select).value=p.record_id;
+  select.disabled=!found.length;
+  select.value=found.some(p=>p.record_id===mapRecord)?String(mapRecord):'';
+  return found;
+}
+function displayMode(map){
+  mapMode=map;
+  $('siteList').hidden=map;$('motifSection').hidden=map;$('otherSection').hidden=map||!otherRows.length;$('mapPanel').hidden=!map;$('evidence').hidden=map||!active;
+  $('mapView').setAttribute('aria-pressed',String(map));$('sitesView').setAttribute('aria-pressed',String(!map));
+}
+function openProteinMap(){
+  const previousRecord=mapRecord;
+  mapRecord=active?.record_id??mapRecord??D.proteins[0]?.record_id??null;
+  if(previousRecord!==mapRecord)mapPage=0;
+  const rows=placementsByRecord.get(mapRecord)||[];
+  const linked=active?(evidence.get(active.site_id)||[]).filter(e=>e.peptide_id===selectedPeptide&&(e.is_candidate||e.role==='spanning')):[];
+  const match=rows.find(m=>linked.some(e=>placementKey(m)===placementKey(e)))||rows.find(m=>m.peptide_id===selectedPeptide);
+  selectedPlacement=match||null;if(match)mapPage=Math.floor(rows.indexOf(match)/mapSize);
+  $('proteinQuery').value='';populateProteins();displayMode(true);renderProteinMap();
+}
+function chooseRecord(id){
+  mapRecord=id;scopeRecord=id;mapPage=0;selectedPeptide=null;selectedPlacement=null;
+  clearFilters();filter();renderProteinMap();
+}
+function chooseMapBond(id){
+  const site=sitesById.get(id);if(!site||site.record_id!==mapRecord)return;
+  const keep=selectedPlacement&&(linksByPlacement.get(placementKey(selectedPlacement))?.has(id))?selectedPlacement:null;
+  if(!filtered.some(r=>r.mappings.some(m=>m.site===site))){
+    scopeRecord=mapRecord;clearFilters();filter();
+  }
+  active=site;selectedPlacement=keep;selectedPeptide=keep?.peptide_id??null;
+  activeRole=site.neo_n_count?'N':'C';page=Math.max(0,Math.floor(filtered.findIndex(r=>r.mappings.some(m=>m.site===site))/pageSize));showPage();renderProteinMap();
+}
+function returnToEvidence(){
+  
+  displayMode(false);showPage();
+  if(active)$('evidence').scrollIntoView({block:'start'});
+}
+function mapSelection(m){
+  selectedPlacement=m;highlight(m.peptide_id);
+  const linked=linksByPlacement.get(placementKey(m));
+  if(linked?.size===1&&!linked.has(active?.site_id))chooseMapBond(linked.values().next().value);
+  renderRelated();
+}
+function renderRelated(){
+  const box=$('related');box.replaceChildren();if(!selectedPlacement)return;
+  const m=selectedPlacement,p=observations.get(m.peptide_id);
+  node('strong',p.sequence,box);node('span',[p.modifications,m.start+'–'+m.end].filter(Boolean).join(' · '),box);
+  const linked=linksByPlacement.get(placementKey(m));
+  if(!linked?.size){node('span','No supporting bond at this placement.',box);return}
+  node('span','Linked candidate bonds',box);
+  for(const id of linked){
+    const s=sitesById.get(id);if(!s)continue;
+    const roles=[...new Set((evidence.get(id)||[]).filter(e=>placementKey(e)===placementKey(m)).map(e=>e.role==='spanning'?'Spanning':'Neo-'+e.role))];
+    const btn=node('button',s.bond_left+' | '+s.bond_right+' · '+roles.join('/'),box);
+    btn.onclick=()=>{chooseMapBond(id);returnToEvidence()};
+  }
+}
+function renderProteinMap(){
+  const p=proteins.get(mapRecord),rows=placementsByRecord.get(mapRecord)||[],bonds=sitesByRecord.get(mapRecord)||[];
+  const selector=$('mapBond');selector.replaceChildren();
+  for(const s of bonds)node('option',s.bond_left+' | '+s.bond_right+' · '+s.context_display,selector).value=s.site_id;
+  const site=active?.record_id===mapRecord?active:null;
+  selector.value=site?.site_id||'';selector.disabled=!bonds.length;$('viewEvidence').disabled=!site;
+  if(!bonds.length)node('option','No candidate sites',selector);
+  $('proteinInfo').textContent=p?recordTitle(p)+' · '+p.length+' aa · '+bonds.length+' candidate sites':'No mapped records';
+  const start=mapPage*mapSize,visible=rows.slice(start,start+mapSize);
+  $('mapPrev').disabled=mapPage===0;$('mapNext').disabled=start+mapSize>=rows.length;
+  $('mapPage').textContent=rows.length?(start+1)+'–'+(start+visible.length)+' of '+rows.length+' placements':'No placements';
+  const box=$('track');box.replaceChildren();if(!p){renderRelated();return}
+  const x=v=>215+(v-1)/p.length*740;
+  const plot=svg('svg',{viewBox:'0 0 1000 '+(60+visible.length*22),role:'group','aria-label':'Full protein map of '+recordTitle(p)},undefined,box);
+  svg('text',{x:215,y:15},'1',plot);svg('text',{x:955,y:15,'text-anchor':'end'},String(p.length),plot);
+  svg('line',{x1:215,x2:955,y1:24,y2:24,stroke:'#aac1b8','stroke-width':3},undefined,plot);
+  const roles=new Map();
+  if(site)for(const item of supportingRows(site))for(const e of item.placements)roles.set(placementKey(e),item.role);
+  for(const [i,m] of visible.entries()){
+    const obs=observations.get(m.peptide_id),role=roles.get(placementKey(m)),y=51+i*22;
+    const label=obs.sequence+(obs.modifications?' *':'');
+    const g=svg('g',{'data-peptide':m.peptide_id,'data-placement':placementKey(m),tabindex:0,role:'button','aria-label':label+' '+m.start+'–'+m.end},undefined,plot);
+    svg('title',{},[obs.sequence,obs.modifications,'Input row '+obs.source_row,m.start+'–'+m.end,role].filter(Boolean).join(' · '),g);
+    svg('text',{x:5,y:y+4},label.length>24?label.slice(0,21)+'…':label,g);
+    svg('rect',{x:x(m.start),y:y-5,width:Math.max(2,x(m.end+1)-x(m.start)),height:10,rx:2,fill:colors[role]||'#97aaa4'},undefined,g);
+    g.onclick=()=>mapSelection(m);g.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();mapSelection(m)}};
+  }
+  if(site){
+    const marker=x(site.bond_right);
+    svg('line',{class:'bond-marker','data-site':site.site_id,x1:marker,x2:marker,y1:20,y2:45+visible.length*22},undefined,plot);
+    svg('text',{x:Math.min(905,Math.max(260,marker)),y:39,'text-anchor':'middle',fill:'#a94932'},site.bond_left+' | '+site.bond_right,plot);
+  }
+  highlight(selectedPeptide);renderRelated();
+}
+$('mapView').onclick=$('openMap').onclick=openProteinMap;
+$('sitesView').onclick=()=>{displayMode(false);showPage()};
+$('viewEvidence').onclick=returnToEvidence;
+$('proteinQuery').oninput=()=>{
+  const found=populateProteins(),q=$('proteinQuery').value.trim().toUpperCase();
+  const exact=found.filter(p=>p.accession.toUpperCase()===q);
+  const match=exact.length===1?exact[0]:found.length===1?found[0]:null;
+  if(match&&match.record_id!==mapRecord){$('proteinRecord').value=match.record_id;chooseRecord(match.record_id)}
+};
+$('proteinRecord').onchange=()=>{if($('proteinRecord').value)chooseRecord(Number($('proteinRecord').value))};
+$('clearRecord').onclick=()=>{scopeRecord=null;filter()};
+$('mapBond').onchange=()=>chooseMapBond($('mapBond').value);
+$('mapPrev').onclick=()=>{mapPage--;renderProteinMap()};
+$('mapNext').onclick=()=>{mapPage++;renderProteinMap()};
+
+function clearFilters(){$('search').value=$('protease').value=$('roleFilter').value='';$('support').value=$('spanSelect').value='all';$('hasReference').checked=false;patternFilter=''}
+function exportSites(){const c=selectedComparison(),head=['Protein / gene / bond mappings','Mapping count','Record / bond keys','Role','Neo log2FC common','Spanning log2FC common','Ratio log2FC','Common control','Total control','Common treatment','Total treatment','Status','Pattern','Pair count','Computable pairs','Direction summary','Increased pairs','Decreased pairs','Below threshold pairs','Neo observation','Spanning observation','MEROPS','UniProt','Comparison','Coverage k','Pattern threshold','Selection policy','Analysis selection k','Selection eligible','Selection fallback','Preferred digestion','Digestion reasons','Other candidate bonds spanned','Joint log2 intensity'];if(inferenceRows.length)head.push('P-value','BH-adjusted P','Test family','Not tested reason');const rows=filtered.map(r=>{const p=r.selected,t=groupTestResult(r);return [r.mappings.map(m=>mappingLabel(m.site)).join('; '),r.mappings.length,JSON.stringify(r.mappings.map(m=>[m.site.record_id,m.site.bond_left,m.site.bond_right])),'Neo-'+r.role,p?.neo_log2_fc,p?.spanning_log2_fc,p?.log2_fc,p?.control.co,p?.control.total,p?.treatment.co,p?.treatment.total,r.view.status_label,r.view.pattern_label,r.pairs.length,r.computable,r.directions.label,r.directions.increased,r.directions.decreased,r.directions.below_threshold,p?.neo_peptide_id,p?.spanning_peptide_id,groupedReferences(r,meropsSummary),groupedReferences(r,processingSummary),c?.Name,kValue(),tauValue(),PairSummary.SELECTION_POLICY,p?.selection?.selection_k,p?.selection?.eligible,p?.selection?.fallback,groupSelectionValue(r,'preferred_digestion'),JSON.stringify(groupSelectionValue(r,'digestion_reasons')),groupSelectionValue(r,'other_candidate_bonds'),p?.selection?.common_log2_intensity,...(inferenceRows.length?[t.result?.p_value,t.result?.adjusted_p_value,t.rows.map(x=>x.family).join('; '),t.reason]:[])]});const cell=x=>{if(x==null)return '';if(typeof x==='number')return String(x);let v=String(x);if(/^[=+@-]/.test(v))v="'"+v;return '"'+v.replaceAll('"','""')+'"'};const blob=new Blob(['\uFEFF'+[head,...rows].map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='atelente_filtered_summary.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+for(const c of comparisons)node('option',c.Treatment+' vs '+c.Control,$('comparison')).value=c.Name;if(!comparisons.length){node('option','No comparison supplied',$('comparison'));$('comparison').disabled=true}
+const proteaseNames=new Map();for(const rows of exactRefs.values())for(const m of rows)proteaseNames.set(m.protease_id,m.protease_name||m.protease_id);for(const [id,name] of [...proteaseNames].sort((a,b)=>a[1].localeCompare(b[1])))node('option',name,$('protease')).value=id;
+$('proteaseLabel').hidden=$('meropsLabel').hidden=!D.merops;
+function comparisonChanged(){summaryCache=null;rankedCache=null;$('coverage').value=PairSummary.defaultK(sampleDesign,selectedComparison());patternFilter='';rebuild()}
+$('mappingChoice').onchange=()=>{const site=sitesById.get($('mappingChoice').value);if(site){active=site;selectedPeptide=overviewRows.find(r=>r.site===site&&r.role===activeRole)?.selected?.neo_peptide_id||null;showPage()}};
+$('motifRole').onchange=$('motifFamily').onchange=renderMotif;$('motifExport').onclick=exportMotif;
+$('comparison').onchange=comparisonChanged;$('coverage').oninput=$('threshold').oninput=rebuild;for(const id of ['search','roleFilter','support','spanSelect','protease','hasReference'])$(id).addEventListener(id==='search'?'input':'change',filter);
+$('showAll').onclick=()=>{$('coverage').value=0;rebuild()};$('resetFilters').onclick=()=>{scopeRecord=null;clearFilters();$('threshold').value=1;comparisonChanged()};$('prev').onclick=()=>{page--;showPage()};$('next').onclick=()=>{page++;showPage()};$('exportSites').onclick=exportSites;$('otherPrev').onclick=()=>{otherPage--;showOtherCandidates()};$('otherNext').onclick=()=>{otherPage++;showOtherCandidates()};$('detailRole').onchange=()=>{activeRole=$('detailRole').value;const r=overviewRows.find(x=>x.site===active&&x.role===activeRole),p=r?.pairs.find(x=>x.key===pairChoices.get(choiceKey(active,activeRole)))||r?.selected;selectedPeptide=p?.neo_peptide_id||null;showPage()};$('pairChoice').onchange=()=>choosePair($('pairChoice').value);$('resetPair').onclick=()=>{pairChoices.delete(choiceKey(active,activeRole));renderPairDetail();highlight(overviewRows.find(x=>x.site===active&&x.role===activeRole)?.selected?.neo_peptide_id)};
+function currentExportView(){
+ const c=selectedComparison(),key=p=>JSON.stringify([c?.Name,p.role,p.neo_peptide_id,p.spanning_peptide_id]);
+ const alternatives=new Map();for(const r of filtered)for(const m of r.mappings)for(const p of m.pairs)alternatives.set(key(p),{key:key(p),pattern:PairSummary.view(p,kValue(),tauValue()).pattern_label});
+ return {rows:filtered.map(r=>({key:key(r.selected),pattern:r.view.pattern_label})),pairPatterns:[...alternatives.values()],settings:{
+  comparison:c?.Name||'',control:c?.Control||'',treatment:c?.Treatment||'',
+  controlTotal:sampleDesign.filter(s=>s.Use==='Yes'&&s.Condition===c?.Control).length,
+  treatmentTotal:sampleDesign.filter(s=>s.Use==='Yes'&&s.Condition===c?.Treatment).length,
+  threshold:tauValue(),coverage:kValue(),analysisSelectionK:analysisSelectionK.get(c?.Name),
+  search:$('search').value,role:$('roleFilter').value||'All',support:$('support').value,spanning:$('spanSelect').value,
+  referenceOnly:Boolean($('hasReference').checked),protease:$('protease').value,proteinRecord:scopeRecord??'',
+  pattern:patternFilter||'All results',sortField,sortDirection:sortDirection===1?'Ascending':'Descending',
+  rowCount:filtered.length,scope:'Current view — all matching rows, across all pages'
+ }};
+}
+const workbookDownloads=ReportWorkbook.mount(D,document,{getView:currentExportView});
+if(D.export_workbook?.internal_sheets?.includes('__Results')){
+ $('exportSites').textContent='Download current view — Excel';
+ $('exportSites').onclick=()=>workbookDownloads.downloadCurrent();
+}
+const profile=D.cleavage?.profile;if(profile)$('runProfile').textContent=profile.enzyme==='trypsin'?'Trypsin · '+(profile.lysine_blocked?'lysines blocked':'standard digestion'):profile.enzyme||'';
+if(D.dataset_label){$('datasetLabel').textContent=D.dataset_label;$('datasetLabel').hidden=true}comparisonChanged();$('notice').hidden=true;
+})().catch(error=>{const notice=document.getElementById('notice');notice.hidden=false;notice.setAttribute('role','alert');notice.textContent='Report could not be opened: '+error.message;console.error(error)});
+</script></body></html>

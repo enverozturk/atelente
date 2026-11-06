@@ -1,0 +1,25 @@
+#!/usr/bin/env Rscript
+args <- commandArgs(trailingOnly=TRUE)
+if (.Platform$OS.type=="windows") suppressWarnings(Sys.setlocale("LC_CTYPE",".UTF-8"))
+root <- dirname(normalizePath(sub("^--file=","",grep("^--file=",commandArgs(),value=TRUE)[1]),winslash="/",mustWork=TRUE))
+for (module in c("mapping","report","excel_locale","sample_metadata","quantification","quantification_io")) source(file.path(root,"R",paste0(module,".R")),encoding="UTF-8")
+if(length(args)!=2L || args[1]!="--config") stop("Usage: Rscript quantify.R --config quantification.json")
+for (package in c("jsonlite","digest","readxl","openxlsx")) if(!requireNamespace(package,quietly=TRUE)) stop("Install ",package," first.")
+config_path <- normalizePath(args[2],winslash="/",mustWork=TRUE)
+config <- jsonlite::fromJSON(config_path)
+needed <- c("results_dir","samples","output_dir")
+if(!all(needed %in% names(config))) stop("Config requires results_dir, samples and output_dir.")
+resolve <- function(path) if(grepl("^([A-Za-z]:[/\\\\]|/|\\\\\\\\)",path)) path else file.path(dirname(config_path),path)
+for(name in needed) config[[name]] <- resolve(config[[name]])
+if(dir.exists(config$output_dir) && length(list.files(config$output_dir,all.files=TRUE,no..=TRUE))) stop("Choose an empty output directory.")
+message("Reading retained mapping results and sample assignments...")
+inputs <- as.list(pm_quantification_input_paths(config$results_dir,require_protein=TRUE))
+result <- pm_load_quantification_result(config$results_dir)
+metadata <- pm_read_sample_metadata(config$samples,result,require_protein=TRUE)
+message("Calculating descriptive peptide and protein effects...")
+quantification <- pm_adjust_peptide_effects(result,metadata,method="mean_log2")
+inputs$samples <- config$samples
+pm_export_quantification(quantification,metadata,config$output_dir,inputs,
+  assumptions=if(is.null(config$assumptions)) character() else config$assumptions,
+  protein_abundance_source=if(is.null(config$protein_abundance_source)) "Not supplied" else config$protein_abundance_source)
+message("Done. Workbook: ",file.path(config$output_dir,"protein_adjusted_effects.xlsx"))

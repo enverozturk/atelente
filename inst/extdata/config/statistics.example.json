@@ -1,0 +1,9 @@
+{
+  "ratios_dir": "normalization_results",
+  "samples": "statistics_samples.csv",
+  "comparisons": "comparisons.csv",
+  "output_dir": "statistics_results",
+  "design": "independent_units",
+  "excel": true,
+  "notes": ["Document the experimental units and the scientific comparison here. Technical repeats or paired samples require a different model."]
+}

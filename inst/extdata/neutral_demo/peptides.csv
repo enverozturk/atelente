@@ -1,0 +1,10 @@
+Observation,Sequence,Protein groups,Modification,Sample A,Sample B
+shared_change,PEPTIDE,G001,,100,200
+peptide_specific,PEPTIDER,G001,,100,400
+constant,AAAAK,G002,,50,50
+missing,AAAK,G001,,,200
+zero,AAAR,G001,,0,200
+unknown_entity,PEPK,G999,,10,20
+alternative_groups,KPEPTIDE,G001;G002,,10,20
+modified,PEPTIDE,G001,Example modification,25,50
+no_link,PEPKR,,,10,20

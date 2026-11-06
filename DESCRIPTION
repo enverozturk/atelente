@@ -1,0 +1,16 @@
+Package: atelente
+Type: Package
+Title: Link Cleavage Products and Spanning Peptides in Shotgun Proteomics
+Version: 0.0.0.9000
+Authors@R: person("Enver", "Ozturk", email = "enver10166@gmail.com",
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0009-0004-8359-8032"))
+Description: Maps observed peptides to reference sequences, links neo-terminal
+    and spanning forms at candidate cleavage bonds, and calculates ratios when
+    both forms are quantified in the same sample. Intended primarily for
+    shotgun proteomics without terminal peptide enrichment.
+Depends: R (>= 4.3.0)
+License: GPL-3
+Encoding: UTF-8
+Imports: stats, utils, digest, jsonlite, curl, zip
+Suggests: limma, openxlsx, readxl, shiny, writexl

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use Atelente, cite the software version or commit used in your analysis."
+type: software
+title: "Atelente: link neo-terminal and spanning peptides at candidate cleavage bonds"
+authors:
+  - family-names: Ozturk
+    given-names: Enver
+    orcid: "https://orcid.org/0009-0004-8359-8032"
+license: GPL-3.0-only

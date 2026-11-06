@@ -1,0 +1,7 @@
+{
+  "results_dir": "mapping_results",
+  "samples": "mapping_results/sample_metadata.xlsx",
+  "output_dir": "quantification_results",
+  "protein_abundance_source": "Describe the supplied protein abundance table and known calculation method",
+  "assumptions": []
+}

@@ -1,0 +1,110 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    env:
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.4"
+          use-public-rspm: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Packages go to this interpreter's site-packages, which `python -I` still sees
+      # (a plain `pip install` on the runner lands in the user site, which -I ignores).
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install R dependencies
+        run: |
+          # writexl is a test-only dependency (tests/test_mapping.R writes an XLSX fixture).
+          install.packages(c("digest", "jsonlite", "curl", "zip", "openxlsx", "readxl", "shiny", "writexl", "BiocManager"))
+          BiocManager::install("limma", update = FALSE, ask = FALSE)
+        shell: Rscript {0}
+
+      - name: R regression scripts (UTF-8 and C locale)
+        run: |
+          status=0
+          for loc in C.UTF-8 C; do
+            for t in tests/test_*.R; do
+              [ "$(basename "$t")" = test_package_equivalence.R ] && continue
+              if ! LC_ALL=$loc Rscript "$t" > "test.log" 2>&1; then
+                echo "::error::FAILED [$loc] $t"; tail -20 test.log; status=1
+              fi
+            done
+          done
+          exit $status
+
+      - name: JavaScript regression scripts
+        run: |
+          status=0
+          for t in tests/test_*.cjs; do
+            node "$t" > test.log 2>&1 || { echo "::error::FAILED $t"; tail -20 test.log; status=1; }
+          done
+          exit $status
+
+      - name: Python developer-tool tests (if present)
+        run: |
+          shopt -s nullglob
+          files=(tests/test_*.py)
+          if [ ${#files[@]} -eq 0 ]; then echo "No Python tests."; exit 0; fi
+          python -m pip install --quiet numpy pandas
+          status=0
+          for t in "${files[@]}"; do python -I -B "$t" || { echo "::error::FAILED $t"; status=1; }; done
+          exit $status
+
+      - name: Build, check and install the package
+        run: |
+          mkdir -p build lib
+          Rscript tools/build_package.R build
+          R CMD check --no-manual --no-vignettes build/atelente_*.tar.gz
+          R CMD INSTALL --library=lib build/atelente_*.tar.gz
+
+      - name: Installed package matches source
+        run: Rscript tests/test_package_equivalence.R lib
+
+  # Follows the README install/open steps and the usage-guide example on a clean
+  # runner. Until the public repository exists, install_local(".") stands in for
+  # install_github("enverozturk/atelente"); switch after migration.
+  readme-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.4"
+          use-public-rspm: true
+
+      - name: README install commands
+        run: |
+          install.packages(c("remotes", "shiny", "readxl", "openxlsx"))
+          remotes::install_local(".", dependencies = NA, upgrade = "never")
+          stopifnot(inherits(atelente::pm_wizard_app(), "shiny.appobj"))
+        shell: Rscript {0}
+
+      - name: README "open" step serves the app
+        run: |
+          mkdir -p appwd && cd appwd
+          Rscript -e 'shiny::runApp(atelente::pm_wizard_app(), port = 8765, launch.browser = FALSE)' > ../app.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o page.html http://127.0.0.1:8765/ && break; sleep 2; done
+          grep -q "Atelente" page.html || { cat ../app.log; exit 1; }
+          grep -q "Do not enter technical replicate measurements as separate samples" page.html
+
+      - name: Usage guide example (limma + synthetic linked report)
+        run: |
+          Rscript -e 'install.packages("BiocManager"); BiocManager::install("limma", ask = FALSE, update = FALSE)'
+          Rscript examples/linked_report/generate.R atelente_demo
+          test -s atelente_demo/report/report.html

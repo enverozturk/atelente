@@ -1,0 +1,13 @@
+{
+  "adapter": "maxquant_peptides",
+  "peptides": "peptides.txt",
+  "proteins": "proteinGroups.txt",
+  "samples": "samples.csv",
+  "output_dir": "maxquant_results",
+  "excel": true,
+  "maxquant_options": {
+    "protein_quantity": "Intensity",
+    "exclude_only_identified_by_site": true
+  },
+  "notes": ["Select corresponding experiments explicitly in the Samples table. Record the source analysis and chosen protein quantity here."]
+}

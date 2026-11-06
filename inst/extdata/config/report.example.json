@@ -1,0 +1,6 @@
+{
+  "mapping_dir": "mapping_results",
+  "ratios_dir": "ratios_results",
+  "statistics_dir": "statistics_results",
+  "output_dir": "integrated_report"
+}

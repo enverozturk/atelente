@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atelente — Peptide mapping</title>
+<style>
+:root{font:15px/1.5 system-ui,sans-serif;color:#172a39;background:#f4f7f8}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}main{max-width:1320px;margin:auto;padding:28px 24px}h1{font-size:29px;letter-spacing:-.7px;margin:0}h2{font-size:19px;margin:0 0 14px}h3{font-size:16px;margin:0 0 10px}.brand{color:#216c68;font-weight:700;letter-spacing:2px;font-size:12px}.muted{color:#617580}header{margin-bottom:20px}.cards{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.card{background:white;border:1px solid #dce4e8;padding:12px 18px;border-radius:8px;min-width:150px;flex:1}.card strong{display:block;font-size:25px}.card span{font-size:12px;color:#526674}section{background:white;border:1px solid #dce4e8;border-radius:8px;padding:22px;margin-bottom:18px}.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:end}label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:13px;max-width:100%}input,select,button{font:inherit;padding:9px 12px;border:1px solid #b7c8cf;border-radius:5px;background:white;color:#172a39}button{cursor:pointer}button:hover{background:#e6f2f0}input{width:250px;max-width:100%}select{max-width:100%}#proteinChoice{width:450px}button:disabled{opacity:.45;cursor:default}.scroll{overflow:auto;max-height:380px}table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;background:#edf3f5;position:sticky;top:0;z-index:1}th,td{padding:9px 12px;border-bottom:1px solid #e3eaee;white-space:nowrap}tr[data-id]{cursor:pointer}tr[data-id]:hover{background:#eaf5f3}tr.selected{background:#d8efea;font-weight:600}.sequence{font-family:ui-monospace,monospace}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;margin:12px 0}.master{color:#176e67}.alternative{color:#6b5bb4}.plot{overflow:auto;max-height:510px;border-top:1px solid #edf3f5;margin:12px 0 16px}.plot svg{display:block;min-width:960px;width:100%}svg text{font:11px ui-monospace,monospace;fill:#526674}svg g[data-id]{cursor:pointer}svg g.selected text{font-weight:800;fill:#102d35}svg g.selected rect{stroke:#102d35;stroke-width:3}svg g:focus{outline:none}svg g:focus rect{stroke:#102d35;stroke-width:3}.pager{display:flex;align-items:center;gap:12px;margin:12px 0;font-size:13px}.detail{padding:17px;background:#f4f7f8;border:1px solid #e2eaed;border-radius:6px;margin-top:18px}.detail-sequence{font:600 16px/1.5 ui-monospace,monospace;overflow-wrap:anywhere;margin:8px 0 14px}.detail-grid{display:grid;grid-template-columns:155px 1fr;gap:10px 14px;font-size:13px}.detail-grid dt{color:#526674}.detail-grid dd{margin:0;overflow-wrap:anywhere}.match-links{display:flex;gap:6px;flex-wrap:wrap}.match-link{font-size:12px;padding:5px 9px;border-radius:4px}.match-link.master{border-color:#88b7ad;background:#eaf5f1}.match-link.alternative{border-color:#b4a9d6;background:#f1eef9}.match-link.current{box-shadow:inset 0 0 0 1px currentColor}.match-link:disabled{opacity:1;cursor:default;background:transparent;border-style:dashed}.links{display:flex;gap:10px 18px;flex-wrap:wrap}a{color:#176e67}summary{cursor:pointer;font-weight:600}details[open]>summary{margin-bottom:18px}#proteinTitle{margin:20px 0 2px;font-size:20px}#proteinName{margin:0;font-size:13px}.info{cursor:help;font-size:12px;font-weight:400;color:#617580}#searchStatus{font-size:13px;margin:9px 0}#startupNotice{margin:16px 0;padding:12px;background:#fff7e4;border-left:3px solid #c99a35}footer{font-size:12px;color:#617580;margin:20px 0}.empty{padding:20px;color:#617580}.mod-label{font-size:11px;color:#6b5bb4;margin-left:6px}@media(max-width:650px){main{padding:18px 12px}section{padding:15px}.detail-grid{grid-template-columns:1fr;gap:4px}.detail-grid dd{margin-bottom:10px}.controls>label{width:100%}input,#proteinChoice{width:100%}}
+.site-summary{display:flex;gap:12px 24px;flex-wrap:wrap;margin:14px 0;font-size:13px}.site-summary strong{font-size:19px;margin-right:5px}.site-context{font:600 19px ui-monospace,monospace;letter-spacing:2px;margin:14px 0}.site-context small{font:12px system-ui,sans-serif;letter-spacing:0;color:#617580;margin-left:12px}#cleavageSite{min-width:240px}#cleavageProtein{font-size:13px;margin:0 0 14px}
+.site-overview{max-height:310px;margin-bottom:20px;border:1px solid #e3eaee;border-radius:5px}.site-overview table{min-width:900px}.site-overview td.annotation{white-space:normal;min-width:160px;max-width:280px}.site-overview tr[data-site-id]{cursor:pointer}.site-overview tr[data-site-id]:hover{background:#eaf5f3}.site-overview tr:focus-visible{outline:2px solid #176e67;outline-offset:-2px}.site-overview .count{text-align:right}.site-overview td:first-child{font-weight:600}.primary-download{display:inline-block;padding:10px 18px;background:#176e67;color:white;border-radius:5px;text-decoration:none;font-weight:600;margin:0 0 18px}.primary-download:hover{background:#125850}#cleavageEvidence{margin-top:18px}
+.overview-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}.overview-head h2{margin:0}.overview-head output{color:#526674;font-size:13px}.overview-scroll{margin-top:12px}.overview-scroll tbody tr{cursor:pointer}.overview-scroll tbody tr:hover{background:#eaf5f3}.overview-scroll td{font-variant-numeric:tabular-nums}.overview-scroll select{max-width:210px;padding:4px 6px}.overview-sequence{font:600 13px ui-monospace,monospace;color:#176e67;border:0;padding:0;background:transparent}.overview-protein-nav{margin:0 0 12px;font-size:12px}
+.overview-scroll .accession-list{white-space:normal;overflow-wrap:anywhere;max-width:280px}.overview-note{font-size:13px;margin:10px 0;color:#526674}
+header{padding:12px 0 22px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:15px;font-family:Georgia,"Times New Roman",serif;font-size:52px;font-weight:600;line-height:1.08;letter-spacing:-2px;color:#164f48;margin:0 0 30px}.brand-mark{width:34px;height:39px;display:inline-block;position:relative;border-left:4px solid #26766b;border-right:4px solid #26766b;transform:skew(-13deg);border-radius:3px}.brand-mark:before,.brand-mark:after{content:"";position:absolute;height:4px;background:#26766b;left:-2px;right:-2px;top:13px;transform:rotate(-22deg)}.brand-mark:after{top:24px;width:16px;left:6px;background:#b79052}header h1{font-size:26px;font-weight:550;letter-spacing:-.5px;margin:0}.run-profile{display:block;margin-top:8px;color:#61716a;font-size:12px}.download-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 22px;margin:14px 0}.download-actions a{text-decoration:none;font-size:14px}.download-primary{background:#17685d;color:white!important;border-radius:6px;padding:10px 15px}.download-actions button{font-size:14px}.table-choices{display:flex;gap:12px 24px;flex-wrap:wrap;margin:14px 0}.table-choices label{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500}.table-choices input{width:auto}.download-status{font-size:12px;color:#516861;margin-left:12px}@media(max-width:700px){.brand{font-size:43px;margin-bottom:23px}.brand-mark{width:29px;height:34px}header h1{font-size:23px}}</style></head><body><main>
+<header><div class="brand"><span class="brand-mark" aria-hidden="true"></span>Atelente</div><h1>Peptide mapping</h1></header>
+<div id="cards" class="cards"></div>
+<section id="peptideOverview"><div class="overview-head"><h2>All peptides</h2><output id="overviewCount"></output></div>
+<p class="overview-note" id="overviewNote" hidden>Sample ratios only. Fold changes and p-values require a condition comparison.</p>
+<div class="controls"><label>Find peptides<input type="search" id="overviewSearch" placeholder="Sequence, modification, protein or gene"></label><label id="overviewComparisonLabel" hidden>Comparison<select id="overviewComparison"></select></label></div>
+<div class="scroll overview-scroll"><table aria-label="All peptide observations"><thead><tr id="overviewHead"></tr></thead><tbody id="overviewRows"></tbody></table></div>
+<div class="pager"><button id="overviewPrev">Previous</button><span id="overviewPage"></span><button id="overviewNext">Next</button></div></section>
+<div id="startupNotice" role="status"><strong>Interactive view is not running yet.</strong> If this message remains, extract the ZIP first, then open <strong>report.html</strong> in Chrome or Edge. Keep the CSV files beside it. <a href="peptides.csv">Open peptide table</a>.</div>
+<section id="proteinView"><div class="controls"><label>Gene, protein ID or name<input id="protein" placeholder="e.g. GAPDH" autocomplete="off" aria-describedby="searchStatus"></label><button id="showProtein">Search</button><label>Matching proteins<select id="proteinChoice"></select></label><label id="recordLabel">Sequence record<select id="record"></select></label></div>
+<p id="searchStatus" class="muted" role="status"></p><h2 id="proteinTitle"></h2><p id="proteinName" class="muted"></p>
+<div id="legend" class="legend"></div><div id="plot" class="plot"></div>
+<div id="mappingScroll" class="scroll"><table><thead><tr><th>Peptide sequence</th><th>Modifications</th><th>Start</th><th>End</th><th>Position check <span class="info" title="Compares this FASTA position with the position supplied by PD for this protein. Positions are one-based and include both ends.">ⓘ</span></th></tr></thead><tbody id="mappingRows"></tbody></table></div>
+<div class="pager"><button id="prev">Previous</button><span id="pageLabel"></span><button id="next">Next</button></div>
+<div id="detail" class="detail" aria-live="polite">Select a peptide in the plot or table.</div></section>
+<section id="cleavageView" hidden><h2>Cleavage sites <span class="info" title="Candidate termini depend on digestion and processing settings; a position alone does not establish biological cleavage.">ⓘ</span></h2><p id="cleavageProtein" class="muted"></p><p id="cleavageEmpty" class="muted"></p><div id="cleavageContent" hidden>
+<div id="siteSummaryScroll" class="scroll site-overview"><table aria-label="Cleavage site summary"><thead><tr><th>Site</th><th title="P4 P3 P2 P1 | P1′ P2′ P3′ P4′">Sequence context</th><th class="count" title="Retained neo-N candidate observations">Neo-N</th><th class="count" title="Retained neo-C candidate observations">Neo-C</th><th class="count" title="Retained observations crossing this bond">Spanning</th><th>UniProt processing</th><th title="Reference annotations, not evidence of active proteases">MEROPS</th></tr></thead><tbody id="siteSummaryRows"></tbody></table></div>
+<div class="controls"><label>Selected site<select id="cleavageSite"></select></label></div><div id="cleavageContext" class="site-context" title="P4 P3 P2 P1 | P1′ P2′ P3′ P4′ around the cleavage bond."></div><div id="cleavageCounts" class="site-summary" title="Counts describe retained peptide observations at this site, not independent measurements or cleavage activity."></div><details id="cleavageEvidence" open><summary>Peptide evidence</summary><div id="cleavageScroll" class="scroll"><table><thead><tr><th>Peptide sequence</th><th>Modifications</th><th>Relation <span class="info" title="N-terminal starts immediately after the bond; C-terminal ends immediately before it; spanning crosses it.">ⓘ</span></th><th>Classification</th><th>Start</th><th>End</th><th>Input row</th></tr></thead><tbody id="cleavageRows"></tbody></table></div></details></div></section>
+<section><details id="exceptions"><summary id="exceptionsTitle">Unmatched &amp; excluded</summary><div class="controls"><label>Show<select id="outcome"></select></label><label>Peptide sequence or input row<input id="filter" placeholder="Filter these records"></label></div><p id="outcomeCount" class="muted"></p>
+<div class="scroll"><table><thead><tr><th>Input row</th><th>Peptide sequence</th><th>Modifications</th><th>Reason</th></tr></thead><tbody id="outcomeRows"></tbody></table></div>
+<div class="pager"><button id="exceptionPrev">Previous</button><span id="exceptionPageLabel"></span><button id="exceptionNext">Next</button></div></details></section>
+<section class="card"><h2>Downloads</h2><div class="download-actions" id="downloads"></div><div id="tableChooser" hidden><div id="tableChoices" class="table-choices"></div><button id="downloadChosen" type="button">Download selected tables</button><span id="downloadStatus" class="download-status" role="status"></span></div></section>
+<footer>Atelente · Mapping report</footer>
+</main><script type="application/json" id="data">__PROTEOMASTER_DATA__</script><script>__ATELENTE_WORKBOOK_JS__</script><script>
+'use strict';
+const $=id=>document.getElementById(id);
+window.addEventListener('error',()=>{$('startupNotice').hidden=false;$('startupNotice').textContent='The interactive view could not start. Extract the ZIP and open report.html directly in Chrome or Edge.'});
+const D=JSON.parse($('data').textContent),peptides=new Map(D.peptides.map(p=>[p.peptide_id,p]));
+const quantityByPeptide=new Map(),statisticsByPeptide=new Map();
+for(const row of D.quantities?.ratios||[])append(quantityByPeptide,row.peptide_id,row);
+for(const row of D.quantities?.results||[])append(statisticsByPeptide,row.peptide_id,row);
+const byAcc=new Map(),byPeptide=new Map(),proteinsByAcc=new Map(),records=new Map(D.proteins.map(p=>[p.record_id,p]));
+function append(map,key,value){if(!map.has(key))map.set(key,[]);map.get(key).push(value)}
+for(const m of D.matches){append(byAcc,m.accession,m);append(byPeptide,m.peptide_id,m)}
+for(const p of D.proteins)append(proteinsByAcc,p.accession,p);
+const cleavageByRecord=new Map(),evidenceBySite=new Map();
+const siteSummaries=new Map((D.site_summary||[]).map(s=>[String(s.record_id)+'|'+s.site_id,s]));
+for(const s of D.cleavage?.sites||[])append(cleavageByRecord,s.record_id,s);
+for(const e of D.cleavage?.evidence||[])append(evidenceBySite,e.site_id,e);
+const meropsBySite=new Map();
+const uniprotRecords=new Map((D.uniprot?.records||[]).map(r=>[r.record_id,r])),uniprotBySite=new Map(),uniprotByPeptide=new Map();
+for(const a of D.uniprot?.site_annotations||[])append(uniprotBySite,a.site_id,a);
+for(const a of D.uniprot?.terminal_annotations||[])append(uniprotByPeptide,a.peptide_id,a);
+const uniprotPanel=node('details',undefined,$('cleavageContent'));uniprotPanel.id='uniprotAnnotations';uniprotPanel.hidden=!D.uniprot;uniprotPanel.style.marginTop='18px';
+const uniprotTitle=node('summary','UniProt processing annotations',uniprotPanel);uniprotTitle.title='Reference annotations provide processing context. They do not remove peptides or identify the cause of cleavage in this sample.';
+const uniprotNotice=node('p',undefined,uniprotPanel);uniprotNotice.className='muted';
+const uniprotScroll=node('div',undefined,uniprotPanel);uniprotScroll.className='scroll';
+const uniprotTable=node('table',undefined,uniprotScroll),uniprotHeader=node('tr',undefined,node('thead',undefined,uniprotTable)),uniprotRows=node('tbody',undefined,uniprotTable);uniprotRows.id='uniprotRows';
+for(const title of ['Feature','Boundary','Description','Evidence'])node('th',title,uniprotHeader);
+let uniprotRenderedSite=null;
+for(const m of D.merops?.matches||[])append(meropsBySite,m.site_id,m);
+const meropsPanel=node('details',undefined,$('cleavageContent'));meropsPanel.id='meropsAnnotations';meropsPanel.hidden=!D.merops;meropsPanel.style.marginTop='18px';
+const meropsTitle=node('summary','MEROPS annotations',meropsPanel);meropsTitle.title='Reference annotations do not identify an active protease in this sample.';
+const meropsNotice=node('p',undefined,meropsPanel);meropsNotice.className='muted';
+const meropsScroll=node('div',undefined,meropsPanel);meropsScroll.className='scroll';
+const meropsTable=node('table',undefined,meropsScroll),meropsHeader=node('tr',undefined,node('thead',undefined,meropsTable)),meropsRows=node('tbody',undefined,meropsTable);meropsRows.id='meropsRows';
+for(const title of ['Protease','Match type','Context','Evidence type'])node('th',title,meropsHeader);
+let meropsRenderedSite=null;
+let selectedSiteId=null,cleavageRecordKey='';
+const searchIndex=[...byAcc.keys()].sort().map(accession=>{const ps=proteinsByAcc.get(accession)||[];const genes=[...new Set(ps.flatMap(p=>(p.gene_symbol||'').split(';').map(g=>g.trim()).filter(Boolean)))];const name=(ps[0]?.header||'').replace(/^\S+\s*/,'').split(' OS=')[0];return{accession,genes,name,text:[accession,...genes,name].join(' ').toUpperCase()}});
+let selectedAcc='',selectedId=null,selected=[],page=0,exceptionPage=0;const pageSize=80;
+function node(tag,text,parent){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(parent)parent.append(n);return n}
+function mods(p){return p.modifications&&p.modifications.trim()?p.modifications:p.modifications_available===true?'None reported':'Not available'}
+const reasons={pd_contaminant_flag:'Marked as contaminant in PD',contaminant_sequence_overlap:'Sequence overlaps a known contaminant',shared_contaminant_assignment:'Shared with a contaminant protein',contaminant_accession:'Protein is in the contaminant list',unmatched:'No match in searched proteins',missing_reported_accessions:'No protein IDs supplied',unsupported_sequence_format:'Unrecognized sequence format',missing_sequence:'Peptide sequence missing'};
+function reason(p){return reasons[p.exclusion_reason||p.mapping_status]||(p.exclusion_reason||p.mapping_status).replaceAll('_',' ')}
+const exceptions=D.peptides.filter(p=>p.match_count===0);
+for(const [title,value] of [['Peptide observations',D.peptides.length],['Mapped',D.peptides.filter(p=>p.match_count>0).length],['Excluded',D.peptides.filter(p=>p.mapping_status==='excluded_contaminant').length],['Unmatched / unresolved',exceptions.filter(p=>p.mapping_status!=='excluded_contaminant').length]]){const c=node('div',undefined,$('cards'));c.className='card';node('strong',value.toLocaleString('en-US'),c);node('span',title,c)}
+function scrollWithin(container,element){if(!element)return;const c=container.getBoundingClientRect(),e=element.getBoundingClientRect();if(e.top<c.top+40)container.scrollTop-=c.top+40-e.top;else if(e.bottom>c.bottom)container.scrollTop+=e.bottom-c.bottom}
+function syncSelection(){document.querySelectorAll('[data-id]').forEach(el=>{const active=el.dataset.id===selectedId;el.classList.toggle('selected',active);if(el.tagName==='g')el.setAttribute('aria-pressed',String(active))})}
+function field(label,value){node('dt',label,$('detailGrid'));const dd=node('dd',undefined,$('detailGrid'));if(typeof value==='string')dd.textContent=value;else dd.append(value);return dd}
+function uniprotStatus(record){return {matched:'No matching boundary annotation',not_found:'No entry in this snapshot',unsupported_identifier:'Not queried: non-UniProt identifier',sequence_mismatch:'Not applied: reference sequence differs',sequence_unavailable:'Not applied: reference sequence unavailable',unsupported_isoform:'Not applied: isoform-specific reference unavailable',ambiguous_accession:'Not applied: ambiguous reference'}[record?.status]||'Reference not assessed'}
+function uniprotBoundary(a){return(a.boundary||'').replaceAll('_',' ')}
+function renderUniprotDetail(p){if(!D.uniprot)return;const rid=Number($('record').value),record=uniprotRecords.get(rid);if(!record||!(byPeptide.get(p.peptide_id)||[]).some(m=>m.record_id===rid))return;const rows=(uniprotByPeptide.get(p.peptide_id)||[]).filter(a=>a.record_id===rid);const box=node('div');box.id='uniprotDetail';if(!rows.length)box.textContent=uniprotStatus(record);for(const a of rows){const row=node('div',`${a.role==='N'?'N-terminus':'C-terminus'} · ${a.feature_type} · ${uniprotBoundary(a)} · peptide ${a.start}–${a.end}`,box);row.title=[a.description,a.evidence_codes?'Evidence: '+a.evidence_codes:'Evidence not supplied',`UniProt ${a.uniprot_accession||record.uniprot_accession}`].filter(Boolean).join('\n')}const dd=field('UniProt processing',box);dd.title='Matched boundaries only; missing annotations do not establish absence of normal processing. Reference entry version: '+(record.entry_version??'unknown')+'; sequence version: '+(record.sequence_version??'unknown')}
+function matchButtons(accessions,matches,master){const box=node('div');box.className='match-links';for(const accession of accessions){const hits=matches.filter(m=>m.accession===accession);const recordIds=[...new Set(hits.map(m=>m.record_id))];if(!hits.length){const b=node('button',accession,box);b.disabled=true;b.className='match-link '+(master?'master':'alternative');b.title='No retained placement for this peptide in this protein';continue}for(const rid of recordIds){const placements=hits.filter(m=>m.record_id===rid),ranges=placements.map(m=>`${m.start}–${m.end}`).join(', ');const b=node('button',`${accession} · ${ranges}${recordIds.length>1?' · record '+rid:''}`,box);b.className='match-link '+(master?'master':'alternative')+(selectedAcc===accession&&Number($('record').value)===rid?' current':'');b.dataset.accession=accession;b.dataset.record=rid;b.title='Open this protein and keep this peptide selected';b.onclick=()=>{const id=selectedId;$('protein').value=accession;searchProteins();setProtein(accession,id,rid)}}}return box}
+function sourceRepresentatives(p){
+  const accessions=value=>[...new Set((value||'').split(';').map(a=>a.trim()).filter(Boolean))];
+  const masters=accessions(p.pd_master_accessions);
+  return masters.length?{label:'PD Master Protein',values:masters}:{label:'Leading razor protein',values:accessions(p.leading_razor_accessions)};
+}
+function renderDetail(){const target=$('detail');target.replaceChildren();const p=peptides.get(selectedId);if(!p){target.textContent='Select a peptide in the plot or table.';return}const seq=node('div',p.sequence||'Sequence unavailable',target);seq.className='detail-sequence';const dl=node('dl',undefined,target);dl.id='detailGrid';dl.className='detail-grid';field('Modifications',mods(p));const matches=byPeptide.get(p.peptide_id)||[],reps=sourceRepresentatives(p),accs=[...new Set(matches.map(m=>m.accession))];const other=accs.filter(a=>!reps.values.includes(a));
+if(reps.values.length)field(reps.label,matchButtons(reps.values,matches,true));
+if(other.length)field(reps.values.length?'Other protein matches':'Protein matches',matchButtons(other,matches,false));
+if(matches.length){field('Protein / isoform matches',String(accs.length));const local=matches.filter(m=>m.accession===selectedAcc&&m.record_id===Number($('record').value));if(local.length>1)field('Positions in this sequence',local.map(m=>`${m.start}–${m.end}`).join(', '));const recordCount=new Set(matches.map(m=>m.record_id)).size;if(recordCount>accs.length)field('FASTA sequence records',String(recordCount))}else field(p.mapping_status==='excluded_contaminant'?'Why excluded':'Mapping result',reason(p));
+field('Input row',String(p.source_row));renderUniprotDetail(p);syncSelection()}
+function quantityNumber(value,pvalue=false){if(typeof value!=='number'||!Number.isFinite(value))return '—';if(value===0)return '0';if(pvalue)return value<.001?value.toExponential(3):value.toPrecision(4);return Math.abs(value)>=1e6||Math.abs(value)<.001?value.toExponential(3):value.toLocaleString('en-US',{maximumFractionDigits:4})}
+// Index observations once. Positions and candidate denominators never add overview rows.
+const overviewItems=D.peptides.map(pep=>{
+  const hits=byPeptide.get(pep.peptide_id)||[];
+  const accessions=[...new Set(hits.map(m=>m.accession))];
+  const representatives=sourceRepresentatives(pep).values;
+  const primary=representatives.find(a=>accessions.includes(a))||accessions[0];
+  const genes=accessions.flatMap(a=>(proteinsByAcc.get(a)||[]).map(p=>p.gene_symbol||''));
+  const search=[pep.sequence,pep.modifications,pep.source_row,...representatives,...accessions,...genes].join(' ').toUpperCase();
+  return {pep,accessions,primary,search};
+});
+let overviewFiltered=overviewItems,overviewPage=0;
+const overviewPageSize=30, overviewComparisons=D.quantities?.comparisons||[],overviewSamples=D.quantities?.samples||[];
+const overviewUnits=new Map();
+for(const sample of D.quantities?.statistics_samples||[]){
+  if(String(sample.Use).toLowerCase()==='yes')overviewUnits.set(sample.Condition,(overviewUnits.get(sample.Condition)||0)+1);
+}
+function openOverviewPeptide(item,accession){
+  $('protein').value=accession||'';
+  searchProteins();
+  setProtein(accession||'',item.pep.peptide_id);
+  $('proteinView').scrollIntoView({block:'start'});
+}
+function overviewStatistics(tr,id,comparison){
+  const candidates=(statisticsByPeptide.get(id)||[]).filter(r=>r.comparison===comparison.Name);
+  const result=candidates.length===1?candidates[0]:null;
+  for(const value of [quantityNumber(result?.log2_effect),quantityNumber(result?.p_value,true),quantityNumber(result?.adjusted_p_value,true)]){
+    const cell=node('td',value,tr);if(value==='—')cell.title=result?quantityStatus(result.status):candidates.length?'Multiple baselines':'Unavailable';
+  }
+  node('td',result?`${result.n_control}/${overviewUnits.get(comparison.Control)} · ${result.n_treatment}/${overviewUnits.get(comparison.Treatment)}`:'—',tr);
+
+}
+function overviewQuantities(tr,id){
+  const values=quantityByPeptide.get(id)||[];
+  const ambiguous=new Set(values.map(v=>v.entity_id)).size>1;
+  if(overviewSamples.length<=2){
+    for(const s of overviewSamples)node('td',ambiguous?'Multiple baselines':quantityNumber(values.find(v=>v.sample_id===s.sample_id)?.log2_ratio),tr);
+  }else node('td',ambiguous?'Multiple baselines':`${values.filter(v=>v.usable_pair).length} / ${overviewSamples.length}`,tr);
+}
+function renderOverview(){
+  const comparison=overviewComparisons.find(c=>c.Name===$('overviewComparison').value);
+  const head=$('overviewHead');head.replaceChildren();
+  const titles=['Peptide sequence','Modifications','Protein accessions',...(comparison?['Adjusted log2 FC','P-value','BH-adjusted P','Usable · control / treatment']:D.quantities?(overviewSamples.length<=2?overviewSamples.map(s=>s.sample_id+' · log2 ratio'):['Usable samples']):[])];
+  for(const title of titles){const th=node('th',title,head);if(title==='BH-adjusted P')th.title='Benjamini–Hochberg adjustment across all tested observations in this comparison.'}
+  const tbody=$('overviewRows');tbody.replaceChildren();
+  const start=overviewPage*overviewPageSize;
+  for(const item of overviewFiltered.slice(start,start+overviewPageSize)){
+    const p=item.pep,tr=node('tr',undefined,tbody);tr.dataset.id=p.peptide_id;
+    const seq=node('button',p.sequence||'Sequence unavailable',node('td',undefined,tr));seq.className='overview-sequence';seq.title='Open input row '+p.source_row;
+    node('td',mods(p),tr);const protein=node('td',undefined,tr);
+    protein.className='accession-list';
+    const ordered=item.primary?[item.primary,...item.accessions.filter(a=>a!==item.primary)]:[];
+    protein.textContent=ordered.length?ordered.join(', '):reason(p);
+    tr.onclick=()=>openOverviewPeptide(item,item.primary);
+    if(comparison)overviewStatistics(tr,p.peptide_id,comparison);else if(D.quantities)overviewQuantities(tr,p.peptide_id);
+  }
+  if(!tbody.children.length){const empty=node('td','No matching observations.',node('tr',undefined,tbody));empty.colSpan=titles.length}
+  $('overviewCount').textContent=overviewFiltered.length.toLocaleString('en-US')+' of '+overviewItems.length.toLocaleString('en-US')+' observations';
+  $('overviewPage').textContent=overviewFiltered.length?`${start+1}–${Math.min(start+overviewPageSize,overviewFiltered.length)}`:'0';
+  $('overviewPrev').disabled=overviewPage===0;$('overviewNext').disabled=start+overviewPageSize>=overviewFiltered.length;
+  syncSelection();
+}
+function setupOverview(){
+  $('overviewNote').hidden=!D.quantities||overviewComparisons.length>0;
+  const select=$('overviewComparison');
+  for(const c of overviewComparisons)node('option',c.Treatment+' vs '+c.Control,select).value=c.Name;
+  $('overviewComparisonLabel').hidden=!overviewComparisons.length;
+  select.onchange=renderOverview;
+  $('overviewSearch').oninput=()=>{const q=$('overviewSearch').value.trim().toUpperCase();overviewFiltered=q?overviewItems.filter(i=>i.search.includes(q)):overviewItems;overviewPage=0;renderOverview()};
+  $('overviewPrev').onclick=()=>{overviewPage--;renderOverview()};$('overviewNext').onclick=()=>{overviewPage++;renderOverview()};
+  const back=document.createElement('a');back.href='#peptideOverview';back.textContent='All peptides ↑';back.className='overview-protein-nav';$('proteinView').prepend(back);
+  renderOverview();
+}
+function quantityStatus(status){return({tested:'Tested',ambiguous_baseline:'Not tested: multiple candidate baselines',insufficient_replicates:'Not tested: too few usable independent units',zero_residual_variance:'Not tested: no within-condition variation',excluded_observation:'Not tested: excluded peptide observation',excluded_protein_entity:'Not tested: excluded protein / group',missing_protein_link:'Not tested: no protein link',protein_entity_not_found:'Not tested: protein / group unavailable',insufficient_features_for_moderation:'Not tested: too few eligible observations',numeric_range_exceeded:'Not tested: numerical range exceeded',model_numeric_failure:'Not tested: numerical model failure'})[status]||String(status||'Unavailable').replaceAll('_',' ')}
+function selectPeptide(id,origin){selectedId=id;renderDetail();syncSelection();if(origin==='plot')scrollWithin($('mappingScroll'),[...$('mappingRows').children].find(r=>r.dataset.id===id));if(origin==='table')scrollWithin($('plot'),[...$('plot').querySelectorAll('g[data-id]')].find(g=>g.dataset.id===id))}
+function svgEl(tag,attrs,text){const n=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n}
+function selectCleavageEvidence(e){const i=selected.findIndex(m=>m.peptide_id===e.peptide_id&&m.record_id===e.record_id&&m.start===e.start&&m.end===e.end);if(i<0)return;selectedId=e.peptide_id;page=Math.floor(i/pageSize);render();scrollWithin($('mappingScroll'),[...$('mappingRows').children].find(r=>r.dataset.id===selectedId));scrollWithin($('plot'),[...$('plot').querySelectorAll('g[data-id]')].find(g=>g.dataset.id===selectedId))}
+function renderMerops(siteId){
+  if(!D.merops)return;
+  if(meropsRenderedSite!==siteId){meropsPanel.open=false;meropsRenderedSite=siteId}
+  const matches=meropsBySite.get(siteId)||[];meropsTitle.textContent=`MEROPS annotations (${matches.length.toLocaleString('en-US')})`;meropsRows.replaceChildren();meropsScroll.hidden=!matches.length;
+  meropsNotice.hidden=matches.length>0&&matches.length<=100;meropsNotice.replaceChildren();
+  if(!matches.length)meropsNotice.textContent='No reference matches for this site.';
+  else if(matches.length>100){meropsNotice.append(document.createTextNode(`Showing the first 100 of ${matches.length.toLocaleString('en-US')} annotations. `));const link=node('a','Download all annotations',meropsNotice);link.href='merops_matches.csv';link.download='merops_matches.csv'}
+  for(const m of matches.slice(0,100)){const tr=node('tr',undefined,meropsRows);tr.title=[m.merops_record_id?'MEROPS record: '+m.merops_record_id:'',m.substrate_accession?'Substrate: '+m.substrate_accession+(m.p1_position?' · P1 '+m.p1_position:''):'',m.reference_ids?'Reference IDs: '+m.reference_ids:'',m.reference_raw?'Reference: '+m.reference_raw:''].filter(Boolean).join('\n');for(const v of [[m.protease_id,m.protease_name].filter(Boolean).join(' · ')||'Not available',{reference_site_candidate:'Accession + position',motif_compatibility:'Motif only'}[m.relation_type]||m.relation_type||'Not available',{agreement:'Agreement',mismatch:'Mismatch',unknown:'Unknown'}[m.context_status]||'Unknown',m.cleavage_type||'Not available'])node('td',v,tr)}
+}
+function renderUniprot(siteId,rid){if(!D.uniprot)return;if(uniprotRenderedSite!==siteId){uniprotPanel.open=false;uniprotRenderedSite=siteId}const rows=uniprotBySite.get(siteId)||[];uniprotTitle.textContent=`UniProt processing annotations (${rows.length})`;uniprotRows.replaceChildren();uniprotScroll.hidden=!rows.length;uniprotNotice.hidden=!!rows.length;uniprotNotice.textContent=uniprotStatus(uniprotRecords.get(rid));uniprotNotice.title='No matching annotation does not mean that normal processing is absent.';for(const a of rows){const tr=node('tr',undefined,uniprotRows);tr.title='UniProt '+a.uniprot_accession;for(const value of [a.feature_type,uniprotBoundary(a),a.description||'—',a.evidence_codes||'Not supplied'])node('td',value,tr)}}
+function siteAnnotationSummary(site){
+  const supplied=siteSummaries.get(String(site.record_id)+'|'+site.site_id);
+  if(supplied&&typeof supplied.uniprot_summary==='string'&&typeof supplied.merops_summary==='string')return supplied;
+  const annotations=(uniprotBySite.get(site.site_id)||[]).filter(a=>a.record_id===site.record_id),reference=uniprotRecords.get(site.record_id);
+  const uniprot=!D.uniprot?'Not provided':annotations.length?[...new Set(annotations.map(a=>a.feature_type+' · '+uniprotBoundary(a)))].join('; '):uniprotStatus(reference);
+  const matches=meropsBySite.get(site.site_id)||[],position=matches.filter(m=>m.relation_type==='reference_site_candidate'),parts=[];
+  for(const [status,label]of [['agreement','position + sequence'],['mismatch','context mismatch'],['unknown','context unknown']]){const n=position.filter(m=>(m.context_status||'unknown')===status).length;if(n)parts.push(`${n} ${label}`)}
+  const motifs=matches.filter(m=>m.relation_type==='motif_compatibility').length;if(motifs)parts.push(`${motifs} motif only`);
+  return{uniprot_summary:uniprot,merops_summary:!D.merops?'Not provided':parts.join('; ')||'No reference matches'}
+}
+function chooseSite(siteId){selectedSiteId=String(siteId);renderCleavage();scrollWithin($('siteSummaryScroll'),[...$('siteSummaryRows').children].find(row=>row.dataset.siteId===selectedSiteId))}
+function renderSiteSummary(sites){
+  const rows=$('siteSummaryRows');rows.replaceChildren();
+  for(const site of sites){const tr=node('tr',undefined,rows),summary=siteAnnotationSummary(site);tr.dataset.siteId=String(site.site_id);tr.tabIndex=0;tr.classList.toggle('selected',String(site.site_id)===selectedSiteId);tr.setAttribute('aria-current',String(String(site.site_id)===selectedSiteId));tr.title='Select this cleavage site';
+    const values=[`${site.bond_left} | ${site.bond_right}`,site.context_display,site.neo_n_count,site.neo_c_count,site.spanning_count,summary.uniprot_summary,summary.merops_summary];
+    values.forEach((value,i)=>{const td=node('td',String(value??'—'),tr);if(i===1){td.className='sequence';if(site.context_complete===false)td.title='Partial sequence context'}if(i>=2&&i<=4)td.className='count';if(i>=5)td.className='annotation';if(i===5)td.title='Matching processing boundaries; missing annotation does not establish absence of normal processing.';if(i===6)td.title='Counts are reference annotation records. Accession/position candidates retain sequence agreement, mismatch and unknown states; motif-only matches are separate.'});
+    tr.onclick=()=>chooseSite(site.site_id);tr.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseSite(site.site_id);[...rows.children].find(row=>row.dataset.siteId===selectedSiteId)?.focus({preventScroll:true})}}
+  }
+}
+function renderCleavage(){
+  $('cleavageView').hidden=!D.cleavage;if(!D.cleavage)return;
+  const rid=Number($('record').value),key=selectedAcc+'|'+rid,sites=(cleavageByRecord.get(rid)||[]).filter(s=>s.accession===selectedAcc).slice().sort((a,b)=>a.bond_left-b.bond_left);
+  if(key!==cleavageRecordKey){selectedSiteId=null;cleavageRecordKey=key;meropsRenderedSite=null;meropsPanel.open=false;uniprotRenderedSite=null;uniprotPanel.open=false}
+  if(!sites.some(s=>String(s.site_id)===selectedSiteId))selectedSiteId=sites.length?String(sites[0].site_id):null;
+  $('cleavageProtein').textContent=selectedAcc?`${selectedAcc}${$('recordLabel').hidden?'':' · Record '+rid}`:'';
+  $('cleavageEmpty').hidden=!!sites.length;$('cleavageEmpty').textContent=selectedAcc?'No candidate cleavage sites for this protein.':'Select a protein to view cleavage sites.';$('cleavageContent').hidden=!sites.length;
+  $('cleavageSite').replaceChildren();$('cleavageRows').replaceChildren();$('cleavageCounts').replaceChildren();$('cleavageContext').replaceChildren();
+  renderSiteSummary(sites);
+  for(const s of sites)node('option',`${s.bond_left} | ${s.bond_right} · ${s.context_display}`,$('cleavageSite')).value=s.site_id;
+  if(!sites.length)return;$('cleavageSite').value=selectedSiteId;
+  const site=sites.find(s=>String(s.site_id)===selectedSiteId);$('cleavageContext').textContent=site.context_display;if(site.context_complete===false)node('small','Partial context',$('cleavageContext'));renderMerops(site.site_id);renderUniprot(site.site_id,rid);
+  for(const [label,count] of [['Neo-N candidates',site.neo_n_count],['Neo-C candidates',site.neo_c_count],['Spanning',site.spanning_count]]){const item=node('span',undefined,$('cleavageCounts'));node('strong',String(count),item);item.append(document.createTextNode(label))}
+  const labels={neo_N_candidate:'Neo-N candidate',neo_C_candidate:'Neo-C candidate',digestion_compatible:'Digestion-compatible',processing_compatible:'Possible Met removal',unclassified:'Unclassified',spanning:'Spanning'};
+  for(const e of evidenceBySite.get(site.site_id)||[]){const p=peptides.get(e.peptide_id);if(!p)continue;const tr=node('tr',undefined,$('cleavageRows'));tr.dataset.id=e.peptide_id;tr.tabIndex=0;const status=e.role==='spanning'?'—':labels[e.classification]||(e.classification||'Unclassified').replaceAll('_',' ');const values=[p.sequence,mods(p),{N:'N-terminal',C:'C-terminal',spanning:'Spanning'}[e.role]||e.role,status,e.start,e.end,p.source_row];values.forEach((v,i)=>{const td=node('td',String(v),tr);if(i===0)td.className='sequence'});tr.onclick=()=>selectCleavageEvidence(e);tr.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selectCleavageEvidence(e)}}}
+  syncSelection()
+}
+$('cleavageSite').onchange=()=>chooseSite($('cleavageSite').value);
+function render(){const rid=Number($('record').value);selected=(byAcc.get(selectedAcc)||[]).filter(m=>m.record_id===rid).sort((a,b)=>a.start-b.start||a.end-b.end||peptides.get(a.peptide_id).source_row-peptides.get(b.peptide_id).source_row);const rec=records.get(rid);$('proteinTitle').textContent=rec?`${rec.gene_symbol?rec.gene_symbol+' · ':''}${rec.accession}`:'';$('proteinName').textContent=rec?rec.header.replace(/^\S+\s*/,'').split(' OS=')[0]:'';
+const rows=selected.slice(page*pageSize,(page+1)*pageSize);$('mappingRows').replaceChildren();for(const m of rows){const p=peptides.get(m.peptide_id),tr=node('tr',undefined,$('mappingRows'));tr.dataset.id=m.peptide_id;tr.title=`Input row ${p.source_row}`;tr.tabIndex=0;const values=[p.sequence,mods(p),m.start,m.end,m.pd_coordinate_agrees===null?'Not available':m.pd_coordinate_agrees?'Matches PD':'Different from PD'];values.forEach((v,i)=>{const td=node('td',String(v),tr);if(i===0)td.className='sequence'});tr.onclick=()=>selectPeptide(m.peptide_id,'table');tr.onkeydown=e=>{if(e.key==='Enter')selectPeptide(m.peptide_id,'table')}}
+$('legend').replaceChildren();if(rows.some(m=>m.is_master)){const s=node('span',`● ${selectedAcc} · PD Master Protein`,$('legend'));s.className='master'}if(rows.some(m=>!m.is_master)){const s=node('span',`● ${selectedAcc} · Other protein match`,$('legend'));s.className='alternative'}
+$('plot').replaceChildren();if(rec){const svg=svgEl('svg',{viewBox:`0 0 1200 ${55+rows.length*22}`,role:'img','aria-label':'Peptide positions on '+selectedAcc}),x=p=>300+(p-1)/Math.max(rec.length,1)*875;svg.append(svgEl('line',{x1:300,x2:1175,y1:22,y2:22,stroke:'#b7c8cf','stroke-width':3}));svg.append(svgEl('text',{x:300,y:12},'1'));svg.append(svgEl('text',{x:1175,y:12,'text-anchor':'end'},String(rec.length)));rows.forEach((m,i)=>{const p=peptides.get(m.peptide_id),y=48+i*22;const g=svgEl('g',{'data-id':p.peptide_id,tabindex:0,role:'button','aria-label':`${p.sequence}; ${mods(p)}; input row ${p.source_row}; ${m.start} to ${m.end}`});g.append(svgEl('title',{},`${p.sequence}\n${mods(p)}\nInput row ${p.source_row} · ${m.start}–${m.end}`));const short=p.sequence.length>32?p.sequence.slice(0,29)+'…':p.sequence;g.append(svgEl('text',{x:0,y:y+4},short+(p.modifications?.trim()?' *':'')));g.append(svgEl('rect',{x:x(m.start),y:y-5,width:Math.max(2,(m.end-m.start+1)/rec.length*875),height:10,rx:2,fill:m.is_master?'#176e67':'#6b5bb4'}));g.onclick=()=>selectPeptide(m.peptide_id,'plot');g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPeptide(m.peptide_id,'plot')}};svg.append(g)});$('plot').append(svg)}
+$('pageLabel').textContent=selected.length?`${page*pageSize+1}–${Math.min((page+1)*pageSize,selected.length)} of ${selected.length}`:'No peptide positions';$('prev').disabled=page===0;$('next').disabled=(page+1)*pageSize>=selected.length;renderDetail();renderCleavage();syncSelection()}
+function setProtein(accession,peptideId=null,recordId=null){selectedAcc=accession;selectedId=peptideId;page=0;$('record').replaceChildren();const hits=byAcc.get(accession)||[],ids=[...new Set(hits.map(m=>m.record_id))];for(const id of ids)node('option',`Record ${id}`,$('record')).value=id;const preferred=recordId??hits.find(m=>m.peptide_id===peptideId)?.record_id;if(ids.includes(preferred))$('record').value=preferred;$('recordLabel').hidden=ids.length<=1;if(peptideId){const ordered=hits.filter(m=>m.record_id===Number($('record').value)).sort((a,b)=>a.start-b.start||a.end-b.end||peptides.get(a.peptide_id).source_row-peptides.get(b.peptide_id).source_row);const i=ordered.findIndex(m=>m.peptide_id===peptideId);if(i>=0)page=Math.floor(i/pageSize)}render();if(peptideId){scrollWithin($('plot'),[...$('plot').querySelectorAll('g[data-id]')].find(g=>g.dataset.id===peptideId));scrollWithin($('mappingScroll'),[...$('mappingRows').children].find(r=>r.dataset.id===peptideId))}}
+function searchProteins(){const q=$('protein').value.trim().toUpperCase(),found=q?searchIndex.filter(p=>p.text.includes(q)):[];found.sort((a,b)=>Number(b.accession.toUpperCase()===q)-Number(a.accession.toUpperCase()===q)||Number(b.genes.some(g=>g.toUpperCase()===q))-Number(a.genes.some(g=>g.toUpperCase()===q))||a.accession.localeCompare(b.accession));$('proteinChoice').replaceChildren();node('option',found.length?'Choose a protein / isoform':'No matching proteins',$('proteinChoice')).value='';for(const p of found)node('option',`${p.accession} · ${p.genes.join('; ')||'Gene unknown'} · ${p.name}`,$('proteinChoice')).value=p.accession;const exact=found.find(p=>p.accession.toUpperCase()===q),acc=exact?.accession||(found.length===1?found[0].accession:'');$('proteinChoice').value=acc;$('proteinChoice').disabled=!found.length;$('searchStatus').hidden=!!acc;$('searchStatus').textContent=!q?'Enter a gene, protein ID or protein name.':!found.length?'No mapped protein found.':`${found.length} matching proteins — choose a protein or isoform.`;setProtein(acc)}
+let searchTimer;$('showProtein').onclick=()=>{clearTimeout(searchTimer);searchProteins()};$('protein').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(searchProteins,150)};$('protein').onkeydown=e=>{if(e.key==='Enter'){clearTimeout(searchTimer);searchProteins()}};$('proteinChoice').onchange=()=>{$('searchStatus').hidden=!!$('proteinChoice').value;setProtein($('proteinChoice').value)};$('record').onchange=()=>{page=0;render()};$('prev').onclick=()=>{page--;render()};$('next').onclick=()=>{page++;render()};
+$('exceptionsTitle').textContent=`Unmatched & excluded (${exceptions.length.toLocaleString('en-US')})`;node('option','All unmatched & excluded',$('outcome')).value='';for(const s of [...new Set(exceptions.map(p=>p.mapping_status))])node('option',s==='excluded_contaminant'?'Excluded contaminants':reasons[s]||s.replaceAll('_',' '),$('outcome')).value=s;
+function renderExceptions(){const status=$('outcome').value,q=$('filter').value.trim().toUpperCase(),rows=exceptions.filter(p=>(!status||p.mapping_status===status)&&(!q||(p.sequence||'').includes(q)||String(p.source_row)===q));$('outcomeRows').replaceChildren();for(const p of rows.slice(exceptionPage*pageSize,(exceptionPage+1)*pageSize)){const tr=node('tr',undefined,$('outcomeRows'));tr.dataset.id=p.peptide_id;for(const v of [p.source_row,p.sequence||'Unavailable',mods(p),reason(p)])node('td',String(v),tr);tr.onclick=()=>selectPeptide(p.peptide_id,'exception')}$('outcomeCount').textContent=`${rows.length.toLocaleString('en-US')} records`;$('exceptionPageLabel').textContent=rows.length?`${exceptionPage*pageSize+1}–${Math.min((exceptionPage+1)*pageSize,rows.length)} of ${rows.length}`:'0 records';$('exceptionPrev').disabled=exceptionPage===0;$('exceptionNext').disabled=(exceptionPage+1)*pageSize>=rows.length;syncSelection()}
+$('outcome').onchange=$('filter').oninput=()=>{exceptionPage=0;renderExceptions()};$('exceptionPrev').onclick=()=>{exceptionPage--;renderExceptions()};$('exceptionNext').onclick=()=>{exceptionPage++;renderExceptions()};
+ReportWorkbook.mount(D,document);
+
+</script></body></html>
+
