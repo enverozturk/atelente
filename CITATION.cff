@@ -7,3 +7,5 @@ authors:
     given-names: Enver
     orcid: "https://orcid.org/0009-0004-8359-8032"
 license: GPL-3.0-only
+version: "0.1.0"
+repository-code: "https://github.com/enverozturk/atelente"

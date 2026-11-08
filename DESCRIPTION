@@ -1,7 +1,7 @@
 Package: atelente
 Type: Package
 Title: Link Cleavage Products and Spanning Peptides in Shotgun Proteomics
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: person("Enver", "Ozturk", email = "enver10166@gmail.com",
     role = c("aut", "cre"),
     comment = c(ORCID = "0009-0004-8359-8032"))

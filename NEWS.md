@@ -1,3 +1,11 @@
+# Atelente 0.1.0 (unreleased)
+
+Prepared as the first numbered release. No release date or DOI has been assigned.
+
+- Adds a concise manuscript-analysis guide linking the three study archives and existing analysis scripts.
+- Updates package and citation version metadata.
+- Preserves all runtime files in `R/` and `inst/` from manuscript commit `b20990f7243c87fa468220c7ad27a5af2ce0559a`; no scientific analyses were rerun for this release preparation.
+
 # Atelente development version
 
 This is a development snapshot, not a tagged v1.0.0 release.
