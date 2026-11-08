@@ -38,8 +38,7 @@ Each optional \code{merops} or \code{uniprot} list with \code{snapshot} and
 \code{pm_annotate_references(result, annotations = TRUE, merops = NULL,
 uniprot = NULL, cache_dir = NULL)} exposes the same reference stage for users
 composing their own workflow. Required download or cache-verification failures
-stop the run; they never silently produce an unannotated result. No reference
-database is bundled and Python is not required at runtime.
+stop the run with an error. Reference retrieval and annotation run in R.
 
 Use \code{pm_read_table} and \code{pm_read_fasta} to read the experiment and reference sequence.
 Pass the mapped result, the declared digestion profile and the reference file SHA-256 to
@@ -61,7 +60,7 @@ filters do not reselect representatives. Original pair tests and BH families rem
 The separate quantity workflow uses \code{pm_import_quant_tables} or
 \code{pm_import_maxquant_tables} with explicit sample and protein-group links.
 \code{pm_sample_ratios} calculates peptide/protein ratios and \code{pm_test_ratios} compares conditions.
-Experimental \code{pm_test_pair_matrix} accepts a log2 neo/spanning matrix, independent sample metadata,
+\code{pm_test_pair_matrix} accepts a log2 neo/spanning matrix, independent sample metadata,
 pair-family membership and a directional contrast. It tests measurement pairs within each declared
 family. Its results describe differential ratios at candidate bonds.
 
@@ -73,7 +72,7 @@ the selected columns for mapping. Saved configurations can be passed to
 
 The opt-in \code{analysis_scope = "specificity_v3"} profile excludes unspecific
 placements from candidate evidence and preserves a separate exclusion audit.
-\code{pm_pair_workflow} adapts exact mapping links to the unchanged experimental
+\code{pm_pair_workflow} adapts exact mapping links to the independent-sample
 pair model. Representative assignment requires a selected source column with
 one common accession and unambiguous placements for both forms. Alternative
 mapping links do not add tests. Tests are refitted within each family/contrast

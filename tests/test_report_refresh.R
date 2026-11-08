@@ -38,7 +38,7 @@ write_config<-function(output,source="mapping",statpath="statistics") {
 }
 run<-function() {
   executable<-file.path(R.home("bin"),if(.Platform$OS.type=="windows") "Rscript.exe" else "Rscript")
-  log<-suppressWarnings(system2(executable,c(shQuote(file.path(root,"refresh_report.R")),"--config",shQuote(config_path)),stdout=TRUE,stderr=TRUE))
+  log<-suppressWarnings(system2(executable,c(shQuote(file.path(root,"scripts","refresh_report.R")),"--config",shQuote(config_path)),stdout=TRUE,stderr=TRUE))
   status<-attr(log,"status");if(is.null(status)) status<-0L
   list(status=status,log=log)
 }

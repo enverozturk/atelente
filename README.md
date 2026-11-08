@@ -1,68 +1,66 @@
 # Atelente
 
-**Link neo-terminal and spanning peptides at the same candidate cleavage bond.**
+**Analyse neo-terminal peptides relative to peptides spanning the same cleavage bond.**
 
-Atelente is an R package with a local Shiny interface for shotgun proteomics. It places observed peptides on supplied protein sequences, links neo-N, neo-C and spanning forms, and compares neo/spanning ratios between conditions when both forms are measured in the same sample. Its primary use is data without terminal-peptide enrichment.
+Atelente is an R package with a local Shiny interface for shotgun proteomics. It maps observed peptides to protein sequences, links neo-N, neo-C and spanning forms, and compares within-sample neo/spanning ratios between conditions. Its primary application is data collected without terminal-peptide enrichment.
 
-The spanning peptide provides a reference across the same bond, complementary to protein-level abundance. Results combine searchable tables, protein-position maps and MEROPS/UniProt annotations.
+## Installation
 
-> Version 0.1.0 is prepared but not yet released. While this repository is private, GitHub installation requires authentication with an account that has repository access.
-
-## Install and open
-
-Use R 4.3 or later. For the Shiny interface and Excel input/output:
+Use R 4.3 or later:
 
 ```r
 install.packages(c("remotes", "shiny", "readxl", "openxlsx"))
 remotes::install_github("enverozturk/atelente", dependencies = NA)
-shiny::runApp(atelente::pm_wizard_app())
 ```
 
-For optional statistical tests, also install limma:
+For statistical testing, install limma:
 
 ```r
 install.packages("BiocManager")
 BiocManager::install("limma", ask = FALSE, update = FALSE)
 ```
 
-## Analyse your data
+The repository currently requires an account with access for installation.
 
-1. **Files:** choose a peptide table (CSV, TSV/TXT or XLSX) and its matching FASTA, optionally gzip-compressed.
-2. **Columns:** select the peptide sequence, master/representative protein and quantity columns. Add modifications when available and select linear or log2 quantities.
-3. **Samples:** name the samples and conditions. Optionally select a treatment/control comparison and statistical tests.
-4. **Review & run:** check the digestion settings and reference options, then run the analysis.
+## Quick start
 
-Before you start:
+```r
+shiny::runApp(atelente::pm_wizard_app())
+```
 
-- Use decimal points in numbers (`100.5`).
-- Leave missing measurements empty. Do not replace them with zeros.
-- Tests assume independent samples. Do not enter technical replicate measurements as separate samples.
+1. Choose a peptide table and its matching FASTA.
+2. Select the sequence, protein accession and sample quantity columns.
+3. Enter sample names and conditions; select the comparison and digestion settings.
+4. Review the settings and run the analysis.
 
-**Reference annotations.** When enabled, Atelente downloads the required MEROPS and UniProt references and saves them on your computer. Later runs work offline when those references are already available. UniProt lookups send protein accession identifiers. Your input tables are processed locally. You can turn annotations off in the setup.
+Use decimal points in numeric text and leave missing measurements empty. For statistical testing, each sample must be an independent experimental unit. Prepare technical-replicate summaries before import.
 
-## Read and download results
+MEROPS and UniProt annotations are optional. Their first use downloads reference records; later runs reuse the local cache. Input tables are processed on your computer.
 
-| Output | Contents |
+## Results
+
+| File | Contents |
 | --- | --- |
-| `report.html` | Searchable results, supporting peptides, alternative pairs, protein maps and reference matches |
+| `report.html` | Interactive results, supporting peptides, protein maps and reference annotations |
 | `atelente_results.xlsx` | Results, Peptides and Settings worksheets |
-| `atelente_audit.zip` | Detailed measurements, links, exclusions and provenance |
-| `run_manifest.json` | Run metadata, reference provenance and file hashes |
+| `atelente_audit.zip` | Measurements, alternative pairs, mapping and provenance |
+| `run_manifest.json` | Run settings, reference details and file hashes |
 
-By default, the app saves each run in `atelente_runs/<run>/results/` inside your R working directory. The report can export the current filtered view or selected worksheets, including All pairs and Annotations.
+Results are saved under `atelente_runs/<run>/results/` by default. Keep the result files together and open the HTML report in Chrome or Edge.
 
-Keep the results folder together. If you receive it as a ZIP file, extract it before opening the report in Chrome or Edge. A finished report works offline.
+The reported effect is the treatment-minus-control difference in mean log2(neo/spanning). Positive values indicate a higher ratio in treatment. Optional limma tests use independent samples, with Benjamini–Hochberg adjustment within each comparison and test family.
 
-## What the main result means
+## Documentation
 
-Ratio log2FC compares the mean log2(neo/spanning) ratio between treatment and control, using samples where both forms were quantified. Positive values indicate a higher ratio in treatment. One-condition observations are reported without a numerical fold change.
+- [Usage](docs/USAGE.md): input preparation, Shiny and scripted runs.
+- [Analysis](docs/ANALYSIS_RULES.md): candidate bonds, pair selection and statistics.
+- [Reference annotations](docs/REFERENCE_ANNOTATIONS.md): MEROPS, UniProt and offline use.
+- [Peptide/protein workflows](docs/PEPTIDE_PROTEIN_WORKFLOW.md): additional normalization, statistics and report commands.
 
-A fixed rule chooses a representative pair for each bond and terminal role, independently of effect size or p-values. Alternative pairs remain available. Optional limma tests evaluate ratio differences, with Benjamini–Hochberg adjustment separately within each comparison and test family.
+Source-checkout commands are in `scripts/`, runnable examples in `examples/`, and bundled example tables/configurations in `inst/extdata/`. Package functions, help pages and tests are in `R/`, `man/` and `tests/`.
 
-## Guides
+## Study data and citation
 
-[Usage and scripted workflows](docs/USAGE.md) · [Analysis rules](docs/ANALYSIS_RULES.md) · [Reference annotations](docs/REFERENCE_ANNOTATIONS.md) · [Manuscript analyses](docs/MANUSCRIPT_ANALYSES.md)
+[Study inputs and analysis records](https://drive.google.com/file/d/1a0HeQokmYq-FII6ryM4Ctrw24Z6FDpXq/view) are archived separately; the working archive currently requires access. The manuscript analyses used [commit b20990f](https://github.com/enverozturk/atelente/tree/b20990f7243c87fa468220c7ad27a5af2ce0559a). Software citation details are in [CITATION.cff](CITATION.cff).
 
-## License and author
-
-GPL-3. Author and maintainer: Enver Ozturk ([ORCID](https://orcid.org/0009-0004-8359-8032)). Contact: [enver10166@gmail.com](mailto:enver10166@gmail.com). Software citation metadata is in [CITATION.cff](CITATION.cff).
+GPL-3. Author and maintainer: Enver Ozturk ([ORCID](https://orcid.org/0009-0004-8359-8032)); [enver10166@gmail.com](mailto:enver10166@gmail.com).

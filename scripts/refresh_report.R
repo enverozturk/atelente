@@ -2,9 +2,9 @@
 # Add verified quantities to an existing mapping report; never change its source directory.
 if(.Platform$OS.type=="windows") invisible(suppressWarnings(Sys.setlocale("LC_CTYPE",".UTF-8")))
 args <- commandArgs(trailingOnly=TRUE)
-root <- dirname(normalizePath(sub("^--file=","",grep("^--file=",commandArgs(),value=TRUE)[1]),winslash="/",mustWork=TRUE))
+root <- dirname(dirname(normalizePath(sub("^--file=","",grep("^--file=",commandArgs(),value=TRUE)[1]),winslash="/",mustWork=TRUE)))
 for(module in c("mapping","report","statistics_io","report_quantities")) source(file.path(root,"R",paste0(module,".R")),encoding="UTF-8")
-if(length(args)!=2L||args[1]!="--config") stop("Usage: Rscript refresh_report.R --config report.json")
+if(length(args)!=2L||args[1]!="--config") stop("Usage: Rscript scripts/refresh_report.R --config report.json")
 for(package in c("jsonlite","digest")) if(!requireNamespace(package,quietly=TRUE)) stop("Install ",package," first.")
 config_path <- normalizePath(args[2],winslash="/",mustWork=TRUE)
 config <- jsonlite::fromJSON(config_path,simplifyVector=TRUE)

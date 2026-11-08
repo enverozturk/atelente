@@ -90,7 +90,7 @@ save_config <- function(x) jsonlite::write_json(x,config_path,auto_unbox=TRUE,pr
 run_cli <- function() {
   executable <- if(.Platform$OS.type=="windows") "Rscript.exe" else "Rscript"
   output <- suppressWarnings(system2(file.path(R.home("bin"),executable),
-    c(shQuote(file.path(root,"normalize.R")),"--config",shQuote(config_path)),stdout=TRUE,stderr=TRUE))
+    c(shQuote(file.path(root,"scripts","normalize.R")),"--config",shQuote(config_path)),stdout=TRUE,stderr=TRUE))
   status <- attr(output,"status");if(is.null(status)) status <- 0L
   list(status=status,output=output)
 }

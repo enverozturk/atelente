@@ -59,5 +59,5 @@ pm_export_statistics(results,file.path(inputs,"statistics"),
 config <- file.path(inputs,"report.json")
 jsonlite::write_json(list(mapping_dir="mapping",ratios_dir="ratios",statistics_dir="statistics",output_dir="../report"),config,auto_unbox=TRUE)
 rscript <- file.path(R.home("bin"),if(.Platform$OS.type=="windows") "Rscript.exe" else "Rscript")
-status <- system2(rscript,c(shQuote(file.path(root,"refresh_report.R")),"--config",shQuote(config)))
+status <- system2(rscript,c(shQuote(file.path(root,"scripts","refresh_report.R")),"--config",shQuote(config)))
 if(status!=0L) stop("Report generation failed.")

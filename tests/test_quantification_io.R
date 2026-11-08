@@ -38,7 +38,7 @@ executable <- file.path(R.home("bin"),"Rscript")
 invoke <- function(directory,destination) {
   config <- file.path(td,"quantification.json")
   jsonlite::write_json(list(results_dir=directory,samples=sample_path,output_dir=destination),config,auto_unbox=TRUE)
-  log <- suppressWarnings(system2(executable,shQuote(c(file.path(root,"quantify.R"),"--config",config)),stdout=TRUE,stderr=TRUE))
+  log <- suppressWarnings(system2(executable,shQuote(c(file.path(root,"scripts","quantify.R"),"--config",config)),stdout=TRUE,stderr=TRUE))
   status <- attr(log,"status");if(is.null(status))status<-0L
   list(status=status,log=paste(log,collapse="\n"))
 }

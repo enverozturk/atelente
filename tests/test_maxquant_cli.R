@@ -15,7 +15,7 @@ config <- list(adapter="maxquant_peptides",peptides="peptides.csv",proteins="pro
 run <- function(cfg) {
   jsonlite::write_json(cfg,file.path(td,"config.json"),auto_unbox=TRUE,pretty=TRUE)
   status <- suppressWarnings(system2(file.path(R.home("bin"),"Rscript"),
-    c(shQuote(file.path(root,"normalize.R")),"--config",shQuote(file.path(td,"config.json"))),
+    c(shQuote(file.path(root,"scripts","normalize.R")),"--config",shQuote(file.path(td,"config.json"))),
     stdout=file.path(td,"stdout.txt"),stderr=file.path(td,"stderr.txt")))
   status
 }

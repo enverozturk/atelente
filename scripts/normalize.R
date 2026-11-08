@@ -2,9 +2,9 @@
 # Explicit software-neutral tables -> sample-level ratios, without a contrast.
 args <- commandArgs(trailingOnly=TRUE)
 if (.Platform$OS.type=="windows") suppressWarnings(Sys.setlocale("LC_CTYPE",".UTF-8"))
-root <- dirname(normalizePath(sub("^--file=","",grep("^--file=",commandArgs(),value=TRUE)[1]),winslash="/",mustWork=TRUE))
+root <- dirname(dirname(normalizePath(sub("^--file=","",grep("^--file=",commandArgs(),value=TRUE)[1]),winslash="/",mustWork=TRUE)))
 for(module in c("mapping","report","excel_locale","input_adapter","maxquant_input","sample_ratios","normalization_io")) source(file.path(root,"R",paste0(module,".R")),encoding="UTF-8")
-if(length(args)!=2L || args[1]!="--config") stop("Usage: Rscript normalize.R --config normalization.json")
+if(length(args)!=2L || args[1]!="--config") stop("Usage: Rscript scripts/normalize.R --config normalization.json")
 for(package in c("jsonlite","digest")) if(!requireNamespace(package,quietly=TRUE)) stop("Install ",package," first.")
 config_path <- normalizePath(args[2],winslash="/",mustWork=TRUE)
 config <- jsonlite::fromJSON(config_path,simplifyVector=TRUE)

@@ -63,7 +63,7 @@ stopifnot(identical(manifest$reference_access$enabled,FALSE),
           identical(manifest$reference_access$status,"disabled"))
 cli <- offline;cli$output_dir <- "cli-result"
 jsonlite::write_json(cli,file.path(td,"config.json"),auto_unbox=TRUE,pretty=TRUE)
-log <- system2(file.path(R.home("bin"),"Rscript"),c(shQuote(file.path(root,"run.R")),"--config",shQuote(file.path(td,"config.json"))),stdout=TRUE,stderr=TRUE)
+log <- system2(file.path(R.home("bin"),"Rscript"),c(shQuote(file.path(root,"scripts","run.R")),"--config",shQuote(file.path(td,"config.json"))),stdout=TRUE,stderr=TRUE)
 if (!is.null(attr(log,"status"))) stop(paste(log,collapse="\n"))
 stopifnot(file.exists(file.path(td,"cli-result/report.html")))
 for (name in c("peptides.csv","matches.csv","cleavage_sites.csv","cleavage_evidence.csv")) {

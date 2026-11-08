@@ -1,17 +1,7 @@
 # Atelente 0.1.0 (unreleased)
 
-Prepared as the first numbered release. No release date or DOI has been assigned.
-
-- Adds a concise manuscript-analysis guide linking the three study archives and existing analysis scripts.
-- Updates package and citation version metadata.
-- Preserves all runtime files in `R/` and `inst/` from manuscript commit `b20990f7243c87fa468220c7ad27a5af2ce0559a`; no scientific analyses were rerun for this release preparation.
-
-# Atelente development version
-
-This is a development snapshot, not a tagged v1.0.0 release.
-
-- Maps supplied peptide observations to reference protein sequences and links neo-terminal and spanning forms at candidate bonds.
-- Provides descriptive sample ratios and condition comparisons, with optional independent-sample limma tests and BH adjustment.
-- Includes a local Shiny column-selection workflow, offline HTML reports, Excel exports and a separate audit bundle.
-- Fetches MEROPS/UniProt references in R and records cache provenance; validated local snapshots are supported.
-- Uses a standard root R-package layout, with portable regression tests and source/installed-package equivalence checks.
+- Map peptide observations to reference sequences and link neo-terminal and spanning forms at candidate bonds.
+- Calculate sample ratios and condition effects, with optional limma tests and BH adjustment.
+- Analyse data through a local Shiny interface and export HTML reports, Excel tables and audit records.
+- Annotate candidate bonds with MEROPS and UniProt using downloaded or supplied reference snapshots.
+- Group source-checkout commands under `scripts/` and consolidate the usage and method guides.
