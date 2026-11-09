@@ -4,7 +4,7 @@
   "doi": "10.1002/pmic.202300491",
   "source": "https://doi.org/10.1002/pmic.202300491",
   "prep": "28,710 prepared peptidoforms with complete observed PSM quantity vectors. Original quantity strings retained; representative accession added from the selected source PSM. Header names adapted for import. No additional normalization or imputation. Six WT and five KO columns, as in deposited annotation.txt.",
-  "fasta_note": "Byte-identical to the protein.fasta in the archived PKD analysis and the local TermineR PKD source folder.",
+  "fasta_note": "Byte-identical to protein.fas distributed with the TermineR repository (data-raw/pkd_mouse_model_search).",
   "expected": {
     "input_rows": 28710,
     "quantity_columns": 11,

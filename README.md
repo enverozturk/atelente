@@ -57,7 +57,7 @@ Start with the GluC dataset:
 Rscript manuscript/run.R 01_GluC_PXD000503
 ```
 
-The runner unpacks the peptide CSV, checks the peptide and FASTA hashes, and passes the saved configuration to Atelente. Open `manuscript/01_GluC_PXD000503/results/report.html` when it finishes. Instructions for all three datasets, preparation details and validated result counts are in [Manuscript analyses](manuscript/README.md).
+The runner unpacks the peptide CSV, checks the peptide and FASTA hashes, and passes the saved configuration to Atelente. Open `manuscript/01_GluC_PXD000503/results/report.html` when it finishes. Instructions for all three datasets, preparation details and result counts are in [Manuscript analyses](manuscript/README.md).
 
 ## Results
 
@@ -89,7 +89,7 @@ The separate peptide/protein functions are described in [Peptide/protein workflo
 
 **Enver Ozturk. Atelente: A Tool for Quantitative Analysis of Proteolytic Cleavage Using Neo-Terminal and Spanning Peptides.** Software version 0.1.0.
 
-Use [CITATION.cff](CITATION.cff) for software citation metadata and record the version or commit used in an analysis. The manuscript inputs identify the validated analysis commit and reference versions.
+Use [CITATION.cff](CITATION.cff) for software citation metadata and record the version or commit used in an analysis. The manuscript inputs identify the analysis commit and reference versions.
 
 ## License and contact
 

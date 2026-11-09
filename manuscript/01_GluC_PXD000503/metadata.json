@@ -3,8 +3,8 @@
   "name": "GluC time course",
   "doi": "10.1074/mcp.M113.035139",
   "source": "https://doi.org/10.1074/mcp.M113.035139",
-  "prep": "All 3,017 observations and eight iTRAQ quantity channels from published supplementary table 1 are retained. Zero retained; empty/NA missing. No scaling or imputation. N-terminal labels were checked against the source modification column. Each time/control channel is a separate condition; tests disabled.",
-  "fasta_note": "842-record reference reused from the validation archive; not asserted to be the original search database.",
+  "prep": "All 3,017 observations and eight iTRAQ quantity channels from published supplementary table 1 are retained. Zero retained; empty/NA missing. No scaling or imputation. All eight channels are reported; the comparison is 16 h versus 1 h (one channel each); tests disabled.",
+  "fasta_note": "842-record reference FASTA used in the manuscript analysis; not asserted to be the original search database.",
   "expected": {
     "input_rows": 3017,
     "quantity_columns": 8,

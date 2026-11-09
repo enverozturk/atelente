@@ -3,7 +3,7 @@
   "name": "Aortic valve semi-tryptic peptide data",
   "doi": "10.1186/s10020-026-01499-0",
   "source": "https://doi.org/10.1186/s10020-026-01499-0",
-  "prep": "All 14,597 deposited rows retained; consecutive F-number technical triplets averaged over observed normalized linear intensities. Nine Control and ten Severe samples. The sample grouping was confirmed by the study analyst on 2026-11-09. No protein fold-change prefilter or imputation.",
+  "prep": "All 14,597 deposited rows retained; technical measurements averaged in groups of three over observed normalized linear intensities. Nine Control and ten Severe samples. No protein fold-change prefilter or imputation.",
   "fasta_note": "1,872-record FASTA recovered by exact UniProt accession; not the original MatrixDB search FASTA. Preserved byte-for-byte.",
   "expected": {
     "input_rows": 14597,

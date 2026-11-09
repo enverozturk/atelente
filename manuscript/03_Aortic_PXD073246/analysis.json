@@ -20,10 +20,10 @@
     "dataset": "Aortic valve semi-tryptic peptide data",
     "accession": "PXD073246",
     "source_publication_doi": "10.1186/s10020-026-01499-0",
-    "preparation": "All 14,597 deposited rows retained; consecutive F-number technical triplets averaged over observed normalized linear intensities. Nine Control and ten Severe samples. The sample grouping was confirmed by the study analyst on 2026-11-09. No protein fold-change prefilter or imputation.",
+    "preparation": "All 14,597 deposited rows retained; technical measurements averaged in groups of three over observed normalized linear intensities. Nine Control and ten Severe samples. No protein fold-change prefilter or imputation.",
     "reference_note": "1,872-record FASTA recovered by exact UniProt accession; not the original MatrixDB search FASTA. Preserved byte-for-byte.",
     "dataset_label": "Aortic valve semi-tryptic peptide data",
-    "replicate_note": "Technical-triplet sample grouping confirmed by the study analyst on 2026-11-09.",
+    "replicate_note": "Technical measurements were averaged in groups of three before analysis.",
     "statistics_version": "limma 3.68.5",
     "reference_annotations": "Enabled. First use downloads reference records; later runs reuse the local cache."
   },

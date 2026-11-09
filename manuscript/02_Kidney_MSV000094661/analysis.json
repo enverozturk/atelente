@@ -127,7 +127,7 @@
     "accession": "MSV000094661",
     "source_publication_doi": "10.1002/pmic.202300491",
     "preparation": "28,710 prepared peptidoforms with complete observed PSM quantity vectors. Original quantity strings retained; representative accession added from the selected source PSM. Header names adapted for import. No additional normalization or imputation. Six WT and five KO columns, as in deposited annotation.txt.",
-    "reference_note": "Byte-identical to the protein.fasta in the archived PKD analysis and the local TermineR PKD source folder.",
+    "reference_note": "Byte-identical to protein.fas distributed with the TermineR repository (data-raw/pkd_mouse_model_search).",
     "dataset_label": "TermineR PKD mouse kidney",
     "statistics_version": "limma 3.68.5",
     "reference_annotations": "Enabled. First use downloads reference records; later runs reuse the local cache."
