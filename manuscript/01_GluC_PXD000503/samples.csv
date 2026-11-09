@@ -1,0 +1,9 @@
+Sample,Condition,Use,Peptide column,Protein column,Experimental unit
+0hc,,No,Abundance: 0hc,,0hc
+1h,1h,Yes,Abundance: 1h,,1h
+2h,,No,Abundance: 2h,,2h
+4h,,No,Abundance: 4h,,4h
+8h,,No,Abundance: 8h,,8h
+12hc,,No,Abundance: 12hc,,12hc
+16h,16h,Yes,Abundance: 16h,,16h
+16hc,,No,Abundance: 16hc,,16hc

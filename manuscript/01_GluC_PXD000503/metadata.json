@@ -1,0 +1,20 @@
+{
+  "accession": "PXD000503",
+  "name": "GluC time course",
+  "doi": "10.1074/mcp.M113.035139",
+  "source": "https://doi.org/10.1074/mcp.M113.035139",
+  "prep": "All 3,017 observations and eight iTRAQ quantity channels from published supplementary table 1 are retained. Zero retained; empty/NA missing. No scaling or imputation. N-terminal labels were checked against the source modification column. Each time/control channel is a separate condition; tests disabled.",
+  "fasta_note": "842-record reference reused from the validation archive; not asserted to be the original search database.",
+  "expected": {
+    "input_rows": 3017,
+    "quantity_columns": 8,
+    "supplementary_S1_rows": 133
+  },
+  "validated_software_commit": "617897ddb413746c5ecf15d104923e110b5bfce8",
+  "annotations_enabled": true,
+  "input_sha256": {
+    "peptides.csv": "59db3f572b75709c2aa22d1f117fdb4164ef16f8b890852dceafda9908c4e984",
+    "reference.fasta": "2e23eaf5456a31408aa37e1d14a56d952384e379f7244728346f6867346cf4f3"
+  },
+  "native_result_rows": 133
+}

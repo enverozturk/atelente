@@ -1,0 +1,43 @@
+{
+  "Aortic_UniProt": {
+    "schema_version": "proteomaster-uniprot-rest-1",
+    "release": "2026_04",
+    "release_date": "04-November-2026",
+    "retrieved_utc_start": "2026-11-04T15:05:08Z",
+    "retrieved_utc_end": "2026-11-04T15:05:41Z",
+    "records": 1872,
+    "derived_sha256": "21100687f5ef56c5fd5ac5a0ed6dbc01edd6428366778ea846d018696081660d",
+    "uncompressed_sha256": "63dcf1d263e252553f85834818e1cf3b01a427dbbb01bbfa27c031b955475e53"
+  },
+  "GluC_UniProt": {
+    "schema_version": "proteomaster-uniprot-rest-1",
+    "release": "2026_04",
+    "release_date": "04-November-2026",
+    "retrieved_utc_start": "2026-11-06T15:32:52Z",
+    "retrieved_utc_end": "2026-11-06T15:33:09Z",
+    "records": 842,
+    "derived_sha256": "1269fe811087da40313fbee0ed7c874f75c87742c7b85328ab6c7859810e53d9",
+    "uncompressed_sha256": "ee25101864e22862904ee5a1d80e193e3bb0683be328c4fc83c77cee34a2333d"
+  },
+  "MEROPS": {
+    "schema_version": "proteomaster-merops-observed-export-1",
+    "source_url": "https://ftp.ebi.ac.uk/pub/databases/merops/current_release/database_files/Substrate_search.txt",
+    "source_last_modified": "Wed, 22 Feb 2023 12:10:13 GMT",
+    "release_version": null,
+    "version_note": "The standalone substrate file does not identify its release. Source date and hashes identify this export; website release labels are not assigned to it.",
+    "retrieved_utc": "2026-11-06T13:56:46Z",
+    "records": 108180,
+    "source_sha256": "a42b67a58666b5a61c94bfeb92dd66dc89116ea4d7926b3131280771ac640ec2",
+    "derived_sha256": "6ecf12480341184e6d580e5e2542db628a78fccbdf5eae5172b80aba35fb5ceb"
+  },
+  "PKD_UniProt": {
+    "schema_version": "proteomaster-uniprot-rest-1",
+    "release": "2026_04",
+    "release_date": "04-November-2026",
+    "retrieved_utc_start": "2026-11-09T13:47:34Z",
+    "retrieved_utc_end": "2026-11-09T13:50:29Z",
+    "records": 6706,
+    "derived_sha256": "2cde3cd305a171dbaa51a758d04ac6878c023c58bfb76e9e529f94c1c2328036",
+    "uncompressed_sha256": "3f11b290c79ab612d63bce091a7d96be115af22daf5fdd41b995d2aa4ca9d273"
+  }
+}

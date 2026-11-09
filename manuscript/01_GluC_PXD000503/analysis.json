@@ -1,0 +1,28 @@
+{
+  "peptides": "peptides.csv",
+  "fasta": "reference.fasta.gz",
+  "scope": "reported",
+  "excel": true,
+  "output_dir": "results",
+  "cleavage": {
+    "enzyme": "trypsin",
+    "lysine_blocked": true,
+    "pre_digest_n_label": "iTRAQ",
+    "analysis_scope": "specificity_v3"
+  },
+  "neo_spanning_samples": "sample_design.xlsx",
+  "assignment_mode": "unique",
+  "pair_statistics": false,
+  "annotations": true,
+  "representative_selection_k": 1,
+  "metadata": {
+    "dataset": "GluC time course",
+    "accession": "PXD000503",
+    "source_publication_doi": "10.1074/mcp.M113.035139",
+    "preparation": "All 3,017 observations and eight iTRAQ quantity channels from published supplementary table 1 are retained. Zero retained; empty/NA missing. No scaling or imputation. N-terminal labels were checked against the source modification column. Each time/control channel is a separate condition; tests disabled.",
+    "reference_note": "842-record reference reused from the validation archive; not asserted to be the original search database.",
+    "dataset_label": "GluC time course",
+    "statistics_version": "Descriptive; no statistical tests",
+    "reference_annotations": "Enabled. First use downloads reference records; later runs reuse the local cache."
+  }
+}

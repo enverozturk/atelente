@@ -1,0 +1,26 @@
+{
+  "accession": "PXD073246",
+  "name": "Aortic valve semi-tryptic peptide data",
+  "doi": "10.1186/s10020-026-01499-0",
+  "source": "https://doi.org/10.1186/s10020-026-01499-0",
+  "prep": "All 14,597 deposited rows retained; consecutive F-number technical triplets averaged over observed normalized linear intensities. Nine Control and ten Severe samples. The sample grouping was confirmed by the study analyst on 2026-11-09. No protein fold-change prefilter or imputation.",
+  "fasta_note": "1,872-record FASTA recovered by exact UniProt accession; not the original MatrixDB search FASTA. Preserved byte-for-byte.",
+  "expected": {
+    "input_rows": 14597,
+    "quantity_columns": 19,
+    "control_units": 9,
+    "severe_units": 10,
+    "tested_pairs": 1857,
+    "q_lt_0_05": 454,
+    "positive_q_lt_0_05": 370,
+    "supplementary_S3_rows": 2165
+  },
+  "validated_software_commit": "617897ddb413746c5ecf15d104923e110b5bfce8",
+  "annotations_enabled": true,
+  "validated_limma_version": "3.68.5",
+  "input_sha256": {
+    "peptides.csv": "0bd54faed1c1cd5d08a3e3bd4710e394f0684f8478bf2a31ff3eb96f116f0a30",
+    "reference.fasta": "5d78c0012f2c3845e1c56ae47e60cfab6a8e9a994efe8d59477a0e87424b3db5"
+  },
+  "native_result_rows": 2165
+}

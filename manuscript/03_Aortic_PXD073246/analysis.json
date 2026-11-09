@@ -1,0 +1,109 @@
+{
+  "peptides": "peptides.csv",
+  "fasta": "reference.fasta.gz",
+  "output_dir": "results",
+  "scope": "reported",
+  "excel": true,
+  "annotations": true,
+  "sequence_column": "Annotated Sequence",
+  "assignment_mode": "representative",
+  "representative_column": "Master Protein Accessions",
+  "pair_statistics": true,
+  "neo_spanning_samples": "sample_design.xlsx",
+  "sample_abundance_type": "abundance",
+  "cleavage": {
+    "enzyme": "trypsin",
+    "lysine_blocked": false,
+    "analysis_scope": "specificity_v3"
+  },
+  "metadata": {
+    "dataset": "Aortic valve semi-tryptic peptide data",
+    "accession": "PXD073246",
+    "source_publication_doi": "10.1186/s10020-026-01499-0",
+    "preparation": "All 14,597 deposited rows retained; consecutive F-number technical triplets averaged over observed normalized linear intensities. Nine Control and ten Severe samples. The sample grouping was confirmed by the study analyst on 2026-11-09. No protein fold-change prefilter or imputation.",
+    "reference_note": "1,872-record FASTA recovered by exact UniProt accession; not the original MatrixDB search FASTA. Preserved byte-for-byte.",
+    "dataset_label": "Aortic valve semi-tryptic peptide data",
+    "replicate_note": "Technical-triplet sample grouping confirmed by the study analyst on 2026-11-09.",
+    "statistics_version": "limma 3.68.5",
+    "reference_annotations": "Enabled. First use downloads reference records; later runs reuse the local cache."
+  },
+  "experimental_units": [
+    {
+      "Sample": "Control_triplet_01",
+      "Experimental unit": "Control_triplet_01"
+    },
+    {
+      "Sample": "Control_triplet_02",
+      "Experimental unit": "Control_triplet_02"
+    },
+    {
+      "Sample": "Control_triplet_03",
+      "Experimental unit": "Control_triplet_03"
+    },
+    {
+      "Sample": "Severe_triplet_04",
+      "Experimental unit": "Severe_triplet_04"
+    },
+    {
+      "Sample": "Severe_triplet_05",
+      "Experimental unit": "Severe_triplet_05"
+    },
+    {
+      "Sample": "Severe_triplet_06",
+      "Experimental unit": "Severe_triplet_06"
+    },
+    {
+      "Sample": "Severe_triplet_07",
+      "Experimental unit": "Severe_triplet_07"
+    },
+    {
+      "Sample": "Severe_triplet_08",
+      "Experimental unit": "Severe_triplet_08"
+    },
+    {
+      "Sample": "Control_triplet_09",
+      "Experimental unit": "Control_triplet_09"
+    },
+    {
+      "Sample": "Control_triplet_10",
+      "Experimental unit": "Control_triplet_10"
+    },
+    {
+      "Sample": "Severe_triplet_11",
+      "Experimental unit": "Severe_triplet_11"
+    },
+    {
+      "Sample": "Severe_triplet_12",
+      "Experimental unit": "Severe_triplet_12"
+    },
+    {
+      "Sample": "Control_triplet_13",
+      "Experimental unit": "Control_triplet_13"
+    },
+    {
+      "Sample": "Control_triplet_14",
+      "Experimental unit": "Control_triplet_14"
+    },
+    {
+      "Sample": "Control_triplet_15",
+      "Experimental unit": "Control_triplet_15"
+    },
+    {
+      "Sample": "Severe_triplet_16",
+      "Experimental unit": "Severe_triplet_16"
+    },
+    {
+      "Sample": "Severe_triplet_17",
+      "Experimental unit": "Severe_triplet_17"
+    },
+    {
+      "Sample": "Severe_triplet_18",
+      "Experimental unit": "Severe_triplet_18"
+    },
+    {
+      "Sample": "Control_triplet_19",
+      "Experimental unit": "Control_triplet_19"
+    }
+  ],
+  "representative_selection_k": 3
+}

@@ -8,3 +8,4 @@
 - Report `Spanning ends` and `Spanning terminal form` in Results and All pairs. Selection, ratios and tests are unchanged.
 - Correct the analysis guide: reference ends, initiator-Met boundaries and labelled N termini do not satisfy the end-compatibility preference, as implemented.
 - Add `scripts/compare_results.R` to confirm that two result workbooks differ only by added columns.
+- Add the three manuscript datasets, saved settings and a shared runner; update usage and citation metadata.

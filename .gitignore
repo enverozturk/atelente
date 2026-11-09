@@ -37,3 +37,9 @@
 /build/
 /lib/
 *.Rcheck/
+
+# Only the distributed manuscript input assets are tracked.
+/manuscript/*/peptides.csv
+/manuscript/*/results/
+!/manuscript/*/reference.fasta.gz
+!/manuscript/*/sample_design.xlsx

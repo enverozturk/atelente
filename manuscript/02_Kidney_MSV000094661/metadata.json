@@ -1,0 +1,25 @@
+{
+  "accession": "MSV000094661",
+  "name": "TermineR PKD mouse kidney",
+  "doi": "10.1002/pmic.202300491",
+  "source": "https://doi.org/10.1002/pmic.202300491",
+  "prep": "28,710 prepared peptidoforms with complete observed PSM quantity vectors. Original quantity strings retained; representative accession added from the selected source PSM. Header names adapted for import. No additional normalization or imputation. Six WT and five KO columns, as in deposited annotation.txt.",
+  "fasta_note": "Byte-identical to the protein.fasta in the archived PKD analysis and the local TermineR PKD source folder.",
+  "expected": {
+    "input_rows": 28710,
+    "quantity_columns": 11,
+    "published_unique_features": 2740,
+    "matched_features": 2704,
+    "features_with_spanning": 1181,
+    "finite_comparisons": 1125,
+    "same_direction": 847
+  },
+  "validated_software_commit": "617897ddb413746c5ecf15d104923e110b5bfce8",
+  "annotations_enabled": true,
+  "validated_limma_version": "3.68.5",
+  "input_sha256": {
+    "peptides.csv": "c7512aedeb26ca43c632d072e32a1f53d4da5c6b9bbc936e656c761c6c566f85",
+    "reference.fasta": "4a0c525e496a4c21bab0895c6ad4d83b2d5782f847046a7c8fa2c417c1b8e5b6"
+  },
+  "native_result_rows": 6056
+}

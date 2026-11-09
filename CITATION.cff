@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use Atelente, cite the software version or commit used in your analysis."
 type: software
-title: "Atelente: link neo-terminal and spanning peptides at candidate cleavage bonds"
+title: "Atelente: A Tool for Quantitative Analysis of Proteolytic Cleavage Using Neo-Terminal and Spanning Peptides"
 authors:
   - family-names: Ozturk
     given-names: Enver

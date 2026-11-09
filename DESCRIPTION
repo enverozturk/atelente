@@ -1,8 +1,8 @@
 Package: atelente
 Type: Package
-Title: Link Cleavage Products and Spanning Peptides in Shotgun Proteomics
+Title: Quantitative Analysis of Neo-Terminal and Spanning Peptides
 Version: 0.1.0
-Authors@R: person("Enver", "Ozturk", email = "enver10166@gmail.com",
+Authors@R: person("Enver", "Ozturk", email = "enver.ozturk@metu.edu.tr",
     role = c("aut", "cre"),
     comment = c(ORCID = "0009-0004-8359-8032"))
 Description: Maps observed peptides to reference sequences, links neo-terminal

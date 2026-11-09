@@ -36,6 +36,20 @@ In the HTML report, select a result to inspect its peptides and protein map. Sam
 
 Keep the result folder together. Extract downloaded ZIPs before opening the report so its adjacent downloads remain accessible.
 
+## Worked manuscript examples
+
+The [three manuscript datasets](../manuscript/README.md) include prepared peptide quantities, reference FASTA files and saved configurations. Start with the GluC time course, or run the kidney and aortic examples for replicated comparisons.
+
+## Report views
+
+The overview lists representative comparisons and their sample coverage:
+
+![Atelente results overview](images/results-overview.png)
+
+Select a row to inspect the matched peptides and their measurements. The protein map shows all observed placements around the selected bond:
+
+![Atelente protein map](images/protein-map.png)
+
 ## Use the installed package from R
 
 Copy an example configuration:

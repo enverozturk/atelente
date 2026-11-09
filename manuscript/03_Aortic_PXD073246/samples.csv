@@ -1,0 +1,20 @@
+Sample,Condition,Use,Peptide column,Protein column,Experimental unit
+Control_triplet_01,Control,Yes,Abundance: Control_triplet_01,,Control_triplet_01
+Control_triplet_02,Control,Yes,Abundance: Control_triplet_02,,Control_triplet_02
+Control_triplet_03,Control,Yes,Abundance: Control_triplet_03,,Control_triplet_03
+Severe_triplet_04,Severe,Yes,Abundance: Severe_triplet_04,,Severe_triplet_04
+Severe_triplet_05,Severe,Yes,Abundance: Severe_triplet_05,,Severe_triplet_05
+Severe_triplet_06,Severe,Yes,Abundance: Severe_triplet_06,,Severe_triplet_06
+Severe_triplet_07,Severe,Yes,Abundance: Severe_triplet_07,,Severe_triplet_07
+Severe_triplet_08,Severe,Yes,Abundance: Severe_triplet_08,,Severe_triplet_08
+Control_triplet_09,Control,Yes,Abundance: Control_triplet_09,,Control_triplet_09
+Control_triplet_10,Control,Yes,Abundance: Control_triplet_10,,Control_triplet_10
+Severe_triplet_11,Severe,Yes,Abundance: Severe_triplet_11,,Severe_triplet_11
+Severe_triplet_12,Severe,Yes,Abundance: Severe_triplet_12,,Severe_triplet_12
+Control_triplet_13,Control,Yes,Abundance: Control_triplet_13,,Control_triplet_13
+Control_triplet_14,Control,Yes,Abundance: Control_triplet_14,,Control_triplet_14
+Control_triplet_15,Control,Yes,Abundance: Control_triplet_15,,Control_triplet_15
+Severe_triplet_16,Severe,Yes,Abundance: Severe_triplet_16,,Severe_triplet_16
+Severe_triplet_17,Severe,Yes,Abundance: Severe_triplet_17,,Severe_triplet_17
+Severe_triplet_18,Severe,Yes,Abundance: Severe_triplet_18,,Severe_triplet_18
+Control_triplet_19,Control,Yes,Abundance: Control_triplet_19,,Control_triplet_19

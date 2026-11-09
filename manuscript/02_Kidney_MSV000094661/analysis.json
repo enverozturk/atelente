@@ -1,0 +1,135 @@
+{
+  "peptides": "peptides.csv",
+  "fasta": "reference.fasta.gz",
+  "output_dir": "results",
+  "scope": "reported",
+  "assignment_mode": "representative",
+  "excel": true,
+  "annotations": true,
+  "pair_statistics": true,
+  "representative_selection_k": 3,
+  "cleavage": {
+    "enzyme": "trypsin",
+    "lysine_blocked": true,
+    "pre_digest_n_label": "TMTpro",
+    "analysis_scope": "specificity_v3"
+  },
+  "column_mapping": {
+    "sequence": "Peptide sequence",
+    "modifications": "Modifications",
+    "representative_protein": "Master Protein Accessions",
+    "protein_accessions": "Protein Accessions",
+    "quantity_columns": [
+      "WT1",
+      "KO1",
+      "WT2",
+      "KO2",
+      "WT3",
+      "KO3",
+      "WT4",
+      "KO4",
+      "WT5",
+      "KO5",
+      "WT6"
+    ],
+    "quantity_scale": "linear"
+  },
+  "sample_design": {
+    "samples": [
+      {
+        "Sample": "WT1",
+        "Condition": "WT",
+        "Use": "Yes",
+        "Peptide column": "WT1",
+        "Experimental unit": "WT1"
+      },
+      {
+        "Sample": "KO1",
+        "Condition": "KO",
+        "Use": "Yes",
+        "Peptide column": "KO1",
+        "Experimental unit": "KO1"
+      },
+      {
+        "Sample": "WT2",
+        "Condition": "WT",
+        "Use": "Yes",
+        "Peptide column": "WT2",
+        "Experimental unit": "WT2"
+      },
+      {
+        "Sample": "KO2",
+        "Condition": "KO",
+        "Use": "Yes",
+        "Peptide column": "KO2",
+        "Experimental unit": "KO2"
+      },
+      {
+        "Sample": "WT3",
+        "Condition": "WT",
+        "Use": "Yes",
+        "Peptide column": "WT3",
+        "Experimental unit": "WT3"
+      },
+      {
+        "Sample": "KO3",
+        "Condition": "KO",
+        "Use": "Yes",
+        "Peptide column": "KO3",
+        "Experimental unit": "KO3"
+      },
+      {
+        "Sample": "WT4",
+        "Condition": "WT",
+        "Use": "Yes",
+        "Peptide column": "WT4",
+        "Experimental unit": "WT4"
+      },
+      {
+        "Sample": "KO4",
+        "Condition": "KO",
+        "Use": "Yes",
+        "Peptide column": "KO4",
+        "Experimental unit": "KO4"
+      },
+      {
+        "Sample": "WT5",
+        "Condition": "WT",
+        "Use": "Yes",
+        "Peptide column": "WT5",
+        "Experimental unit": "WT5"
+      },
+      {
+        "Sample": "KO5",
+        "Condition": "KO",
+        "Use": "Yes",
+        "Peptide column": "KO5",
+        "Experimental unit": "KO5"
+      },
+      {
+        "Sample": "WT6",
+        "Condition": "WT",
+        "Use": "Yes",
+        "Peptide column": "WT6",
+        "Experimental unit": "WT6"
+      }
+    ],
+    "comparisons": [
+      {
+        "Name": "KO vs WT",
+        "Treatment": "KO",
+        "Control": "WT"
+      }
+    ]
+  },
+  "metadata": {
+    "dataset": "TermineR PKD mouse kidney",
+    "accession": "MSV000094661",
+    "source_publication_doi": "10.1002/pmic.202300491",
+    "preparation": "28,710 prepared peptidoforms with complete observed PSM quantity vectors. Original quantity strings retained; representative accession added from the selected source PSM. Header names adapted for import. No additional normalization or imputation. Six WT and five KO columns, as in deposited annotation.txt.",
+    "reference_note": "Byte-identical to the protein.fasta in the archived PKD analysis and the local TermineR PKD source folder.",
+    "dataset_label": "TermineR PKD mouse kidney",
+    "statistics_version": "limma 3.68.5",
+    "reference_annotations": "Enabled. First use downloads reference records; later runs reuse the local cache."
+  }
+}
