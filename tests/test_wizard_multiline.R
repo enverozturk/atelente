@@ -21,7 +21,7 @@ stopifnot(identical(keys[c(1,5)],cols[c(1,5)]),           # ordinary headers are
   identical(pm_wizard_column_keys(c("A","B")),c("A","B")))
 
 # 2. Complete wizard run from an XLSX with LF and CRLF headers.
-if(requireNamespace("shiny",quietly=TRUE)&&requireNamespace("openxlsx",quietly=TRUE)&&requireNamespace("readxl",quietly=TRUE)) {
+if(requireNamespace("shiny",quietly=TRUE)&&requireNamespace("openxlsx",quietly=TRUE)&&requireNamespace("readxl",quietly=TRUE)&&requireNamespace("writexl",quietly=TRUE)) {
   td <- tempfile("wizard_multiline_");dir.create(td)
   writeLines(c(">sp|P1|ONE","MAARACDEFGHIKLMNRSTVWYK",">sp|P2|TWO","MSTVWYKAGHIKLMNR"),file.path(td,"ref.fasta"))
   table_in <- data.frame(c("CDEFGHIK","DEFGHIK","ACDEFGHIK","CDEFGHI","STVWYK","AGHIK"),
@@ -30,7 +30,11 @@ if(requireNamespace("shiny",quietly=TRUE)&&requireNamespace("openxlsx",quietly=T
   quantity <- vapply(1:6,function(i)sprintf(if(i%%2)"Abundance:\nF%d: Sample" else "Abundance:\r\nF%d: Sample",i),character(1))
   for(i in 1:6)table_in[[quantity[i]]] <- c(11,12,13,14,15,16)*1000+i
   expected_headers <- names(table_in)
-  openxlsx::write.xlsx(table_in,file.path(td,"peptides.xlsx"),sheetName="PeptideGroups")
+  # Preserve CRLF as an OOXML-escaped carriage return plus line feed. Some
+  # openxlsx versions translate literal XML line breaks on Windows, changing
+  # the fixture's headers before the wizard has an opportunity to read them.
+  writexl::write_xlsx(list(PeptideGroups=table_in),file.path(td,"peptides.xlsx"))
+  stopifnot(identical(names(readxl::read_xlsx(file.path(td,"peptides.xlsx"),sheet="PeptideGroups")),expected_headers))
   app <- pm_wizard_app(run_root=file.path(td,"runs"),template=file.path(root,"inst","templates","report_template.html"))
   shiny::testServer(app$serverFuncSource(), {
     session$setInputs(peptides=list(name="peptides.xlsx",datapath=file.path(td,"peptides.xlsx")),

@@ -1,6 +1,8 @@
 # Reader-facing output bundle; the audit remains a separate on-disk ZIP.
 pm_prepare_export_bundle <- function(payload, output_dir, manifest=list(), excel=TRUE) {
   payload$pair_view <- pm_report_selection(payload$pair_view)
+  if(!is.null(payload$cleavage)&&!is.null(payload$pair_view))
+    payload$pair_view$spanning_end_reporting <- pm_report_spanning_ends(payload)
   payload$export_settings <- manifest[c("settings","metadata","inputs","version","report_version","reference_access","pair_statistics")]
   if (isTRUE(excel)) {
     tables <- pm_export_tables(payload)

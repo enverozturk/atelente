@@ -26,7 +26,7 @@ Choose a destination and run the analysis. The default is `atelente_runs/<run>/r
 
 The Excel workbook has three default sheets:
 
-- **Results:** representative neo/spanning comparisons and tests.
+- **Results:** representative neo/spanning comparisons and tests. `Spanning ends` and `Spanning terminal form` show whether the spanning form is itself a terminal form (see [Analysis](ANALYSIS_RULES.md#representative-pair-selection)).
 - **Peptides:** observed forms, modifications and sample quantities.
 - **Settings:** selected columns, samples, comparison and run settings.
 

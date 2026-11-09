@@ -68,6 +68,33 @@ async function inspectFile(file,currentTemplate=false){
   const D=fixture();const positions=['P4','P3','P2','P1','P1prime','P2prime','P3prime','P4prime'];
   for(const site of D.cleavage.sites)positions.forEach((p,i)=>site[p]=i<4?'A':'G');
   const ids=await run(D);
+  // Canonical R-derived descriptions must reach every ratio table unchanged.
+  const reported=fixture();
+  reported.pair_view.spanning_end_reporting=reported.cleavage.evidence.filter(e=>e.role==='spanning').map(e=>({site_id:e.site_id,spanning_peptide_id:e.peptide_id,ends:'CANONICAL '+e.peptide_id+' @ '+e.site_id,terminal:e.peptide_id==='mixed_b_span'?'Yes':'No',position:e.start+'-'+e.end}));
+  const reportedIds=await run(reported);
+  const column=(state,head,label)=>{const i=state.get(head).children.findIndex(c=>c.textContent===label);assert.ok(i>=0,head+' exposes '+label);return i;};
+  const reportCells=(state,head,row)=>Object.fromEntries(['Spanning ends','Spanning terminal form'].map(label=>[label,row.children[column(state,head,label)]?.textContent]));
+  const reportedRow=reportedIds.get('sites').children.find(r=>r.textContent.includes('FIXTURE_1'));
+  const overviewEnds=reportCells(reportedIds,'overviewHead',reportedRow);
+  assert.match(overviewEnds['Spanning ends'],/^CANONICAL /,'Overview consumes the canonical lookup');
+  assert.ok(['Yes','No'].includes(overviewEnds['Spanning terminal form']));
+  reportedRow.onclick();
+  const selectedEnds=reportCells(reportedIds,'pairHead',reportedIds.get('pairBody').children[0]);
+  assert.equal(selectedEnds['Spanning ends'],overviewEnds['Spanning ends'],'Selected pair uses the same canonical value');
+  assert.equal(selectedEnds['Spanning terminal form'],overviewEnds['Spanning terminal form']);
+  for(const row of reportedIds.get('allPairBody').children){
+    const values=reportCells(reportedIds,'allPairHead',row),lookup=reported.pair_view.spanning_end_reporting.find(x=>x.ends===values['Spanning ends']);
+    assert.ok(lookup,'Every all-pairs row uses its own canonical entry');assert.equal(values['Spanning terminal form'],lookup.terminal);
+  }
+  const alternative=reportedIds.get('allPairBody').children.find(r=>reportCells(reportedIds,'allPairHead',r)['Spanning terminal form']==='Yes');
+  alternative.onclick();assert.equal(reportCells(reportedIds,'pairHead',reportedIds.get('pairBody').children[0])['Spanning terminal form'],'Yes','Alternative choice updates terminal reporting');
+  // Legacy supporting-evidence rendering uses natural-end precedence too.
+  const natural=fixture();
+  for(const t of natural.cleavage.termini.filter(t=>t.role==='N'&&['mixed_a_span','mixed_b_span'].includes(t.peptide_id))){t.pre_digest_n_label=true;t.digestion_compatible=false;t.processing_status=t.peptide_id==='mixed_a_span'?'reference_end':'possible_initiator_met_removal';}
+  const naturalIds=await run(natural);naturalIds.get('sites').children.find(r=>r.textContent.includes('FIXTURE_1')).onclick();
+  for(const [pid,expected] of [['mixed_a_span','N: protein end'],['mixed_b_span','N: possible Met removal']]){
+    const row=naturalIds.get('peptides').children.find(r=>r.dataset.peptide===pid);assert.ok(row.textContent.includes(expected));assert.ok(!row.textContent.includes('N: pre-digestion N label'),'Natural context precedes the label');
+  }
   for(const state of [ids,await run((()=>{
     const d=structuredClone(D);
     for(const r of d.pair_view.ratios.filter(r=>r.neo_peptide_id==='span_only_neo')){
@@ -139,8 +166,13 @@ async function inspectFile(file,currentTemplate=false){
   for(const key of ['evidence','termini'])grouped.cleavage[key].push(...grouped.cleavage[key].filter(e=>e.site_id===originalSite.site_id).map(e=>({...e,site_id:duplicate.site_id,record_id:99,accession:duplicate.accession,start:e.start+20,end:e.end+20})));
   grouped.matches.push(...grouped.matches.filter(e=>e.record_id===originalSite.record_id).map(e=>({...e,record_id:99,accession:duplicate.accession,start:e.start+20,end:e.end+20})));
   grouped.pair_view.ratios.push(...grouped.pair_view.ratios.filter(e=>e.site_id===originalSite.site_id).map(e=>({...e,site_id:duplicate.site_id,record_id:99,accession:duplicate.accession,bond_left:40,bond_right:41})));
+  grouped.pair_view.spanning_end_reporting=grouped.cleavage.evidence.filter(e=>e.role==='spanning').map(e=>({site_id:e.site_id,spanning_peptide_id:e.peptide_id,ends:e.record_id===99?'CANONICAL alternate terminal':'CANONICAL original compatible',terminal:e.record_id===99?'Yes':'No',position:e.start+'-'+e.end}));
   const groupedIds=await run(grouped),groupedRow=groupedIds.get('sites').children.find(r=>r.textContent.includes('ALT_MAPPING'));
   assert.ok(groupedRow.textContent.includes('FIXTURE_1'),'Both mappings listed in one row');
+  const groupedEnds=reportCells(groupedIds,'overviewHead',groupedRow);
+  assert.equal(groupedEnds['Spanning terminal form'],'Yes','A grouped Yes means terminal evidence in any reported mapping');
+  assert.ok(groupedEnds['Spanning ends'].includes('CANONICAL original compatible')&&groupedEnds['Spanning ends'].includes('CANONICAL alternate terminal'),'Both canonical mapping descriptions survive grouping');
+  assert.ok(groupedEnds['Spanning ends'].includes('[1 ')&&groupedEnds['Spanning ends'].includes('[99 '),'FASTA record identifiers disambiguate grouped descriptions');
   assert.equal(groupedIds.get('sites').children.filter(r=>r.textContent.includes('ALT_MAPPING')||r.textContent.includes('FIXTURE_1')).length,1);
   groupedRow.onclick();assert.equal(groupedIds.get('mappingChoice').children.length,2);groupedIds.get('mappingChoice').value=duplicate.site_id;groupedIds.get('mappingChoice').onchange();assert.ok(groupedIds.get('bond').textContent.includes('ALT_MAPPING'));
   grouped.pair_view.statistics=[{site_id:originalSite.site_id,role:'N',neo_peptide_id:'mixed_a_neo',spanning_peptide_id:'mixed_a_span',comparison:'T_vs_C',family:'N_primary',status:'tested',p_value:.0123,adjusted_p_value:.0456}];

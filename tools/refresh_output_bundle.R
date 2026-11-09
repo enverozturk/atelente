@@ -102,6 +102,7 @@ pv <- payload$pair_view;ov <- original$pair_view;pv$selection<-ov$selection<-NUL
 # Legacy reports gain derived R summaries on their first compact refresh. An
 # existing prepared summary must remain unchanged on subsequent refreshes.
 if(is.null(ov$prepared_summaries)) pv$prepared_summaries <- NULL
+if(is.null(ov$spanning_end_reporting)) pv$spanning_end_reporting <- NULL
 stopifnot(identical(pv,ov))
 pm_write_report(payload,file.path(root,"inst","templates","report_template.html"),file.path(out,"report.html"))
 manifest <- pm_finalize_audit(out,manifest)

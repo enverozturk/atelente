@@ -41,13 +41,20 @@ Missing, zero and invalid quantities have separate recorded states. The analysis
 Selection is performed for each bond, terminal role and comparison using the following ordered criteria:
 
 1. **Quantitative eligibility.** Common positive measurements must reach `k` in each condition. The default is the smaller of three and the smaller included condition size, with a minimum of one. One-condition observations are handled separately: when only neo is missing from the other condition, spanning must reach `k` there; absence of both components has its own availability state.
-2. **End compatibility.** Prefer known digestion-compatible boundaries at the neo's other end and both spanning ends. Reference ends, possible initiator-Met boundaries, unknown metadata and pre-digestion label evidence are neutral for this preference.
+2. **End compatibility.** Prefer pairs whose neo other end and both spanning ends are known digestion-compatible boundaries. Reference ends, possible initiator-Met boundaries, unknown metadata and an N terminus carrying the declared pre-digestion label do not satisfy this preference.
 3. **Common coverage.** Maximize the smaller condition count, then the total common count.
 4. **Other crossed bonds.** Prefer fewer other accepted candidate bonds crossed by the spanning form on the same FASTA record. Exclude the focal bond from this count and retain unknown counts separately.
 5. **Pooled joint intensity.** Prefer the larger mean log2 quantity across both forms and all jointly measured included samples.
 6. **Stable observation IDs.** Resolve remaining ties reproducibly.
 
 These criteria determine selection independently of effect size and p-values. Internal missed cleavages are excluded from ranking. If all pairs are ineligible, a coverage/ID fallback retains the applicable low-coverage or unavailable status. Alternative pairs remain separate.
+
+When no pair satisfies the end-compatibility preference, the representative spanning form can itself be a terminal form, for example a longer form in a ragged series of termini. The spanning peptide still contains the focal bond, but its own ends can provide evidence of processing at other boundaries. Results and All pairs report each spanning form's ends:
+
+- **Spanning ends** describes the N and C ends of the spanning placement: `digestion-compatible`, `not digestion-compatible`, `pre-digestion N label`, `protein end`, `possible Met removal` or `unknown`.
+- **Spanning terminal form** is `Yes` when at least one reported spanning placement has an end that is not digestion-compatible or carries the declared pre-digestion N-terminal label; `No` when all reported ends are digestion-compatible, protein ends or possible initiator-Met removal; and `Unknown` otherwise. Protein ends and possible initiator-Met removal take precedence over label evidence. For grouped mappings, any `Yes` gives `Yes`; otherwise any `Unknown` gives `Unknown`. Multiple placements and grouped mappings are identified by their protein/record and coordinates in `Spanning ends`.
+
+These columns are descriptive and do not change selection, ratios or tests. A labelled internal N terminus may also arise from natural processing, such as signal-peptide removal.
 
 Scripted runs can set `representative_selection_k` to a positive integer. Display coverage filters apply to the existing results and leave representative selection fixed.
 

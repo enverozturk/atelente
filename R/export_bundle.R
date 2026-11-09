@@ -1,3 +1,53 @@
+# Descriptive spanning ends, shared by workbook and HTML reporting.
+pm_report_spanning_ends <- function(payload) {
+  out <- data.frame(site_id=character(),spanning_peptide_id=character(),
+    ends=character(),terminal=character(),position=character(),stringsAsFactors=FALSE)
+  evidence <- payload$cleavage$evidence; terms <- payload$cleavage$termini
+  if(!is.data.frame(evidence)||!nrow(evidence)) return(out)
+  evidence <- unique(evidence[evidence$role %in% "spanning",
+    intersect(c("site_id","peptide_id","record_id","accession","start","end"),names(evidence)),drop=FALSE])
+  if(!nrow(evidence))return(out)
+  key <- function(x,cols) do.call(paste,c(x[cols],sep="\034"))
+  index <- function(x,cols) split(seq_len(nrow(x)),key(x,cols))
+  end_labels <- character();term_index<-list()
+  required<-c("record_id","peptide_id","start","end","role")
+  if(is.data.frame(terms)&&nrow(terms)&&all(required %in% names(terms))){
+    value<-function(name,default) if(name %in% names(terms))terms[[name]] else rep(default,nrow(terms))
+    ps<-as.character(value("processing_status",""));cl<-as.character(value("classification",""))
+    labelled<-value("pre_digest_n_label",NA);compatible<-value("digestion_compatible",NA)
+    end_labels<-ifelse(ps %in% "reference_end"|cl %in% "reference_end","protein end",
+      ifelse(ps %in% "possible_initiator_met_removal","possible Met removal",
+        ifelse(terms$role %in% "N" & labelled %in% TRUE,"pre-digestion N label",
+          ifelse(compatible %in% TRUE,"digestion-compatible",
+            ifelse(compatible %in% FALSE,"not digestion-compatible","unknown")))))
+    term_index<-index(terms,required)
+  }
+  groups<-index(evidence,c("site_id","peptide_id"))
+  rows<-lapply(groups,function(ii){
+    descriptions<-character();labels<-character()
+    for(j in ii){
+      side<-vapply(c("N","C"),function(role){
+        kk<-paste(evidence$record_id[j],evidence$peptide_id[j],evidence$start[j],evidence$end[j],role,sep="\034")
+        tt<-term_index[[kk]]
+        if(length(tt))paste(unique(end_labels[tt]),collapse="/") else "unknown"
+      },character(1))
+      labels<-c(labels,unlist(strsplit(side,"/",fixed=TRUE)))
+      text<-paste0("N: ",side[1],"; C: ",side[2])
+      if(length(ii)>1L){
+        acc<-if("accession" %in% names(evidence))evidence$accession[j] else evidence$record_id[j]
+        text<-paste0(acc," [",evidence$record_id[j]," ",evidence$start[j],"-",evidence$end[j],"]: ",text)
+      }
+      descriptions<-c(descriptions,text)
+    }
+    flag<-if(any(labels %in% c("pre-digestion N label","not digestion-compatible")))"Yes" else if(!length(labels)||any(labels %in% "unknown"))"Unknown" else "No"
+    data.frame(site_id=evidence$site_id[ii[1]],spanning_peptide_id=evidence$peptide_id[ii[1]],
+      ends=paste(unique(descriptions),collapse=" | "),terminal=flag,
+      position=paste(unique(paste(evidence$start[ii],evidence$end[ii],sep="-")),collapse="; "),stringsAsFactors=FALSE)
+  })
+  out<-do.call(rbind,rows);rownames(out)<-NULL
+  out
+}
+
 # Reader-facing tables, derived from unchanged observations and pair tests.
 # This mirrors the frozen report representative rule; no models are fitted here.
 pm_export_tables <- function(payload) {
@@ -41,6 +91,24 @@ pm_export_tables <- function(payload) {
       }
     }
     x[setdiff(names(x),c("Control","Control total","Treatment","Treatment total","Site IDs","Export key","Passes default coverage"))]
+  }
+  # Ends of the spanning form at its placement(s) for the focal bond. This is
+  # descriptive: representative selection, ratios and tests are unchanged. A
+  # spanning form is reported as a terminal form when one of its own ends was not
+  # produced by the declared digestion (a non-compatible end, or the declared
+  # pre-digestion N-terminal label away from a protein end).
+  reporting<-pv$spanning_end_reporting
+  if(!is.data.frame(reporting))reporting<-pm_report_spanning_ends(payload)
+  report_keys<-key(reporting,c("site_id","spanning_peptide_id"))
+  terminal_form<-function(labels){
+    if(!length(labels)||any(labels=="unknown"))return(if(any(labels %in% c("pre-digestion N label","not digestion-compatible")))"Yes" else "Unknown")
+    if(any(labels %in% c("pre-digestion N label","not digestion-compatible")))"Yes" else "No"
+  }
+  spanning_ends<-function(site,peptide){
+    at<-match(paste(site,peptide,sep="\034"),report_keys)
+    ends<-reporting$ends[at];terminal<-reporting$terminal[at]
+    ends[is.na(ends)]<-"Not available";terminal[is.na(terminal)]<-"Unknown"
+    list(ends=ends,terminal=terminal)
   }
   all_index<-if("site_id" %in% names(all))index(all,c("site_id","role","comparison")) else list()
   position_index<-if(nrow(evidence))index(evidence,c("site_id","role","peptide_id")) else list()
@@ -86,8 +154,13 @@ pm_export_tables <- function(payload) {
     }
     x$`Neo position`<-positions(x$role,x$neo_peptide_id)
     x$`Spanning position`<-positions("spanning",x$spanning_peptide_id)
+    span_ends<-spanning_ends(x$site_id,x$spanning_peptide_id)
+    x$`Spanning ends`<-span_ends$ends;x$`Spanning terminal form`<-span_ends$terminal
     if(group){
       x<-bind(lapply(split(seq_len(nrow(x)),key(x,c("comparison","role","neo_peptide_id","spanning_peptide_id"))),function(ii){z<-x[ii[1],,drop=FALSE];z$accession<-collapse(x$accession[ii]);z$Gene<-collapse(x$Gene[ii]);z$Bond<-collapse(paste(x$accession[ii],x$Bond[ii]));z$site_id<-collapse(x$site_id[ii]);z$MEROPS<-collapse(x$MEROPS[ii]);z$UniProt<-collapse(x$UniProt[ii]);
+        descriptions<-x$`Spanning ends`[ii]
+        if(length(ii)>1L)descriptions<-paste0(x$accession[ii]," [",x$record_id[ii]," ",x$`Spanning position`[ii],"]: ",descriptions)
+        z$`Spanning ends`<-collapse(descriptions);z$`Spanning terminal form`<-terminal_form(unlist(lapply(x$`Spanning terminal form`[ii],function(v)switch(v,Yes="pre-digestion N label",No="digestion-compatible","unknown"))));
         windows<-unique(x$`Cleavage window`[ii]);z$`Cleavage window`<-if(length(windows)==1L)windows else collapse(paste(x$accession[ii],x$`Cleavage window`[ii]));
         alternatives<-unique(unlist(lapply(ii,function(i)all_index[[key(x[i,,drop=FALSE],c("site_id","role","comparison"))]])));
         z$`Available pairs`<-length(unique(key(all[alternatives,,drop=FALSE],c("neo_peptide_id","spanning_peptide_id"))));
@@ -97,6 +170,7 @@ pm_export_tables <- function(payload) {
     x$role<-paste0("Neo-",x$role)
     fields<-c(comparison="Comparison",accession="Protein",Gene="Gene",Bond="Bond",role="Role",`Cleavage window`="Cleavage window",
       `Neo sequence`="Neo sequence",`Neo modifications`="Neo modifications",`Spanning sequence`="Spanning sequence",`Spanning modifications`="Spanning modifications",
+      `Spanning ends`="Spanning ends",`Spanning terminal form`="Spanning terminal form",
       neo_log2_fc="Neo log2FC",spanning_log2_fc="Spanning log2FC",log2_fc="Ratio log2FC",Pattern="Pattern",
       control_common="Control measured",treatment_common="Treatment measured",`Available pairs`="Available pairs",status="Status",
       `P-value`="P-value",`BH-adjusted P`="BH-adjusted P",`Test family`="Test family",`Test status`="Test status",MEROPS="MEROPS",UniProt="UniProt")
