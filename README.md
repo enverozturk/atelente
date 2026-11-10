@@ -85,7 +85,7 @@ The separate peptide/protein functions are described in [Peptide/protein workflo
 
 ## Citation
 
-**Enver Ozturk. Atelente: A Tool for Quantitative Analysis of Proteolytic Cleavage Using Neo-Terminal and Spanning Peptides.** Software version 0.1.0.
+**Enver Ozturk. Atelente: A Tool for Quantitative Analysis of Proteolytic Cleavage Using Neo-Terminal and Spanning Peptides.** Software version 0.1.0. [DOI: 10.5281/zenodo.24101920](https://doi.org/10.5281/zenodo.24101920).
 
 Use [CITATION.cff](CITATION.cff) for software citation metadata. The manuscript analyses use Atelente v0.1.0; input and reference records are provided with the datasets.
 
