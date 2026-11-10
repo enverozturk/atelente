@@ -20,7 +20,7 @@
     "accession": "PXD000503",
     "source_publication_doi": "10.1074/mcp.M113.035139",
     "preparation": "All 3,017 observations and eight iTRAQ quantity channels from published supplementary table 1 are retained. Zero retained; empty/NA missing. No scaling or imputation. All eight channels are reported; the comparison is 16 h versus 1 h (one channel each); tests disabled.",
-    "reference_note": "842-record reference FASTA used in the manuscript analysis; not asserted to be the original search database.",
+    "reference_note": "The 842-record reference FASTA was downloaded from UniProt using the reported protein accession identifiers.",
     "dataset_label": "GluC time course",
     "statistics_version": "Descriptive; no statistical tests",
     "reference_annotations": "Enabled. First use downloads reference records; later runs reuse the local cache."

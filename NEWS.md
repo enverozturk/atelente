@@ -1,4 +1,4 @@
-# Atelente 0.1.0 (unreleased)
+# Atelente 0.1.0
 
 - Map peptide observations to reference sequences and link neo-terminal and spanning forms at candidate bonds.
 - Calculate sample ratios and condition effects, with optional limma tests and BH adjustment.

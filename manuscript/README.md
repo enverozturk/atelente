@@ -12,15 +12,15 @@ Rscript manuscript/run.R 02_Kidney_MSV000094661
 Rscript manuscript/run.R 03_Aortic_PXD073246
 ```
 
-Each command uses that dataset's `analysis.json` and writes a `results/` folder beside its inputs. The runner expands `peptides.csv.gz` to `peptides.csv`, verifies the uncompressed peptide and FASTA hashes, and calls `atelente::pm_run()`. FASTA gzip files are read directly. Keep a completed results folder before starting another run in the same location; use a new `output_dir` in `analysis.json` for a separate run.
+Each command uses that dataset's `analysis.json` and writes a `results/` folder beside its inputs. The runner expands `peptides.csv.gz` to `peptides.csv`, verifies the uncompressed peptide and FASTA hashes, and calls `atelente::pm_run()`. A run stops if `results/` already contains files; move or rename it before running again.
 
 Annotations are enabled. The first run requires internet access to retrieve MEROPS and UniProt records; subsequent runs reuse the local cache. The manuscript analyses used UniProt release 2026_04. Reference identifiers and hashes are recorded in [reference_versions.json](reference_versions.json). New retrievals may use updated reference records. [Reference annotations](../docs/REFERENCE_ANNOTATIONS.md) explains how to supply frozen snapshots for offline use.
 
-The replicated analyses used limma 3.68.5. Use the same version to reproduce the reported statistics; the runner warns if another limma version is used. Inputs and analytical source were checked against the completed analyses at [commit 617897d](https://github.com/enverozturk/atelente/tree/617897ddb413746c5ecf15d104923e110b5bfce8). Each new run records its own software and reference provenance.
+The replicated analyses used limma 3.68.5. Use the same version to reproduce the reported statistics; the runner warns if another limma version is used. Running these inputs with Atelente v0.1.0 reproduces the Results row counts below. Each new run records its own software and reference provenance.
 
 ## Datasets
 
-| Dataset | Prepared rows | Conditions | Native Results rows |
+| Dataset | Prepared rows | Conditions | Results rows |
 | --- | ---: | --- | ---: |
 | [GluC, PXD000503](01_GluC_PXD000503) | 3,017 | 16 h versus 1 h; eight channels reported | 133 |
 | [Kidney, MSV000094661](02_Kidney_MSV000094661) | 28,710 | Six WT and five KO | 6,056 |
@@ -28,7 +28,7 @@ The replicated analyses used limma 3.68.5. Use the same version to reproduce the
 
 Each dataset has a short README, a runnable configuration, source/preparation metadata and its sample/comparison information. [SHA256SUMS.csv](SHA256SUMS.csv) identifies the distributed files.
 
-Native exports contain the Atelente analysis. Manuscript supporting tables also include selected examples and comparisons with source publications. For example, the 1,125 matched kidney comparisons are a subset of the 6,056 native Results rows, rather than the expected size of the full output.
+Results rows are the rows of the Results sheet in `atelente_results.xlsx`. The manuscript supplementary tables are derived from these outputs; for example, the 1,125 kidney comparisons are a subset of the 6,056 rows.
 
 ## Source attribution
 

@@ -12,7 +12,7 @@ Use R 4.3 or later. Install Atelente and the packages used by the interface and 
 
 ```r
 install.packages(c("remotes", "shiny", "readxl", "openxlsx"))
-remotes::install_github("enverozturk/atelente", dependencies = NA)
+remotes::install_github("enverozturk/atelente", ref = "v0.1.0", dependencies = NA)
 ```
 
 For statistical testing:
@@ -21,8 +21,6 @@ For statistical testing:
 install.packages("BiocManager")
 BiocManager::install("limma", ask = FALSE, update = FALSE)
 ```
-
-While this repository is private, installation requires an account with repository access.
 
 ## Usage at a glance
 
@@ -72,7 +70,7 @@ Select a result to inspect the neo-terminal and spanning peptides, their positio
 | `atelente_audit.zip` | Detailed measurements, alternative pairs, mappings and provenance |
 | `run_manifest.json` | Run settings, reference versions and file hashes |
 
-The ratio log2 fold change is the treatment-minus-control difference in mean sample log2(neo/spanning). The neo and spanning fold changes shown with a pair use the same common samples. A fixed rule selects a representative pair; alternative pairs remain available. `Spanning ends` describes the spanning peptide's own termini, while that peptide still crosses the selected bond.
+The ratio log2 fold change is the treatment-minus-control difference in mean sample log2(neo/spanning). The neo and spanning fold changes shown with a pair use the same common samples. A fixed rule selects a representative pair; alternative pairs remain available. `Spanning ends` describes the spanning peptide’s own N and C ends, including digestion-compatible ends, labeled N-termini and protein ends.
 
 Keep the output files together and open the HTML report in Chrome or Edge. The finished report works offline. The interface saves runs under `atelente_runs/<run>/results/` by default; the manuscript examples save them beside their inputs.
 
@@ -89,7 +87,7 @@ The separate peptide/protein functions are described in [Peptide/protein workflo
 
 **Enver Ozturk. Atelente: A Tool for Quantitative Analysis of Proteolytic Cleavage Using Neo-Terminal and Spanning Peptides.** Software version 0.1.0.
 
-Use [CITATION.cff](CITATION.cff) for software citation metadata and record the version or commit used in an analysis. The manuscript inputs identify the analysis commit and reference versions.
+Use [CITATION.cff](CITATION.cff) for software citation metadata. The manuscript analyses use Atelente v0.1.0; input and reference records are provided with the datasets.
 
 ## License and contact
 
